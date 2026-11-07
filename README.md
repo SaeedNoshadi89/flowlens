@@ -6,9 +6,16 @@ FlowLens runs from a command-line tool (CLI). A Claude Code plugin and a Codex p
 
 > "FlowLens" is a provisional name. The project is MIT licensed.
 
-![FlowLens replaying a checkout journey (web client → FastAPI route → SQLite) and then an agent graph with conditional and unresolved handoffs](docs/images/flowlens-demo.gif)
+![How FlowLens works: run the scan, open the map, replay a journey, inspect evidence, filter, and follow agent handoffs](docs/images/flowlens-demo.gif)
 
-*The demo above steps through two simulated replays. First, a checkout click travels from the web client through an inferred request-to-route match into the FastAPI handler and the `orders` table. Then an agent graph branches on a router function and ends at a `goto` target that can only be decided at runtime. The Now panel shows how each step was established and links to the source line.*
+*How it works, in about a minute:*
+
+1. Run `flowlens scan` in your project, or `/flowlens:map` in Claude Code, or the `flowlens` skill in Codex.
+2. Open the generated map. It is a single offline HTML file.
+3. Pick a scenario and press Play to replay it step by step.
+4. Click any step to see how it was established, and its file:line evidence.
+5. Filter by relationship or provenance to switch views without re-scanning.
+6. Agent graphs work the same way, with branches and runtime-only targets marked.
 
 Demo reports, generated from the two synthetic fixtures (open them in a browser):
 
