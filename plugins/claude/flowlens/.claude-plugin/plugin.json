@@ -1,0 +1,9 @@
+{
+  "name": "flowlens",
+  "displayName": "FlowLens",
+  "version": "0.1.0",
+  "description": "Analyze the current repository and generate an interactive, offline HTML flow map: API calls, data flow, module dependencies and agent handoffs, with source evidence and simulated replays.",
+  "author": { "name": "FlowLens contributors" },
+  "license": "MIT",
+  "keywords": ["architecture", "visualization", "static-analysis", "flow-map", "agents"]
+}

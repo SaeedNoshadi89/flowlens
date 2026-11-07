@@ -1,0 +1,1 @@
+{ "name": "shop-web", "private": true, "dependencies": { "react": "^18.3.1", "axios": "^1.7.0" } }

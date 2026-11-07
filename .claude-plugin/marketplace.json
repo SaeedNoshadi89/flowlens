@@ -1,0 +1,13 @@
+{
+  "name": "flowlens",
+  "owner": { "name": "FlowLens contributors" },
+  "metadata": { "description": "FlowLens: interactive flow maps of a repository from static analysis." },
+  "plugins": [
+    {
+      "name": "flowlens",
+      "source": "./plugins/claude/flowlens",
+      "description": "Generate an interactive, offline HTML flow map of the current repository.",
+      "category": "development"
+    }
+  ]
+}

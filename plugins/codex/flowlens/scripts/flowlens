@@ -1,0 +1,4 @@
+#!/bin/sh
+# FlowLens CLI wrapper for the Codex plugin.
+DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+exec node "$DIR/../engine/flowlens.mjs" "$@"

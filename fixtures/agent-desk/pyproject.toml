@@ -1,0 +1,4 @@
+[project]
+name = "agent-desk"
+version = "0.0.0"
+dependencies = ["langgraph>=0.2", "openai-agents>=0.1", "sqlalchemy>=2", "crewai>=0.30"]

@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="generator" content="FlowLens 0.1.0">
+<title>shop-app flow map · FlowLens</title>
+<style>:root {
+  color-scheme: dark;
+  --bg: #070a1a; --bg2: #0c1030; --panel: rgba(17, 22, 56, 0.86); --panel-solid: #111638; --card: rgba(22, 28, 68, 0.9);
+  --fg: #edf0ff; --muted: #a3abd8; --faint: #6f78a8; --line: rgba(150, 160, 255, 0.18); --line-strong: rgba(150, 160, 255, 0.34);
+  --focus: #3ee0ff; --ink: #070a1a;
+  --c-ui: #3ee0ff; --c-request: #9d8cff; --c-endpoint: #d58cff; --c-service: #4dff88; --c-agent: #ff5cdc;
+  --c-data: #ffe14d; --c-external: #ff9a5c; --c-unknown: #ff6b8b;
+  --r-api: #3ee0ff; --r-data: #ffe14d; --r-deps: #98a4e0; --r-agents: #ff5cdc; --r-calls: #4dff88;
+  --p-observed: #4dff88; --p-inferred: #ffc24d; --p-unresolved: #ff6b8b;
+  --f-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --f-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; color: var(--fg); font: 14px/1.5 var(--f-body);
+  background: radial-gradient(1100px 560px at 6% -12%, rgba(141, 107, 255, 0.24), transparent 60%),
+    radial-gradient(900px 480px at 100% 0%, rgba(62, 224, 255, 0.14), transparent 60%), linear-gradient(var(--bg), var(--bg2));
+  background-attachment: fixed; min-height: 100vh;
+}
+a { color: var(--focus); }
+button, input, select { font: inherit; color: inherit; }
+button {
+  background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 9px; padding: 6px 11px; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+button:hover { border-color: var(--focus); }
+button:disabled { opacity: 0.4; cursor: default; border-color: var(--line); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+button.primary { background: linear-gradient(135deg, #3ee0ff, #9d8cff); color: var(--ink); border-color: transparent; font-weight: 700; min-width: 84px; }
+input[type="search"], input[type="text"] {
+  background: rgba(0, 0, 0, 0.28); border: 1px solid var(--line); border-radius: 9px; padding: 7px 10px; width: 100%;
+}
+input[type="checkbox"] { accent-color: #3ee0ff; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+[hidden] { display: none !important; }
+.mono { font-family: var(--f-mono); font-size: 0.92em; }
+.muted { color: var(--muted); }
+
+.app { display: flex; flex-direction: column; gap: 12px; padding: 14px 16px 24px; max-width: 1920px; margin: 0 auto; }
+header.top { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: flex-end; justify-content: space-between; }
+header.top h1 { margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.1; letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #3ee0ff, #9d8cff 40%, #ff5cdc 70%, #ffe14d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+header.top p { margin: 4px 0 0; color: var(--muted); max-width: 90ch; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge { font: 600 11px/1 var(--f-mono); padding: 5px 8px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--muted); white-space: nowrap; }
+.badge.sim { color: var(--ink); background: var(--p-inferred); border-color: transparent; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.searchbox { position: relative; flex: 1 1 260px; max-width: 460px; }
+.results { position: absolute; z-index: 20; top: calc(100% + 4px); left: 0; right: 0; background: var(--panel-solid); border: 1px solid var(--line-strong);
+  border-radius: 10px; max-height: 320px; overflow: auto; padding: 4px; margin: 0; list-style: none; }
+.results button { display: block; width: 100%; text-align: left; border: 0; border-radius: 7px; padding: 6px 8px; background: transparent; }
+.results button:hover, .results button:focus-visible { background: rgba(62, 224, 255, 0.12); }
+.results small { display: block; color: var(--muted); font-family: var(--f-mono); font-size: 11px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; padding: 6px 10px; font: 12px var(--f-mono); background: transparent; }
+.seg button[aria-pressed="true"] { background: var(--focus); color: var(--ink); font-weight: 700; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+.legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.legend .ln { width: 22px; height: 0; border-top: 2px solid var(--muted); border-radius: 0; }
+.legend .ln.inferred { border-top-style: dashed; border-color: var(--p-inferred); }
+.legend .ln.unresolved { border-top-style: dotted; border-color: var(--p-unresolved); border-top-width: 3px; }
+.legend .ln.observed { border-color: var(--p-observed); }
+
+.layout { display: grid; grid-template-columns: 268px minmax(0, 1fr) 356px; gap: 12px; align-items: start; }
+@media (max-width: 1380px) { .layout { grid-template-columns: 260px minmax(0, 1fr); } .right { grid-column: 1 / -1; display: grid !important; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); } }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.left, .right { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; min-width: 0; backdrop-filter: blur(8px); }
+.panel > h2 { font-size: 13px; margin: 0; padding: 9px 13px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 8px; align-items: baseline; letter-spacing: 0.02em; }
+.panel > h2 small { font: 400 11px var(--f-mono); color: var(--muted); }
+.pad { padding: 10px 13px; }
+.scroll { max-height: 360px; overflow: auto; }
+
+.scen-list { list-style: none; margin: 0; padding: 4px 6px 8px; }
+.scen-list .grp { font: 600 10.5px var(--f-mono); text-transform: uppercase; letter-spacing: 0.09em; color: var(--c-request); padding: 8px 7px 3px; }
+.scen-list button { display: block; width: 100%; text-align: left; border: 1px solid transparent; background: transparent; border-radius: 8px; padding: 5px 8px; }
+.scen-list button:hover { border-color: var(--line-strong); }
+.scen-list button[aria-pressed="true"] { background: linear-gradient(135deg, rgba(255, 92, 220, 0.32), rgba(157, 140, 255, 0.32)); border-color: var(--c-agent); }
+.scen-list small { display: block; color: var(--muted); font: 11px var(--f-mono); }
+
+fieldset { border: 0; margin: 0; padding: 0; }
+legend.fl { font: 600 10.5px var(--f-mono); text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); padding: 0; margin: 4px 0 6px; }
+.checks { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; }
+.checks label { display: flex; gap: 7px; align-items: center; font-size: 13px; cursor: pointer; }
+.checks label.off { color: var(--faint); cursor: not-allowed; }
+.checks .n { margin-left: auto; font: 11px var(--f-mono); color: var(--muted); }
+.swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.note { font-size: 12px; color: var(--muted); margin: 4px 0 8px; }
+.warn { color: var(--p-inferred); }
+.cmd { display: flex; gap: 6px; align-items: stretch; margin: 6px 0; }
+.cmd code { flex: 1; min-width: 0; font: 11.5px var(--f-mono); background: rgba(0, 0, 0, 0.35); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; overflow-wrap: anywhere; }
+.cmd button { font-size: 12px; padding: 4px 9px; }
+
+.mapwrap { position: relative; background: rgba(10, 14, 40, 0.78); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; min-height: 520px; }
+.mapbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 8px 10px; border-bottom: 1px solid var(--line); background: rgba(7, 10, 26, 0.6); }
+.mapbar .grow { flex: 1; }
+#btnFollow[aria-pressed="true"] { border-color: var(--focus); color: var(--focus); }
+.counter { font: 12px var(--f-mono); color: var(--muted); min-width: 92px; }
+.progress { height: 3px; background: rgba(255, 255, 255, 0.06); }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #3ee0ff, #ff5cdc); transition: width 0.3s; }
+svg.map { display: block; width: 100%; height: 68vh; min-height: 480px; cursor: grab; touch-action: none; user-select: none; }
+svg.map.dragging { cursor: grabbing; }
+.mapnote { position: absolute; left: 12px; bottom: 10px; margin: 0; font: 11px var(--f-mono); color: var(--muted); pointer-events: none; background: rgba(7, 10, 26, 0.7); padding: 3px 7px; border-radius: 6px; }
+.empty { position: absolute; inset: 120px 20px auto; text-align: center; color: var(--muted); }
+
+.lane-bg { fill: rgba(255, 255, 255, 0.022); stroke: rgba(150, 160, 255, 0.08); }
+.lane-h { font: 600 12px var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; }
+.edge { fill: none; stroke-width: 1.6; opacity: 0.5; transition: opacity 0.2s; }
+.edge.inferred { stroke-dasharray: 7 5; }
+.edge.unresolved { stroke-dasharray: 2 5; stroke-width: 2.2; stroke-linecap: round; }
+.edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+.edge.dim { opacity: 0.1; }
+.edge.seen { opacity: 0.85; stroke-width: 2.2; }
+.edge.active { opacity: 1; stroke-width: 4; filter: url(#glow); }
+.edge.sel { opacity: 1; stroke-width: 3.2; }
+.ecount { font: 600 10px var(--f-mono); fill: var(--muted); }
+.node { cursor: pointer; }
+.node rect.box { fill: rgba(16, 21, 52, 0.96); stroke: rgba(150, 160, 255, 0.22); stroke-width: 1; transition: stroke 0.2s, fill 0.2s; }
+.node rect.bar { fill: var(--kc); }
+.node .lbl { font: 650 13.5px var(--f-body); fill: var(--fg); }
+.node .sub { font: 11px var(--f-mono); fill: var(--muted); }
+.node.dim { opacity: 0.28; }
+.node.match rect.box { stroke: #fff; stroke-width: 2; }
+.node.seen rect.box { stroke: color-mix(in srgb, var(--kc) 70%, transparent); stroke-width: 1.6; }
+.node.active rect.box { stroke: var(--kc); stroke-width: 3.2; fill: color-mix(in srgb, var(--kc) 18%, #10153a); filter: url(#glow); }
+.node.active .lbl { fill: #fff; font-weight: 800; }
+.node.sel rect.box { stroke: #fff; stroke-width: 2.2; stroke-dasharray: 5 3; }
+.node:focus-visible { outline: none; }
+.node:focus-visible rect.box { stroke: var(--focus); stroke-width: 3; }
+.node .frame { fill: none; stroke: var(--kc); stroke-width: 1.5; stroke-dasharray: 7 6; opacity: 0; }
+.node.active .frame { opacity: 0.9; animation: march 1.2s linear infinite; }
+@keyframes march { to { stroke-dashoffset: -26; } }
+.pulse { fill: #fff; filter: url(#glow); }
+
+.now { padding: 10px 13px; display: flex; flex-direction: column; gap: 7px; }
+.now .ev { font: 700 14.5px var(--f-mono); overflow-wrap: anywhere; }
+.now p { margin: 0; }
+.tag { font: 700 10px/1.3 var(--f-mono); letter-spacing: 0.04em; padding: 2px 6px; border-radius: 5px; color: var(--ink); display: inline-block; white-space: nowrap; }
+.tag.observed { background: var(--p-observed); }
+.tag.inferred { background: var(--p-inferred); }
+.tag.unresolved { background: var(--p-unresolved); }
+.tag.kind { background: transparent; color: var(--muted); border: 1px solid var(--line-strong); }
+.evid { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.evid li { font-size: 12.5px; display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; }
+.evid a, .evid .loc { font: 11.5px var(--f-mono); }
+.evid button { font-size: 11px; padding: 1px 6px; }
+.why { font-size: 12.5px; background: rgba(255, 194, 77, 0.08); border-left: 3px solid var(--p-inferred); padding: 6px 9px; border-radius: 0 8px 8px 0; margin: 0; }
+.why.unresolved { background: rgba(255, 107, 139, 0.08); border-left-color: var(--p-unresolved); }
+.why.observed { background: rgba(77, 255, 136, 0.07); border-left-color: var(--p-observed); }
+.kv { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 3px 10px; font-size: 12.5px; margin: 0; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; overflow-wrap: anywhere; }
+.elist { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+.elist button { width: 100%; text-align: left; display: flex; gap: 6px; align-items: baseline; font-size: 12px; padding: 4px 7px; }
+.elist button span.t { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+h3.sub { font: 600 10.5px var(--f-mono); text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); margin: 10px 0 2px; }
+
+.log { list-style: none; margin: 0; padding: 4px 0; max-height: 380px; overflow: auto; font-size: 12.5px; }
+.log li { display: grid; grid-template-columns: 34px 74px minmax(0, 1fr); gap: 6px; padding: 4px 12px; border-left: 3px solid transparent; cursor: pointer; opacity: 0.75; }
+.log li:hover { background: rgba(255, 255, 255, 0.03); }
+.log li.seen { opacity: 0.95; }
+.log li.cur { opacity: 1; background: linear-gradient(90deg, rgba(62, 224, 255, 0.16), transparent 70%); border-left-color: var(--focus); }
+.log .i { font: 11px var(--f-mono); color: var(--muted); }
+.log .t { overflow-wrap: anywhere; }
+.log .alt { display: block; font: 10.5px var(--f-mono); color: var(--p-inferred); }
+.log .sep { display: block; grid-template-columns: none; font: 600 10.5px var(--f-mono); color: var(--c-request); text-transform: uppercase; letter-spacing: 0.08em; cursor: default; opacity: 1; }
+
+.bottom { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+table.cov { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+table.cov th { text-align: left; font: 500 11px var(--f-mono); color: var(--muted); padding: 5px 13px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel-solid); }
+table.cov td { padding: 5px 13px; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+.st-active { color: var(--p-observed); } .st-unavailable { color: var(--p-unresolved); } .st-not-applicable { color: var(--faint); }
+footer { color: var(--faint); font-size: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+body.reduced *, body.reduced *::before { animation: none !important; transition: none !important; }
+</style>
+</head>
+<body>
+<a class="sr-only" href="#svg">Skip to map</a>
+<div class="app">
+  <header class="top">
+    <div><h1 id="title"></h1><p id="lede"></p></div>
+    <div class="badges" id="badges"></div>
+  </header>
+  <div class="bar">
+    <div class="searchbox">
+      <label class="sr-only" for="q">Search the map</label>
+      <input id="q" type="search" placeholder="Search modules, functions, routes, stores (press /)" autocomplete="off" spellcheck="false">
+      <ul class="results" id="results" hidden></ul>
+    </div>
+    <div class="seg" role="group" aria-label="Detail level">
+      <button type="button" data-level="modules">Modules</button>
+      <button type="button" data-level="functions">Functions</button>
+    </div>
+    <div class="legend" id="legend" aria-label="Legend"></div>
+  </div>
+  <div class="layout">
+    <aside class="left">
+      <section class="panel" aria-labelledby="h-scn">
+        <h2 id="h-scn">Scenarios <small id="scnCount"></small></h2>
+        <div class="pad"><input id="scnq" type="search" placeholder="Filter scenarios" aria-label="Filter scenarios"></div>
+        <ul class="scen-list scroll" id="scenarios"></ul>
+      </section>
+      <section class="panel" aria-labelledby="h-flt">
+        <h2 id="h-flt">Filters <small id="filterSummary"></small></h2>
+        <div class="pad" id="filters"></div>
+      </section>
+      <section class="panel" aria-labelledby="h-scope">
+        <h2 id="h-scope">Scope <small id="scopeSummary"></small></h2>
+        <div class="pad" id="scope"></div>
+      </section>
+    </aside>
+    <main class="center">
+      <div class="mapwrap">
+        <div class="mapbar" role="toolbar" aria-label="Replay controls">
+          <button type="button" id="btnRestart" title="Restart (Home)">Restart</button>
+          <button type="button" id="btnBack" title="Previous step (←)">◀ Back</button>
+          <button type="button" id="btnPlay" class="primary" title="Play or pause (Space)">Play</button>
+          <button type="button" id="btnNext" title="Next step (→)">Next ▶</button>
+          <div class="seg" role="group" aria-label="Speed">
+            <button type="button" data-speed="0.5">0.5×</button><button type="button" data-speed="1">1×</button><button type="button" data-speed="2">2×</button><button type="button" data-speed="4">4×</button>
+          </div>
+          <span class="counter" id="counter" aria-live="polite"></span>
+          <span class="grow"></span>
+          <button type="button" id="btnExit" hidden title="Leave the scenario and show the whole map">Overview</button>
+          <button type="button" id="btnFollow" hidden aria-pressed="true" title="Keep the current step in view at a readable zoom">Follow</button>
+          <button type="button" id="btnZoomOut" aria-label="Zoom out">−</button>
+          <button type="button" id="btnZoomIn" aria-label="Zoom in">+</button>
+          <button type="button" id="btnFit">Fit</button>
+        </div>
+        <div class="progress"><i id="prog"></i></div>
+        <svg class="map" id="svg" role="group" aria-label="Flow map: lanes from frontend to external services"></svg>
+        <p class="mapnote" id="mapnote"></p>
+        <div class="empty" id="empty" hidden></div>
+      </div>
+    </main>
+    <aside class="right">
+      <section class="panel" aria-labelledby="h-now"><h2 id="h-now">Now <small id="nowMeta"></small></h2><div class="now" id="now"></div></section>
+      <section class="panel" aria-labelledby="h-log"><h2 id="h-log">Event stream <small>simulated replay · no timing data</small></h2><ol class="log" id="log"></ol></section>
+      <section class="panel" aria-labelledby="h-det"><h2 id="h-det">Details</h2><div class="pad" id="details"></div></section>
+    </aside>
+  </div>
+  <div class="bottom">
+    <section class="panel" aria-labelledby="h-cov"><h2 id="h-cov">Coverage</h2><div class="scroll" id="coverage"></div></section>
+    <section class="panel" aria-labelledby="h-diag"><h2 id="h-diag">Diagnostics <small id="diagCount"></small></h2><div class="scroll" id="diags"></div></section>
+    <section class="panel" aria-labelledby="h-re"><h2 id="h-re">Re-scan</h2><div class="pad" id="rescan"></div></section>
+  </div>
+  <footer id="footer"></footer>
+</div>
+<script type="application/json" id="flowlens-data">{"schema":"flowlens.graph","version":"1.0.0","generator":{"name":"flowlens","version":"0.1.0"},"project":{"name":"shop-app"},"generatedAt":"2026-11-07T12:00:00.000Z","scope":{"preset":"whole","include":[],"exclude":[],"relations":["api","data","deps","agents"],"topLevel":[{"path":"api","scanned":true},{"path":"config","scanned":true},{"path":"docs","scanned":true},{"path":"web","scanned":true}]},"coverage":{"filesConsidered":21,"filesAnalyzed":14,"skipped":{"secret-like-file":2},"languages":{"python":{"files":11,"supported":true},"typescript":{"files":3,"supported":true}},"adapters":[{"id":"python.ast","language":"python","status":"active","files":11},{"id":"js.babel","language":"javascript","status":"active","files":3}],"parseErrors":0,"unresolvedEdges":2,"inferredEdges":4,"unsupportedFrameworks":[]},"nodes":[{"id":"ep:GET_/api/inventory/{sku}~1500b01bfa","kind":"endpoint","label":"GET /api/inventory/{sku}","sub":"fastapi","layer":"backend","path":"api/app/routes/inventory.py","line":8,"feature":"api/app","module":"mod:api/app/routes/inventory.py","adapter":"python.ast","attrs":{"method":"GET","route":"/api/inventory/{sku}"}},{"id":"ep:GET_/api/orders/{order_id}~56eae040a4","kind":"endpoint","label":"GET /api/orders/{order_id}","sub":"fastapi","layer":"backend","path":"api/app/routes/orders.py","line":20,"feature":"api/app","module":"mod:api/app/routes/orders.py","adapter":"python.ast","attrs":{"method":"GET","route":"/api/orders/{order_id}"}},{"id":"ep:GET_/api/orders~93ddc8e4b8","kind":"endpoint","label":"GET /api/orders","sub":"fastapi","layer":"backend","path":"api/app/routes/orders.py","line":15,"feature":"api/app","module":"mod:api/app/routes/orders.py","adapter":"python.ast","attrs":{"method":"GET","route":"/api/orders"}},{"id":"ep:GET_/health~ce575b3b5c","kind":"endpoint","label":"GET /health","sub":"fastapi","layer":"backend","path":"api/app/main.py","line":10,"feature":"api/app","module":"mod:api/app/main.py","adapter":"python.ast","attrs":{"method":"GET","route":"/health"}},{"id":"ep:POST_/api/orders~6741cd86e9","kind":"endpoint","label":"POST /api/orders","sub":"fastapi","layer":"backend","path":"api/app/routes/orders.py","line":10,"feature":"api/app","module":"mod:api/app/routes/orders.py","adapter":"python.ast","attrs":{"method":"POST","route":"/api/orders"}},{"id":"ext:hooks.example.com","kind":"external","label":"hooks.example.com","sub":"external host","layer":"external"},{"id":"fn:api/app/main.py#health","kind":"function","label":"health","sub":"main.py","layer":"backend","path":"api/app/main.py","line":11,"feature":"api/app","module":"mod:api/app/main.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/routes/inventory.py#stock_level","kind":"function","label":"stock_level","sub":"inventory.py","layer":"backend","path":"api/app/routes/inventory.py","line":9,"feature":"api/app","module":"mod:api/app/routes/inventory.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/routes/orders.py#create_order","kind":"function","label":"create_order","sub":"orders.py","layer":"backend","path":"api/app/routes/orders.py","line":11,"feature":"api/app","module":"mod:api/app/routes/orders.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/routes/orders.py#get_order","kind":"function","label":"get_order","sub":"orders.py","layer":"backend","path":"api/app/routes/orders.py","line":21,"feature":"api/app","module":"mod:api/app/routes/orders.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/routes/orders.py#list_orders","kind":"function","label":"list_orders","sub":"orders.py","layer":"backend","path":"api/app/routes/orders.py","line":16,"feature":"api/app","module":"mod:api/app/routes/orders.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/services/orders.py#notify_warehouse","kind":"function","label":"notify_warehouse","sub":"orders.py","layer":"backend","path":"api/app/services/orders.py","line":12,"feature":"api/app","module":"mod:api/app/services/orders.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/services/orders.py#place_order","kind":"function","label":"place_order","sub":"orders.py","layer":"backend","path":"api/app/services/orders.py","line":6,"feature":"api/app","module":"mod:api/app/services/orders.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/store/orders_repo.py#find_order","kind":"function","label":"find_order","sub":"orders_repo.py","layer":"backend","path":"api/app/store/orders_repo.py","line":17,"feature":"api/app","module":"mod:api/app/store/orders_repo.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/store/orders_repo.py#find_orders","kind":"function","label":"find_orders","sub":"orders_repo.py","layer":"backend","path":"api/app/store/orders_repo.py","line":13,"feature":"api/app","module":"mod:api/app/store/orders_repo.py","language":"python","adapter":"python.ast"},{"id":"fn:api/app/store/orders_repo.py#save_order","kind":"function","label":"save_order","sub":"orders_repo.py","layer":"backend","path":"api/app/store/orders_repo.py","line":6,"feature":"api/app","module":"mod:api/app/store/orders_repo.py","language":"python","adapter":"python.ast"},{"id":"fn:docs/snippet.py#doc_helper","kind":"function","label":"doc_helper","sub":"snippet.py","layer":"backend","path":"docs/snippet.py","line":1,"feature":"docs","module":"mod:docs/snippet.py","language":"python","adapter":"python.ast"},{"id":"fn:web/src/api/client.ts#createOrder","kind":"function","label":"createOrder","sub":"client.ts","layer":"frontend","path":"web/src/api/client.ts","line":11,"feature":"web/src","module":"mod:web/src/api/client.ts","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/api/client.ts#getOrder","kind":"function","label":"getOrder","sub":"client.ts","layer":"frontend","path":"web/src/api/client.ts","line":25,"feature":"web/src","module":"mod:web/src/api/client.ts","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/api/client.ts#getStock","kind":"function","label":"getStock","sub":"client.ts","layer":"frontend","path":"web/src/api/client.ts","line":29,"feature":"web/src","module":"mod:web/src/api/client.ts","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/api/client.ts#listOrders","kind":"function","label":"listOrders","sub":"client.ts","layer":"frontend","path":"web/src/api/client.ts","line":20,"feature":"web/src","module":"mod:web/src/api/client.ts","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/api/client.ts#sendFeedback","kind":"function","label":"sendFeedback","sub":"client.ts","layer":"frontend","path":"web/src/api/client.ts","line":37,"feature":"web/src","module":"mod:web/src/api/client.ts","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/api/client.ts#trackEvent","kind":"function","label":"trackEvent","sub":"client.ts","layer":"frontend","path":"web/src/api/client.ts","line":33,"feature":"web/src","module":"mod:web/src/api/client.ts","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage","kind":"function","label":"CheckoutPage","sub":"CheckoutPage.tsx","layer":"frontend","path":"web/src/pages/CheckoutPage.tsx","line":8,"feature":"web/src","module":"mod:web/src/pages/CheckoutPage.tsx","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","kind":"function","label":"CheckoutPage.submit","sub":"CheckoutPage.tsx","layer":"frontend","path":"web/src/pages/CheckoutPage.tsx","line":11,"feature":"web/src","module":"mod:web/src/pages/CheckoutPage.tsx","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/pages/CheckoutPage.tsx#saveDraft","kind":"function","label":"saveDraft","sub":"CheckoutPage.tsx","layer":"frontend","path":"web/src/pages/CheckoutPage.tsx","line":4,"feature":"web/src","module":"mod:web/src/pages/CheckoutPage.tsx","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/pages/OrdersPage.tsx#OrdersPage","kind":"function","label":"OrdersPage","sub":"OrdersPage.tsx","layer":"frontend","path":"web/src/pages/OrdersPage.tsx","line":4,"feature":"web/src","module":"mod:web/src/pages/OrdersPage.tsx","language":"typescript","adapter":"js.babel"},{"id":"fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder","kind":"function","label":"OrdersPage.openOrder","sub":"OrdersPage.tsx","layer":"frontend","path":"web/src/pages/OrdersPage.tsx","line":10,"feature":"web/src","module":"mod:web/src/pages/OrdersPage.tsx","language":"typescript","adapter":"js.babel"},{"id":"mod:api/app/__init__.py","kind":"module","label":"app/__init__.py","sub":"api/app","layer":"backend","path":"api/app/__init__.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/main.py","kind":"module","label":"main.py","sub":"api/app","layer":"backend","path":"api/app/main.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/models.py","kind":"module","label":"models.py","sub":"api/app","layer":"backend","path":"api/app/models.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/routes/__init__.py","kind":"module","label":"routes/__init__.py","sub":"api/app/routes","layer":"backend","path":"api/app/routes/__init__.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/routes/inventory.py","kind":"module","label":"inventory.py","sub":"api/app/routes","layer":"backend","path":"api/app/routes/inventory.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/routes/orders.py","kind":"module","label":"orders.py","sub":"api/app/routes","layer":"backend","path":"api/app/routes/orders.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/services/__init__.py","kind":"module","label":"services/__init__.py","sub":"api/app/services","layer":"backend","path":"api/app/services/__init__.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/services/orders.py","kind":"module","label":"orders.py","sub":"api/app/services","layer":"backend","path":"api/app/services/orders.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/store/__init__.py","kind":"module","label":"store/__init__.py","sub":"api/app/store","layer":"backend","path":"api/app/store/__init__.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:api/app/store/orders_repo.py","kind":"module","label":"orders_repo.py","sub":"api/app/store","layer":"backend","path":"api/app/store/orders_repo.py","line":1,"feature":"api/app","language":"python","adapter":"python.ast"},{"id":"mod:docs/snippet.py","kind":"module","label":"snippet.py","sub":"docs","layer":"backend","path":"docs/snippet.py","line":1,"feature":"docs","language":"python","adapter":"python.ast"},{"id":"mod:web/src/api/client.ts","kind":"module","label":"client.ts","sub":"web/src/api","layer":"frontend","path":"web/src/api/client.ts","line":1,"feature":"web/src","language":"typescript","adapter":"js.babel"},{"id":"mod:web/src/pages/CheckoutPage.tsx","kind":"module","label":"CheckoutPage.tsx","sub":"web/src/pages","layer":"frontend","path":"web/src/pages/CheckoutPage.tsx","line":1,"feature":"web/src","language":"typescript","adapter":"js.babel"},{"id":"mod:web/src/pages/OrdersPage.tsx","kind":"module","label":"OrdersPage.tsx","sub":"web/src/pages","layer":"frontend","path":"web/src/pages/OrdersPage.tsx","line":1,"feature":"web/src","language":"typescript","adapter":"js.babel"},{"id":"req:api/app/services/orders.py#L13","kind":"request","label":"POST //hooks.example.com/warehouse","sub":"requests","layer":"backend","path":"api/app/services/orders.py","line":13,"feature":"api/app","module":"mod:api/app/services/orders.py","adapter":"python.ast","attrs":{"method":"POST","url":"//hooks.example.com/warehouse","urlKind":"literal"}},{"id":"req:web/src/api/client.ts#L12","kind":"request","label":"POST /api/orders","sub":"fetch","layer":"frontend","path":"web/src/api/client.ts","line":12,"feature":"web/src","module":"mod:web/src/api/client.ts","adapter":"js.babel","attrs":{"method":"POST","url":"/api/orders","urlKind":"literal"}},{"id":"req:web/src/api/client.ts#L21","kind":"request","label":"GET /api/orders","sub":"fetch","layer":"frontend","path":"web/src/api/client.ts","line":21,"feature":"web/src","module":"mod:web/src/api/client.ts","adapter":"js.babel","attrs":{"method":"GET","url":"/api/orders","urlKind":"template"}},{"id":"req:web/src/api/client.ts#L26","kind":"request","label":"GET /api/orders/{}","sub":"fetch","layer":"frontend","path":"web/src/api/client.ts","line":26,"feature":"web/src","module":"mod:web/src/api/client.ts","adapter":"js.babel","attrs":{"method":"GET","url":"/api/orders/{}","urlKind":"template"}},{"id":"req:web/src/api/client.ts#L30","kind":"request","label":"GET {base}/inventory/{}","sub":"http","layer":"frontend","path":"web/src/api/client.ts","line":30,"feature":"web/src","module":"mod:web/src/api/client.ts","adapter":"js.babel","attrs":{"method":"GET","url":"{base}/inventory/{}","urlKind":"partial"}},{"id":"req:web/src/api/client.ts#L34","kind":"request","label":"POST (dynamic URL)","sub":"fetch","layer":"frontend","path":"web/src/api/client.ts","line":34,"feature":"web/src","module":"mod:web/src/api/client.ts","adapter":"js.babel","attrs":{"method":"POST","url":"(dynamic URL)","urlKind":"dynamic"}},{"id":"req:web/src/api/client.ts#L38","kind":"request","label":"POST /api/feedback","sub":"fetch","layer":"frontend","path":"web/src/api/client.ts","line":38,"feature":"web/src","module":"mod:web/src/api/client.ts","adapter":"js.babel","attrs":{"method":"POST","url":"/api/feedback","urlKind":"literal"}},{"id":"store:browser-storage:localStorage","kind":"store","label":"localStorage","sub":"browser storage","layer":"data","attrs":{"storeKind":"browser-storage"}},{"id":"store:kv:cache","kind":"store","label":"cache","sub":"key-value","layer":"data","attrs":{"storeKind":"kv"}},{"id":"store:sql:orders","kind":"store","label":"orders","sub":"SQL table","layer":"data","attrs":{"storeKind":"sql"}},{"id":"unknown:dynamic-url","kind":"unknown","label":"Dynamic URL","sub":"target decided at runtime","layer":"external"},{"id":"unknown:unmatched:POST_/api/feedback~4b69c535c2","kind":"unknown","label":"No scanned route: POST /api/feedback","sub":"outside scope or unsupported","layer":"external"}],"edges":[{"id":"e:calls_fn:api/app/routes/orders.py#create_order_fn:api/app/se~25f09ddba6","kind":"calls","relation":"calls","from":"fn:api/app/routes/orders.py#create_order","to":"fn:api/app/services/orders.py#place_order","provenance":"observed","evidence":[{"path":"api/app/routes/orders.py","line":12,"note":"calls order_service.place_order()"}],"adapter":"python.ast"},{"id":"e:calls_fn:api/app/routes/orders.py#get_order_fn:api/app/store~cb3d05c9b1","kind":"calls","relation":"calls","from":"fn:api/app/routes/orders.py#get_order","to":"fn:api/app/store/orders_repo.py#find_order","provenance":"observed","evidence":[{"path":"api/app/routes/orders.py","line":22,"note":"calls find_order()"}],"adapter":"python.ast"},{"id":"e:calls_fn:api/app/routes/orders.py#list_orders_fn:api/app/sto~c5d3f2f3a2","kind":"calls","relation":"calls","from":"fn:api/app/routes/orders.py#list_orders","to":"fn:api/app/store/orders_repo.py#find_orders","provenance":"observed","evidence":[{"path":"api/app/routes/orders.py","line":17,"note":"calls find_orders()"}],"adapter":"python.ast"},{"id":"e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~0e2b539a5c","kind":"calls","relation":"calls","from":"fn:api/app/services/orders.py#place_order","to":"fn:api/app/store/orders_repo.py#save_order","provenance":"observed","evidence":[{"path":"api/app/services/orders.py","line":7,"note":"calls orders_repo.save_order()"}],"adapter":"python.ast"},{"id":"e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~43e309578d","kind":"calls","relation":"calls","from":"fn:api/app/services/orders.py#place_order","to":"fn:api/app/services/orders.py#notify_warehouse","provenance":"observed","evidence":[{"path":"api/app/services/orders.py","line":8,"note":"calls notify_warehouse()"}],"adapter":"python.ast"},{"id":"e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~409990efe8","kind":"calls","relation":"calls","from":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","to":"fn:web/src/api/client.ts#getStock","provenance":"observed","evidence":[{"path":"web/src/pages/CheckoutPage.tsx","line":13,"note":"calls getStock()"}],"adapter":"js.babel"},{"id":"e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~4e7a92d57c","kind":"calls","relation":"calls","from":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","to":"fn:web/src/api/client.ts#trackEvent","provenance":"observed","evidence":[{"path":"web/src/pages/CheckoutPage.tsx","line":15,"note":"calls trackEvent()"}],"adapter":"js.babel"},{"id":"e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~a84152f7f6","kind":"calls","relation":"calls","from":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","to":"fn:web/src/pages/CheckoutPage.tsx#saveDraft","provenance":"observed","evidence":[{"path":"web/src/pages/CheckoutPage.tsx","line":12,"note":"calls saveDraft()"}],"adapter":"js.babel"},{"id":"e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~c3d0de8249","kind":"calls","relation":"calls","from":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","to":"fn:web/src/api/client.ts#createOrder","provenance":"observed","evidence":[{"path":"web/src/pages/CheckoutPage.tsx","line":14,"note":"calls createOrder()"}],"adapter":"js.babel"},{"id":"e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage_fn:web/src/~2d1f8fa583","kind":"calls","relation":"calls","from":"fn:web/src/pages/OrdersPage.tsx#OrdersPage","to":"fn:web/src/api/client.ts#sendFeedback","provenance":"observed","evidence":[{"path":"web/src/pages/OrdersPage.tsx","line":14,"note":"calls sendFeedback()"}],"adapter":"js.babel"},{"id":"e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage_fn:web/src/~d93b9d647b","kind":"calls","relation":"calls","from":"fn:web/src/pages/OrdersPage.tsx#OrdersPage","to":"fn:web/src/api/client.ts#listOrders","provenance":"observed","evidence":[{"path":"web/src/pages/OrdersPage.tsx","line":7,"note":"calls listOrders()"}],"adapter":"js.babel"},{"id":"e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder_f~9a9657737b","kind":"calls","relation":"calls","from":"fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder","to":"fn:web/src/api/client.ts#getOrder","provenance":"observed","evidence":[{"path":"web/src/pages/OrdersPage.tsx","line":11,"note":"calls getOrder()"}],"adapter":"js.babel"},{"id":"e:handles_ep:GET_/api/inventory/{sku}_1500b01bfa_fn:api/app/ro~2135d1184b","kind":"handles","relation":"api","from":"ep:GET_/api/inventory/{sku}~1500b01bfa","to":"fn:api/app/routes/inventory.py#stock_level","provenance":"observed","evidence":[{"path":"api/app/main.py","line":7,"note":"mounts router inventory.router at /api"},{"path":"api/app/routes/inventory.py","line":4,"note":"router prefix /inventory"},{"path":"api/app/routes/inventory.py","line":8,"note":"fastapi route GET /{sku} on router"}],"adapter":"python.ast"},{"id":"e:handles_ep:GET_/api/orders_93ddc8e4b8_fn:api/app/routes/orde~b12582a97c","kind":"handles","relation":"api","from":"ep:GET_/api/orders~93ddc8e4b8","to":"fn:api/app/routes/orders.py#list_orders","provenance":"observed","evidence":[{"path":"api/app/main.py","line":6,"note":"mounts router orders.router at /api"},{"path":"api/app/routes/orders.py","line":7,"note":"router prefix /orders"},{"path":"api/app/routes/orders.py","line":15,"note":"fastapi route GET  on router"}],"adapter":"python.ast"},{"id":"e:handles_ep:GET_/api/orders/{order_id}_56eae040a4_fn:api/app/~713739cc4d","kind":"handles","relation":"api","from":"ep:GET_/api/orders/{order_id}~56eae040a4","to":"fn:api/app/routes/orders.py#get_order","provenance":"observed","evidence":[{"path":"api/app/main.py","line":6,"note":"mounts router orders.router at /api"},{"path":"api/app/routes/orders.py","line":7,"note":"router prefix /orders"},{"path":"api/app/routes/orders.py","line":20,"note":"fastapi route GET /{order_id} on router"}],"adapter":"python.ast"},{"id":"e:handles_ep:GET_/health_ce575b3b5c_fn:api/app/main.py#health_~b952c1935f","kind":"handles","relation":"api","from":"ep:GET_/health~ce575b3b5c","to":"fn:api/app/main.py#health","provenance":"observed","evidence":[{"path":"api/app/main.py","line":10,"note":"fastapi route GET /health on app"}],"adapter":"python.ast"},{"id":"e:handles_ep:POST_/api/orders_6741cd86e9_fn:api/app/routes/ord~053e76068b","kind":"handles","relation":"api","from":"ep:POST_/api/orders~6741cd86e9","to":"fn:api/app/routes/orders.py#create_order","provenance":"observed","evidence":[{"path":"api/app/main.py","line":6,"note":"mounts router orders.router at /api"},{"path":"api/app/routes/orders.py","line":7,"note":"router prefix /orders"},{"path":"api/app/routes/orders.py","line":10,"note":"fastapi route POST  on router"}],"data":"payload: OrderIn","adapter":"python.ast"},{"id":"e:imports_mod:api/app/main.py_mod:api/app/routes/inventory.py_~bb53f76bbd","kind":"imports","relation":"deps","from":"mod:api/app/main.py","to":"mod:api/app/routes/inventory.py","provenance":"observed","evidence":[{"path":"api/app/main.py","line":3,"note":"imports app.routes.inventory"}],"adapter":"python.ast"},{"id":"e:imports_mod:api/app/main.py_mod:api/app/routes/orders.py_~df8bb539a6","kind":"imports","relation":"deps","from":"mod:api/app/main.py","to":"mod:api/app/routes/orders.py","provenance":"observed","evidence":[{"path":"api/app/main.py","line":3,"note":"imports app.routes.orders"}],"adapter":"python.ast"},{"id":"e:imports_mod:api/app/routes/orders.py_mod:api/app/models.py_~38ecc14300","kind":"imports","relation":"deps","from":"mod:api/app/routes/orders.py","to":"mod:api/app/models.py","provenance":"observed","evidence":[{"path":"api/app/routes/orders.py","line":3,"note":"imports app.models"}],"adapter":"python.ast"},{"id":"e:imports_mod:api/app/routes/orders.py_mod:api/app/services/or~9015900fad","kind":"imports","relation":"deps","from":"mod:api/app/routes/orders.py","to":"mod:api/app/services/orders.py","provenance":"observed","evidence":[{"path":"api/app/routes/orders.py","line":4,"note":"imports app.services.orders"}],"adapter":"python.ast"},{"id":"e:imports_mod:api/app/routes/orders.py_mod:api/app/store/order~4bf64e0b24","kind":"imports","relation":"deps","from":"mod:api/app/routes/orders.py","to":"mod:api/app/store/orders_repo.py","provenance":"observed","evidence":[{"path":"api/app/routes/orders.py","line":5,"note":"imports app.store.orders_repo"}],"adapter":"python.ast"},{"id":"e:imports_mod:api/app/services/orders.py_mod:api/app/store/ord~e108be4446","kind":"imports","relation":"deps","from":"mod:api/app/services/orders.py","to":"mod:api/app/store/orders_repo.py","provenance":"observed","evidence":[{"path":"api/app/services/orders.py","line":3,"note":"imports app.store.orders_repo"}],"adapter":"python.ast"},{"id":"e:imports_mod:web/src/pages/CheckoutPage.tsx_mod:web/src/api/c~1aa0077724","kind":"imports","relation":"deps","from":"mod:web/src/pages/CheckoutPage.tsx","to":"mod:web/src/api/client.ts","provenance":"observed","evidence":[{"path":"web/src/pages/CheckoutPage.tsx","line":2,"note":"imports ../api/client"}],"adapter":"js.babel"},{"id":"e:imports_mod:web/src/pages/OrdersPage.tsx_mod:web/src/api/cli~8521c90c68","kind":"imports","relation":"deps","from":"mod:web/src/pages/OrdersPage.tsx","to":"mod:web/src/api/client.ts","provenance":"observed","evidence":[{"path":"web/src/pages/OrdersPage.tsx","line":2,"note":"imports ../api/client"}],"adapter":"js.babel"},{"id":"e:reads_fn:api/app/routes/inventory.py#stock_level_store:kv:ca~067e645e11","kind":"reads","relation":"data","from":"fn:api/app/routes/inventory.py#stock_level","to":"store:kv:cache","provenance":"observed","evidence":[{"path":"api/app/routes/inventory.py","line":10,"note":"key-value get"}],"adapter":"python.ast"},{"id":"e:reads_fn:api/app/store/orders_repo.py#find_order_store:sql:o~f1124e677e","kind":"reads","relation":"data","from":"fn:api/app/store/orders_repo.py#find_order","to":"store:sql:orders","provenance":"observed","evidence":[{"path":"api/app/store/orders_repo.py","line":18,"note":"SQL SELECT on table orders"}],"adapter":"python.ast"},{"id":"e:reads_fn:api/app/store/orders_repo.py#find_orders_store:sql:~4710cd33f2","kind":"reads","relation":"data","from":"fn:api/app/store/orders_repo.py#find_orders","to":"store:sql:orders","provenance":"observed","evidence":[{"path":"api/app/store/orders_repo.py","line":14,"note":"SQL SELECT on table orders"}],"adapter":"python.ast"},{"id":"e:requests_fn:api/app/services/orders.py#notify_warehouse_req:~baf922871a","kind":"requests","relation":"api","from":"fn:api/app/services/orders.py#notify_warehouse","to":"req:api/app/services/orders.py#L13","provenance":"observed","evidence":[{"path":"api/app/services/orders.py","line":13,"note":"requests POST request with {order_id}"}],"data":"{order_id}","adapter":"python.ast"},{"id":"e:requests_fn:web/src/api/client.ts#createOrder_req:web/src/ap~b6d692afa6","kind":"requests","relation":"api","from":"fn:web/src/api/client.ts#createOrder","to":"req:web/src/api/client.ts#L12","provenance":"observed","evidence":[{"path":"web/src/api/client.ts","line":12,"note":"fetch POST request with order"}],"data":"order","adapter":"js.babel"},{"id":"e:requests_fn:web/src/api/client.ts#getOrder_req:web/src/api/c~73fe7713f4","kind":"requests","relation":"api","from":"fn:web/src/api/client.ts#getOrder","to":"req:web/src/api/client.ts#L26","provenance":"observed","evidence":[{"path":"web/src/api/client.ts","line":26,"note":"fetch GET request"}],"adapter":"js.babel"},{"id":"e:requests_fn:web/src/api/client.ts#getStock_req:web/src/api/c~55b6f8f64c","kind":"requests","relation":"api","from":"fn:web/src/api/client.ts#getStock","to":"req:web/src/api/client.ts#L30","provenance":"observed","evidence":[{"path":"web/src/api/client.ts","line":30,"note":"http GET request"}],"adapter":"js.babel"},{"id":"e:requests_fn:web/src/api/client.ts#listOrders_req:web/src/api~18dc2ebf1b","kind":"requests","relation":"api","from":"fn:web/src/api/client.ts#listOrders","to":"req:web/src/api/client.ts#L21","provenance":"observed","evidence":[{"path":"web/src/api/client.ts","line":21,"note":"fetch GET request"}],"adapter":"js.babel"},{"id":"e:requests_fn:web/src/api/client.ts#sendFeedback_req:web/src/a~99e253f7da","kind":"requests","relation":"api","from":"fn:web/src/api/client.ts#sendFeedback","to":"req:web/src/api/client.ts#L38","provenance":"observed","evidence":[{"path":"web/src/api/client.ts","line":38,"note":"fetch POST request with {text}"}],"data":"{text}","adapter":"js.babel"},{"id":"e:requests_fn:web/src/api/client.ts#trackEvent_req:web/src/api~8305acf991","kind":"requests","relation":"api","from":"fn:web/src/api/client.ts#trackEvent","to":"req:web/src/api/client.ts#L34","provenance":"observed","evidence":[{"path":"web/src/api/client.ts","line":34,"note":"fetch POST request with {name}"}],"data":"{name}","adapter":"js.babel"},{"id":"e:routes_to_req:api/app/services/orders.py#L13_ext:hooks.examp~83d3d1ea8b","kind":"routes_to","relation":"api","from":"req:api/app/services/orders.py#L13","to":"ext:hooks.example.com","provenance":"observed","evidence":[{"path":"api/app/services/orders.py","line":13,"note":"request to host hooks.example.com"}]},{"id":"e:routes_to_req:web/src/api/client.ts#L12_ep:POST_/api/orders_~9eb88b0643","kind":"routes_to","relation":"api","from":"req:web/src/api/client.ts#L12","to":"ep:POST_/api/orders~6741cd86e9","provenance":"inferred","evidence":[{"path":"api/app/routes/orders.py","line":10,"note":"route POST /api/orders"},{"path":"web/src/api/client.ts","line":12,"note":"request URL"}],"reason":"Method POST and path \"/api/orders\" match route POST /api/orders (api/app/routes/orders.py:10). The base URL and proxying are decided at runtime."},{"id":"e:routes_to_req:web/src/api/client.ts#L21_ep:GET_/api/orders_9~895fec7008","kind":"routes_to","relation":"api","from":"req:web/src/api/client.ts#L21","to":"ep:GET_/api/orders~93ddc8e4b8","provenance":"inferred","evidence":[{"path":"api/app/routes/orders.py","line":15,"note":"route GET /api/orders"},{"path":"web/src/api/client.ts","line":21,"note":"request URL"}],"reason":"Method GET and path \"/api/orders\" match route GET /api/orders (api/app/routes/orders.py:15). The base URL and proxying are decided at runtime."},{"id":"e:routes_to_req:web/src/api/client.ts#L26_ep:GET_/api/orders/{~f4b9b90853","kind":"routes_to","relation":"api","from":"req:web/src/api/client.ts#L26","to":"ep:GET_/api/orders/{order_id}~56eae040a4","provenance":"inferred","evidence":[{"path":"api/app/routes/orders.py","line":20,"note":"route GET /api/orders/{order_id}"},{"path":"web/src/api/client.ts","line":26,"note":"request URL"}],"reason":"Method GET and path \"/api/orders/{}\" match route GET /api/orders/{order_id} (api/app/routes/orders.py:20). The base URL and proxying are decided at runtime."},{"id":"e:routes_to_req:web/src/api/client.ts#L30_ep:GET_/api/inventor~0d9bdfb77d","kind":"routes_to","relation":"api","from":"req:web/src/api/client.ts#L30","to":"ep:GET_/api/inventory/{sku}~1500b01bfa","provenance":"inferred","evidence":[{"path":"api/app/routes/inventory.py","line":8,"note":"route GET /api/inventory/{sku}"},{"path":"web/src/api/client.ts","line":30,"note":"request URL"}],"reason":"The URL has a runtime prefix; its known part \"/inventory/{}\" and method GET match the end of route GET /api/inventory/{sku} (api/app/routes/inventory.py:8)."},{"id":"e:routes_to_req:web/src/api/client.ts#L34_unknown:dynamic-url_~f97b16c829","kind":"routes_to","relation":"api","from":"req:web/src/api/client.ts#L34","to":"unknown:dynamic-url","provenance":"unresolved","evidence":[{"path":"web/src/api/client.ts","line":34,"note":"request URL"}],"reason":"The URL is computed at runtime (a variable or a call), so the target cannot be determined from source."},{"id":"e:routes_to_req:web/src/api/client.ts#L38_unknown:unmatched:PO~9977594bfc","kind":"routes_to","relation":"api","from":"req:web/src/api/client.ts#L38","to":"unknown:unmatched:POST_/api/feedback~4b69c535c2","provenance":"unresolved","evidence":[{"path":"web/src/api/client.ts","line":38,"note":"request URL"}],"reason":"No route with this method and path was found in the scanned scope. The server may be outside the scan, behind a proxy, or use a framework without an adapter."},{"id":"e:writes_fn:api/app/store/orders_repo.py#save_order_store:sql:~782339ca18","kind":"writes","relation":"data","from":"fn:api/app/store/orders_repo.py#save_order","to":"store:sql:orders","provenance":"observed","evidence":[{"path":"api/app/store/orders_repo.py","line":8,"note":"SQL INSERT on table orders"}],"adapter":"python.ast"},{"id":"e:writes_fn:web/src/pages/CheckoutPage.tsx#saveDraft_store:bro~d603f059cf","kind":"writes","relation":"data","from":"fn:web/src/pages/CheckoutPage.tsx#saveDraft","to":"store:browser-storage:localStorage","provenance":"observed","evidence":[{"path":"web/src/pages/CheckoutPage.tsx","line":5,"note":"localStorage.setItem with draft"}],"data":"draft","adapter":"js.babel"}],"scenarios":[{"id":"scn:api:req:web/src/api/client.ts#L30:fn:web/src/api/client.ts#getStock","title":"GET {base}/inventory/{} from getStock","kind":"api-flow","feature":"web/src","entry":"fn:web/src/api/client.ts#getStock","steps":[{"index":0,"edge":"e:requests_fn:web/src/api/client.ts#getStock_req:web/src/api/c~55b6f8f64c","from":"fn:web/src/api/client.ts#getStock","to":"req:web/src/api/client.ts#L30","title":"getStock sends GET {base}/inventory/{}","provenance":"observed","depth":0},{"index":1,"edge":"e:routes_to_req:web/src/api/client.ts#L30_ep:GET_/api/inventor~0d9bdfb77d","from":"req:web/src/api/client.ts#L30","to":"ep:GET_/api/inventory/{sku}~1500b01bfa","title":"Request reaches GET /api/inventory/{sku}","provenance":"inferred","depth":1},{"index":2,"edge":"e:handles_ep:GET_/api/inventory/{sku}_1500b01bfa_fn:api/app/ro~2135d1184b","from":"ep:GET_/api/inventory/{sku}~1500b01bfa","to":"fn:api/app/routes/inventory.py#stock_level","title":"GET /api/inventory/{sku} is handled by stock_level","provenance":"observed","depth":2},{"index":3,"edge":"e:reads_fn:api/app/routes/inventory.py#stock_level_store:kv:ca~067e645e11","from":"fn:api/app/routes/inventory.py#stock_level","to":"store:kv:cache","title":"stock_level reads cache","provenance":"observed","depth":3}],"summary":"Client code sends a request that is matched to GET /api/inventory/{sku}.","replay":"simulated","basis":"static-analysis"},{"id":"scn:api:req:web/src/api/client.ts#L21:fn:web/src/api/client.ts#listOrders","title":"GET /api/orders from listOrders","kind":"api-flow","feature":"web/src","entry":"fn:web/src/api/client.ts#listOrders","steps":[{"index":0,"edge":"e:requests_fn:web/src/api/client.ts#listOrders_req:web/src/api~18dc2ebf1b","from":"fn:web/src/api/client.ts#listOrders","to":"req:web/src/api/client.ts#L21","title":"listOrders sends GET /api/orders","provenance":"observed","depth":0},{"index":1,"edge":"e:routes_to_req:web/src/api/client.ts#L21_ep:GET_/api/orders_9~895fec7008","from":"req:web/src/api/client.ts#L21","to":"ep:GET_/api/orders~93ddc8e4b8","title":"Request reaches GET /api/orders","provenance":"inferred","depth":1},{"index":2,"edge":"e:handles_ep:GET_/api/orders_93ddc8e4b8_fn:api/app/routes/orde~b12582a97c","from":"ep:GET_/api/orders~93ddc8e4b8","to":"fn:api/app/routes/orders.py#list_orders","title":"GET /api/orders is handled by list_orders","provenance":"observed","depth":2},{"index":3,"edge":"e:calls_fn:api/app/routes/orders.py#list_orders_fn:api/app/sto~c5d3f2f3a2","from":"fn:api/app/routes/orders.py#list_orders","to":"fn:api/app/store/orders_repo.py#find_orders","title":"list_orders calls find_orders","provenance":"observed","depth":3},{"index":4,"edge":"e:reads_fn:api/app/store/orders_repo.py#find_orders_store:sql:~4710cd33f2","from":"fn:api/app/store/orders_repo.py#find_orders","to":"store:sql:orders","title":"find_orders reads orders","provenance":"observed","depth":4}],"summary":"Client code sends a request that is matched to GET /api/orders.","replay":"simulated","basis":"static-analysis"},{"id":"scn:api:req:web/src/api/client.ts#L26:fn:web/src/api/client.ts#getOrder","title":"GET /api/orders/{} from getOrder","kind":"api-flow","feature":"web/src","entry":"fn:web/src/api/client.ts#getOrder","steps":[{"index":0,"edge":"e:requests_fn:web/src/api/client.ts#getOrder_req:web/src/api/c~73fe7713f4","from":"fn:web/src/api/client.ts#getOrder","to":"req:web/src/api/client.ts#L26","title":"getOrder sends GET /api/orders/{}","provenance":"observed","depth":0},{"index":1,"edge":"e:routes_to_req:web/src/api/client.ts#L26_ep:GET_/api/orders/{~f4b9b90853","from":"req:web/src/api/client.ts#L26","to":"ep:GET_/api/orders/{order_id}~56eae040a4","title":"Request reaches GET /api/orders/{order_id}","provenance":"inferred","depth":1},{"index":2,"edge":"e:handles_ep:GET_/api/orders/{order_id}_56eae040a4_fn:api/app/~713739cc4d","from":"ep:GET_/api/orders/{order_id}~56eae040a4","to":"fn:api/app/routes/orders.py#get_order","title":"GET /api/orders/{order_id} is handled by get_order","provenance":"observed","depth":2},{"index":3,"edge":"e:calls_fn:api/app/routes/orders.py#get_order_fn:api/app/store~cb3d05c9b1","from":"fn:api/app/routes/orders.py#get_order","to":"fn:api/app/store/orders_repo.py#find_order","title":"get_order calls find_order","provenance":"observed","depth":3},{"index":4,"edge":"e:reads_fn:api/app/store/orders_repo.py#find_order_store:sql:o~f1124e677e","from":"fn:api/app/store/orders_repo.py#find_order","to":"store:sql:orders","title":"find_order reads orders","provenance":"observed","depth":4}],"summary":"Client code sends a request that is matched to GET /api/orders/{order_id}.","replay":"simulated","basis":"static-analysis"},{"id":"scn:api:req:web/src/api/client.ts#L34:fn:web/src/api/client.ts#trackEvent","title":"POST (dynamic URL) from trackEvent","kind":"api-flow","feature":"web/src","entry":"fn:web/src/api/client.ts#trackEvent","steps":[{"index":0,"edge":"e:requests_fn:web/src/api/client.ts#trackEvent_req:web/src/api~8305acf991","from":"fn:web/src/api/client.ts#trackEvent","to":"req:web/src/api/client.ts#L34","title":"trackEvent sends POST (dynamic URL)","provenance":"observed","depth":0},{"index":1,"edge":"e:routes_to_req:web/src/api/client.ts#L34_unknown:dynamic-url_~f97b16c829","from":"req:web/src/api/client.ts#L34","to":"unknown:dynamic-url","title":"Request goes to Dynamic URL","provenance":"unresolved","depth":1}],"summary":"Client code sends a request whose server route was not found in the scan.","replay":"simulated","basis":"static-analysis"},{"id":"scn:api:req:api/app/services/orders.py#L13:fn:api/app/services/o~264d2d8e4f","title":"POST //hooks.example.com/warehouse from notify_warehouse","kind":"api-flow","feature":"api/app","entry":"fn:api/app/services/orders.py#notify_warehouse","steps":[{"index":0,"edge":"e:requests_fn:api/app/services/orders.py#notify_warehouse_req:~baf922871a","from":"fn:api/app/services/orders.py#notify_warehouse","to":"req:api/app/services/orders.py#L13","title":"notify_warehouse sends POST //hooks.example.com/warehouse","provenance":"observed","depth":0},{"index":1,"edge":"e:routes_to_req:api/app/services/orders.py#L13_ext:hooks.examp~83d3d1ea8b","from":"req:api/app/services/orders.py#L13","to":"ext:hooks.example.com","title":"Request goes to hooks.example.com","provenance":"observed","depth":1}],"summary":"Client code sends a request whose server route was not found in the scan.","replay":"simulated","basis":"static-analysis"},{"id":"scn:api:req:web/src/api/client.ts#L38:fn:web/src/api/client.ts#sendFeedback","title":"POST /api/feedback from sendFeedback","kind":"api-flow","feature":"web/src","entry":"fn:web/src/api/client.ts#sendFeedback","steps":[{"index":0,"edge":"e:requests_fn:web/src/api/client.ts#sendFeedback_req:web/src/a~99e253f7da","from":"fn:web/src/api/client.ts#sendFeedback","to":"req:web/src/api/client.ts#L38","title":"sendFeedback sends POST /api/feedback","provenance":"observed","depth":0},{"index":1,"edge":"e:routes_to_req:web/src/api/client.ts#L38_unknown:unmatched:PO~9977594bfc","from":"req:web/src/api/client.ts#L38","to":"unknown:unmatched:POST_/api/feedback~4b69c535c2","title":"Request goes to No scanned route: POST /api/feedback","provenance":"unresolved","depth":1}],"summary":"Client code sends a request whose server route was not found in the scan.","replay":"simulated","basis":"static-analysis"},{"id":"scn:api:req:web/src/api/client.ts#L12:fn:web/src/api/client.ts#createOrder","title":"POST /api/orders from createOrder","kind":"api-flow","feature":"web/src","entry":"fn:web/src/api/client.ts#createOrder","steps":[{"index":0,"edge":"e:requests_fn:web/src/api/client.ts#createOrder_req:web/src/ap~b6d692afa6","from":"fn:web/src/api/client.ts#createOrder","to":"req:web/src/api/client.ts#L12","title":"createOrder sends POST /api/orders","provenance":"observed","depth":0},{"index":1,"edge":"e:routes_to_req:web/src/api/client.ts#L12_ep:POST_/api/orders_~9eb88b0643","from":"req:web/src/api/client.ts#L12","to":"ep:POST_/api/orders~6741cd86e9","title":"Request reaches POST /api/orders","provenance":"inferred","depth":1},{"index":2,"edge":"e:handles_ep:POST_/api/orders_6741cd86e9_fn:api/app/routes/ord~053e76068b","from":"ep:POST_/api/orders~6741cd86e9","to":"fn:api/app/routes/orders.py#create_order","title":"POST /api/orders is handled by create_order","provenance":"observed","depth":2},{"index":3,"edge":"e:calls_fn:api/app/routes/orders.py#create_order_fn:api/app/se~25f09ddba6","from":"fn:api/app/routes/orders.py#create_order","to":"fn:api/app/services/orders.py#place_order","title":"create_order calls place_order","provenance":"observed","depth":3},{"index":4,"edge":"e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~0e2b539a5c","from":"fn:api/app/services/orders.py#place_order","to":"fn:api/app/store/orders_repo.py#save_order","title":"place_order calls save_order","provenance":"observed","depth":4},{"index":5,"edge":"e:writes_fn:api/app/store/orders_repo.py#save_order_store:sql:~782339ca18","from":"fn:api/app/store/orders_repo.py#save_order","to":"store:sql:orders","title":"save_order writes orders","provenance":"observed","depth":5},{"index":6,"edge":"e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~43e309578d","from":"fn:api/app/services/orders.py#place_order","to":"fn:api/app/services/orders.py#notify_warehouse","title":"place_order calls notify_warehouse","provenance":"observed","depth":4},{"index":7,"edge":"e:requests_fn:api/app/services/orders.py#notify_warehouse_req:~baf922871a","from":"fn:api/app/services/orders.py#notify_warehouse","to":"req:api/app/services/orders.py#L13","title":"notify_warehouse sends POST //hooks.example.com/warehouse","provenance":"observed","depth":5},{"index":8,"edge":"e:routes_to_req:api/app/services/orders.py#L13_ext:hooks.examp~83d3d1ea8b","from":"req:api/app/services/orders.py#L13","to":"ext:hooks.example.com","title":"Request goes to hooks.example.com","provenance":"observed","depth":6}],"summary":"Client code sends a request that is matched to POST /api/orders.","replay":"simulated","basis":"static-analysis"},{"id":"scn:ep:ep:GET_/health_ce575b3b5c~85cd62af1f","title":"GET /health","kind":"endpoint-flow","feature":"api/app","entry":"ep:GET_/health~ce575b3b5c","steps":[{"index":0,"edge":"e:handles_ep:GET_/health_ce575b3b5c_fn:api/app/main.py#health_~b952c1935f","from":"ep:GET_/health~ce575b3b5c","to":"fn:api/app/main.py#health","title":"GET /health is handled by health","provenance":"observed","depth":0}],"summary":"Server route traced from its handler; no client call for it was found in the scan.","replay":"simulated","basis":"static-analysis"},{"id":"scn:entry:fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","title":"CheckoutPage.submit journey","kind":"entry-flow","feature":"web/src","entry":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","steps":[{"index":0,"edge":"e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~a84152f7f6","from":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","to":"fn:web/src/pages/CheckoutPage.tsx#saveDraft","title":"CheckoutPage.submit calls saveDraft","provenance":"observed","depth":0},{"index":1,"edge":"e:writes_fn:web/src/pages/CheckoutPage.tsx#saveDraft_store:bro~d603f059cf","from":"fn:web/src/pages/CheckoutPage.tsx#saveDraft","to":"store:browser-storage:localStorage","title":"saveDraft writes localStorage","provenance":"observed","depth":1},{"index":2,"edge":"e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~409990efe8","from":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","to":"fn:web/src/api/client.ts#getStock","title":"CheckoutPage.submit calls getStock","provenance":"observed","depth":0},{"index":3,"edge":"e:requests_fn:web/src/api/client.ts#getStock_req:web/src/api/c~55b6f8f64c","from":"fn:web/src/api/client.ts#getStock","to":"req:web/src/api/client.ts#L30","title":"getStock sends GET {base}/inventory/{}","provenance":"observed","depth":1},{"index":4,"edge":"e:routes_to_req:web/src/api/client.ts#L30_ep:GET_/api/inventor~0d9bdfb77d","from":"req:web/src/api/client.ts#L30","to":"ep:GET_/api/inventory/{sku}~1500b01bfa","title":"Request reaches GET /api/inventory/{sku}","provenance":"inferred","depth":2},{"index":5,"edge":"e:handles_ep:GET_/api/inventory/{sku}_1500b01bfa_fn:api/app/ro~2135d1184b","from":"ep:GET_/api/inventory/{sku}~1500b01bfa","to":"fn:api/app/routes/inventory.py#stock_level","title":"GET /api/inventory/{sku} is handled by stock_level","provenance":"observed","depth":3},{"index":6,"edge":"e:reads_fn:api/app/routes/inventory.py#stock_level_store:kv:ca~067e645e11","from":"fn:api/app/routes/inventory.py#stock_level","to":"store:kv:cache","title":"stock_level reads cache","provenance":"observed","depth":4},{"index":7,"edge":"e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~c3d0de8249","from":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","to":"fn:web/src/api/client.ts#createOrder","title":"CheckoutPage.submit calls createOrder","provenance":"observed","depth":0},{"index":8,"edge":"e:requests_fn:web/src/api/client.ts#createOrder_req:web/src/ap~b6d692afa6","from":"fn:web/src/api/client.ts#createOrder","to":"req:web/src/api/client.ts#L12","title":"createOrder sends POST /api/orders","provenance":"observed","depth":1},{"index":9,"edge":"e:routes_to_req:web/src/api/client.ts#L12_ep:POST_/api/orders_~9eb88b0643","from":"req:web/src/api/client.ts#L12","to":"ep:POST_/api/orders~6741cd86e9","title":"Request reaches POST /api/orders","provenance":"inferred","depth":2},{"index":10,"edge":"e:handles_ep:POST_/api/orders_6741cd86e9_fn:api/app/routes/ord~053e76068b","from":"ep:POST_/api/orders~6741cd86e9","to":"fn:api/app/routes/orders.py#create_order","title":"POST /api/orders is handled by create_order","provenance":"observed","depth":3},{"index":11,"edge":"e:calls_fn:api/app/routes/orders.py#create_order_fn:api/app/se~25f09ddba6","from":"fn:api/app/routes/orders.py#create_order","to":"fn:api/app/services/orders.py#place_order","title":"create_order calls place_order","provenance":"observed","depth":4},{"index":12,"edge":"e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~0e2b539a5c","from":"fn:api/app/services/orders.py#place_order","to":"fn:api/app/store/orders_repo.py#save_order","title":"place_order calls save_order","provenance":"observed","depth":5},{"index":13,"edge":"e:writes_fn:api/app/store/orders_repo.py#save_order_store:sql:~782339ca18","from":"fn:api/app/store/orders_repo.py#save_order","to":"store:sql:orders","title":"save_order writes orders","provenance":"observed","depth":6},{"index":14,"edge":"e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~43e309578d","from":"fn:api/app/services/orders.py#place_order","to":"fn:api/app/services/orders.py#notify_warehouse","title":"place_order calls notify_warehouse","provenance":"observed","depth":5},{"index":15,"edge":"e:requests_fn:api/app/services/orders.py#notify_warehouse_req:~baf922871a","from":"fn:api/app/services/orders.py#notify_warehouse","to":"req:api/app/services/orders.py#L13","title":"notify_warehouse sends POST //hooks.example.com/warehouse","provenance":"observed","depth":6},{"index":16,"edge":"e:routes_to_req:api/app/services/orders.py#L13_ext:hooks.examp~83d3d1ea8b","from":"req:api/app/services/orders.py#L13","to":"ext:hooks.example.com","title":"Request goes to hooks.example.com","provenance":"observed","depth":7},{"index":17,"edge":"e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~4e7a92d57c","from":"fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit","to":"fn:web/src/api/client.ts#trackEvent","title":"CheckoutPage.submit calls trackEvent","provenance":"observed","depth":0},{"index":18,"edge":"e:requests_fn:web/src/api/client.ts#trackEvent_req:web/src/api~8305acf991","from":"fn:web/src/api/client.ts#trackEvent","to":"req:web/src/api/client.ts#L34","title":"trackEvent sends POST (dynamic URL)","provenance":"observed","depth":1},{"index":19,"edge":"e:routes_to_req:web/src/api/client.ts#L34_unknown:dynamic-url_~f97b16c829","from":"req:web/src/api/client.ts#L34","to":"unknown:dynamic-url","title":"Request goes to Dynamic URL","provenance":"unresolved","depth":2}],"summary":"Everything reachable from CheckoutPage.submit, which nothing in the scanned code calls (an entry point such as a UI handler, job or script).","replay":"simulated","basis":"static-analysis"},{"id":"scn:entry:fn:web/src/pages/OrdersPage.tsx#OrdersPage","title":"OrdersPage journey","kind":"entry-flow","feature":"web/src","entry":"fn:web/src/pages/OrdersPage.tsx#OrdersPage","steps":[{"index":0,"edge":"e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage_fn:web/src/~d93b9d647b","from":"fn:web/src/pages/OrdersPage.tsx#OrdersPage","to":"fn:web/src/api/client.ts#listOrders","title":"OrdersPage calls listOrders","provenance":"observed","depth":0},{"index":1,"edge":"e:requests_fn:web/src/api/client.ts#listOrders_req:web/src/api~18dc2ebf1b","from":"fn:web/src/api/client.ts#listOrders","to":"req:web/src/api/client.ts#L21","title":"listOrders sends GET /api/orders","provenance":"observed","depth":1},{"index":2,"edge":"e:routes_to_req:web/src/api/client.ts#L21_ep:GET_/api/orders_9~895fec7008","from":"req:web/src/api/client.ts#L21","to":"ep:GET_/api/orders~93ddc8e4b8","title":"Request reaches GET /api/orders","provenance":"inferred","depth":2},{"index":3,"edge":"e:handles_ep:GET_/api/orders_93ddc8e4b8_fn:api/app/routes/orde~b12582a97c","from":"ep:GET_/api/orders~93ddc8e4b8","to":"fn:api/app/routes/orders.py#list_orders","title":"GET /api/orders is handled by list_orders","provenance":"observed","depth":3},{"index":4,"edge":"e:calls_fn:api/app/routes/orders.py#list_orders_fn:api/app/sto~c5d3f2f3a2","from":"fn:api/app/routes/orders.py#list_orders","to":"fn:api/app/store/orders_repo.py#find_orders","title":"list_orders calls find_orders","provenance":"observed","depth":4},{"index":5,"edge":"e:reads_fn:api/app/store/orders_repo.py#find_orders_store:sql:~4710cd33f2","from":"fn:api/app/store/orders_repo.py#find_orders","to":"store:sql:orders","title":"find_orders reads orders","provenance":"observed","depth":5},{"index":6,"edge":"e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage_fn:web/src/~2d1f8fa583","from":"fn:web/src/pages/OrdersPage.tsx#OrdersPage","to":"fn:web/src/api/client.ts#sendFeedback","title":"OrdersPage calls sendFeedback","provenance":"observed","depth":0},{"index":7,"edge":"e:requests_fn:web/src/api/client.ts#sendFeedback_req:web/src/a~99e253f7da","from":"fn:web/src/api/client.ts#sendFeedback","to":"req:web/src/api/client.ts#L38","title":"sendFeedback sends POST /api/feedback","provenance":"observed","depth":1},{"index":8,"edge":"e:routes_to_req:web/src/api/client.ts#L38_unknown:unmatched:PO~9977594bfc","from":"req:web/src/api/client.ts#L38","to":"unknown:unmatched:POST_/api/feedback~4b69c535c2","title":"Request goes to No scanned route: POST /api/feedback","provenance":"unresolved","depth":2}],"summary":"Everything reachable from OrdersPage, which nothing in the scanned code calls (an entry point such as a UI handler, job or script).","replay":"simulated","basis":"static-analysis"},{"id":"scn:entry:fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder","title":"OrdersPage.openOrder journey","kind":"entry-flow","feature":"web/src","entry":"fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder","steps":[{"index":0,"edge":"e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder_f~9a9657737b","from":"fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder","to":"fn:web/src/api/client.ts#getOrder","title":"OrdersPage.openOrder calls getOrder","provenance":"observed","depth":0},{"index":1,"edge":"e:requests_fn:web/src/api/client.ts#getOrder_req:web/src/api/c~73fe7713f4","from":"fn:web/src/api/client.ts#getOrder","to":"req:web/src/api/client.ts#L26","title":"getOrder sends GET /api/orders/{}","provenance":"observed","depth":1},{"index":2,"edge":"e:routes_to_req:web/src/api/client.ts#L26_ep:GET_/api/orders/{~f4b9b90853","from":"req:web/src/api/client.ts#L26","to":"ep:GET_/api/orders/{order_id}~56eae040a4","title":"Request reaches GET /api/orders/{order_id}","provenance":"inferred","depth":2},{"index":3,"edge":"e:handles_ep:GET_/api/orders/{order_id}_56eae040a4_fn:api/app/~713739cc4d","from":"ep:GET_/api/orders/{order_id}~56eae040a4","to":"fn:api/app/routes/orders.py#get_order","title":"GET /api/orders/{order_id} is handled by get_order","provenance":"observed","depth":3},{"index":4,"edge":"e:calls_fn:api/app/routes/orders.py#get_order_fn:api/app/store~cb3d05c9b1","from":"fn:api/app/routes/orders.py#get_order","to":"fn:api/app/store/orders_repo.py#find_order","title":"get_order calls find_order","provenance":"observed","depth":4},{"index":5,"edge":"e:reads_fn:api/app/store/orders_repo.py#find_order_store:sql:o~f1124e677e","from":"fn:api/app/store/orders_repo.py#find_order","to":"store:sql:orders","title":"find_order reads orders","provenance":"observed","depth":5}],"summary":"Everything reachable from OrdersPage.openOrder, which nothing in the scanned code calls (an entry point such as a UI handler, job or script).","replay":"simulated","basis":"static-analysis"}],"diagnostics":[],"traces":[]}</script>
+<script type="application/json" id="flowlens-config">{"sourceBase":"../../fixtures/shop-app/","editorRoot":null,"graphFile":"graph.json","maxNodes":700}</script>
+<script>/* FlowLens report core: pure functions (no DOM) for views, layout, replay and URL state.
+   Loaded inline in the report and evaluated in tests with node:vm. */
+(function (root) {
+  'use strict';
+
+  var LANES = [
+    { id: 'ui', title: 'Frontend', color: 'var(--c-ui)' },
+    { id: 'request', title: 'Requests', color: 'var(--c-request)' },
+    { id: 'endpoint', title: 'API routes', color: 'var(--c-endpoint)' },
+    { id: 'service', title: 'Application code', color: 'var(--c-service)' },
+    { id: 'agent', title: 'Agents & tools', color: 'var(--c-agent)' },
+    { id: 'data', title: 'Stores & queues', color: 'var(--c-data)' },
+    { id: 'external', title: 'External & unresolved', color: 'var(--c-external)' }
+  ];
+  var RELATIONS = ['api', 'data', 'deps', 'agents', 'calls'];
+  var PROVENANCES = ['observed', 'inferred', 'unresolved'];
+  var RANK = { unresolved: 0, inferred: 1, observed: 2 };
+  var NODE_W = 196, NODE_H = 46, ROW = 60, LANE_GAP = 62, TOP = 64, LEFT = 26;
+
+  function laneOf(n) {
+    switch (n.kind) {
+      case 'request': return 'request';
+      case 'endpoint': return 'endpoint';
+      case 'store': case 'queue': return 'data';
+      case 'external': case 'unknown': return 'external';
+      case 'agent': case 'tool': return 'agent';
+    }
+    if (n.layer === 'frontend') return 'ui';
+    return 'service';
+  }
+
+  function colorOf(n) {
+    if (n.kind === 'unknown') return 'var(--c-unknown)';
+    var l = laneOf(n);
+    for (var i = 0; i < LANES.length; i++) if (LANES[i].id === l) return LANES[i].color;
+    return 'var(--muted)';
+  }
+
+  function defaultState(graph) {
+    return {
+      scenario: null, step: -1, playing: false, speed: 1, level: 'modules',
+      relations: RELATIONS.filter(function (r) { return r === 'calls' || graph.scope.relations.indexOf(r) >= 0; }),
+      provenance: PROVENANCES.slice(), features: null, selected: null, selectedEdge: null, query: '', isolated: false
+    };
+  }
+
+  function index(graph) {
+    if (graph.__index) return graph.__index;
+    var nodes = {}, edges = {}, scen = {};
+    graph.nodes.forEach(function (n) { nodes[n.id] = n; });
+    graph.edges.forEach(function (e) { edges[e.id] = e; });
+    graph.scenarios.forEach(function (s) { scen[s.id] = s; });
+    var features = {};
+    graph.nodes.forEach(function (n) { if (n.feature) features[n.feature] = (features[n.feature] || 0) + (n.kind === 'module' ? 1 : 0); });
+    Object.defineProperty(graph, '__index', { value: { nodes: nodes, edges: edges, scenarios: scen, features: features }, enumerable: false });
+    return graph.__index;
+  }
+
+  /** Visible nodes and edges for a state. Aggregates to modules at the modules level. */
+  function computeView(graph, st) {
+    var ix = index(graph);
+    var relOk = {}; st.relations.forEach(function (r) { relOk[r] = true; });
+    var provOk = {}; st.provenance.forEach(function (p) { provOk[p] = true; });
+    var featOk = st.features ? {} : null;
+    if (st.features) st.features.forEach(function (f) { featOk[f] = true; });
+    var scenario = st.scenario ? ix.scenarios[st.scenario] : null;
+
+    if (scenario) {
+      var nset = {}, order = [], eset = {}, elist = [];
+      scenario.steps.forEach(function (s) {
+        [s.from, s.to].forEach(function (id) { if (!nset[id] && ix.nodes[id]) { nset[id] = true; order.push(id); } });
+        if (!eset[s.edge] && ix.edges[s.edge]) { eset[s.edge] = true; var e = ix.edges[s.edge]; elist.push({ id: e.id, from: e.from, to: e.to, relation: e.relation, provenance: e.provenance, members: [e.id], count: 1 }); }
+      });
+      return { nodes: order.map(function (id) { return ix.nodes[id]; }), edges: elist, mode: 'scenario', order: order };
+    }
+
+    var mapNode = function (n) {
+      if (st.level === 'modules' && (n.kind === 'function' || n.kind === 'request') && n.module && ix.nodes[n.module]) return n.module;
+      return n.id;
+    };
+    var visible = {};
+    graph.nodes.forEach(function (n) {
+      if (st.level === 'modules' && (n.kind === 'function' || n.kind === 'request')) return;
+      if (st.level === 'functions' && n.kind === 'module') return;
+      if (featOk && n.feature && !featOk[n.feature]) return;
+      visible[n.id] = n;
+    });
+    var agg = {}, aggList = [];
+    graph.edges.forEach(function (e) {
+      if (!relOk[e.relation] || !provOk[e.provenance]) return;
+      if (st.level === 'modules' && e.kind === 'imports') { /* keep */ }
+      var a = ix.nodes[e.from], b = ix.nodes[e.to];
+      if (!a || !b) return;
+      var f = mapNode(a), t = mapNode(b);
+      if (f === t) return;
+      var fa = ix.nodes[f], tb = ix.nodes[t];
+      if (featOk && ((fa.feature && !featOk[fa.feature]) || (tb.feature && !featOk[tb.feature]))) {
+        // Keep edges to feature-less nodes (stores, externals) only when the other end is visible.
+        var fOk = !fa.feature || featOk[fa.feature], tOk = !tb.feature || featOk[tb.feature];
+        if (!(fOk && tOk)) return;
+      }
+      var key = f + '|' + t + '|' + e.relation;
+      var g = agg[key];
+      if (!g) { g = agg[key] = { id: 'agg:' + key, from: f, to: t, relation: e.relation, provenance: e.provenance, members: [], count: 0 }; aggList.push(g); }
+      g.members.push(e.id); g.count++;
+      if (RANK[e.provenance] < RANK[g.provenance]) g.provenance = e.provenance; // show the weakest provenance
+    });
+    var used = {};
+    aggList.forEach(function (g) { used[g.from] = true; used[g.to] = true; });
+    var nodes = [];
+    Object.keys(visible).forEach(function (id) {
+      var n = visible[id];
+      var structural = n.kind === 'module' || n.kind === 'endpoint' || n.kind === 'agent' || n.kind === 'tool';
+      if (used[id] || (structural && (st.isolated || st.level === 'modules'))) nodes.push(n);
+      else if (st.isolated && n.kind === 'function') nodes.push(n);
+    });
+    // Feature-less targets (stores, externals) reached by visible edges.
+    aggList.forEach(function (g) { [g.from, g.to].forEach(function (id) { if (!visible[id] && ix.nodes[id] && !ix.nodes[id].feature && nodes.indexOf(ix.nodes[id]) < 0) { visible[id] = ix.nodes[id]; nodes.push(ix.nodes[id]); } }); });
+    var present = {}; nodes.forEach(function (n) { present[n.id] = true; });
+    var edges = aggList.filter(function (g) { return present[g.from] && present[g.to]; });
+    return { nodes: nodes, edges: edges, mode: 'overview', order: null };
+  }
+
+  /** Lane layout with barycentric ordering; in scenario mode rows follow first appearance. */
+  function layout(view, limit) {
+    var max = limit || 700;
+    var nodes = view.nodes;
+    var truncated = false;
+    if (nodes.length > max) {
+      var deg = {};
+      view.edges.forEach(function (e) { deg[e.from] = (deg[e.from] || 0) + 1; deg[e.to] = (deg[e.to] || 0) + 1; });
+      nodes = nodes.slice().sort(function (a, b) { return (deg[b.id] || 0) - (deg[a.id] || 0) || (a.id < b.id ? -1 : 1); }).slice(0, max);
+      truncated = true;
+    }
+    var lanes = {}; LANES.forEach(function (l) { lanes[l.id] = []; });
+    nodes.forEach(function (n) { lanes[laneOf(n)].push(n); });
+    var present = LANES.filter(function (l) { return lanes[l.id].length; });
+    var pos = {};
+    var orderIdx = {};
+    if (view.order) view.order.forEach(function (id, i) { orderIdx[id] = i; });
+    present.forEach(function (l) {
+      lanes[l.id].sort(function (a, b) {
+        if (view.order) return orderIdx[a.id] - orderIdx[b.id];
+        return (a.feature || '').localeCompare(b.feature || '') || a.label.localeCompare(b.label);
+      });
+      lanes[l.id].forEach(function (n, i) { pos[n.id] = { lane: l.id, row: i }; });
+    });
+    if (!view.order) {
+      var nbr = {};
+      view.edges.forEach(function (e) {
+        if (!pos[e.from] || !pos[e.to]) return;
+        (nbr[e.from] = nbr[e.from] || []).push(e.to);
+        (nbr[e.to] = nbr[e.to] || []).push(e.from);
+      });
+      for (var it = 0; it < 6; it++) {
+        present.forEach(function (l) {
+          var list = lanes[l.id];
+          var bc = {};
+          list.forEach(function (n) {
+            var ns = (nbr[n.id] || []).filter(function (m) { return pos[m] && pos[m].lane !== l.id; });
+            bc[n.id] = ns.length ? ns.reduce(function (s, m) { return s + pos[m].row; }, 0) / ns.length : pos[n.id].row;
+          });
+          list.sort(function (a, b) { return bc[a.id] - bc[b.id] || pos[a.id].row - pos[b.id].row; });
+          list.forEach(function (n, i) { pos[n.id].row = i; });
+        });
+      }
+    }
+    var laneX = {};
+    present.forEach(function (l, i) { laneX[l.id] = LEFT + i * (NODE_W + LANE_GAP); });
+    var maxRows = 0;
+    present.forEach(function (l) { maxRows = Math.max(maxRows, lanes[l.id].length); });
+    var placed = {};
+    nodes.forEach(function (n) { var p = pos[n.id]; placed[n.id] = { x: laneX[p.lane], y: TOP + p.row * ROW, w: NODE_W, h: NODE_H, lane: p.lane }; });
+    var width = LEFT * 2 + present.length * NODE_W + Math.max(0, present.length - 1) * LANE_GAP;
+    var height = TOP + Math.max(1, maxRows) * ROW + 30;
+    return { lanes: present.map(function (l) { return { id: l.id, title: l.title, color: l.color, x: laneX[l.id], count: lanes[l.id].length }; }), pos: placed, width: width, height: height, truncated: truncated, shown: nodes.length, total: view.nodes.length };
+  }
+
+  function edgePath(a, b) {
+    var y1 = a.y + a.h / 2, y2 = b.y + b.h / 2;
+    if (b.x > a.x) {
+      var x1 = a.x + a.w, x2 = b.x, dx = Math.max(40, (x2 - x1) / 2);
+      return 'M' + x1 + ',' + y1 + ' C' + (x1 + dx) + ',' + y1 + ' ' + (x2 - dx) + ',' + y2 + ' ' + x2 + ',' + y2;
+    }
+    if (b.x === a.x) {
+      var xr = a.x + a.w, bend = 46 + Math.min(80, Math.abs(y2 - y1) / 4);
+      return 'M' + xr + ',' + y1 + ' C' + (xr + bend) + ',' + y1 + ' ' + (xr + bend) + ',' + y2 + ' ' + xr + ',' + y2;
+    }
+    var sx = a.x, tx = b.x + b.w, d2 = Math.max(50, (sx - tx) / 2);
+    return 'M' + sx + ',' + y1 + ' C' + (sx - d2) + ',' + (y1 - 30) + ' ' + (tx + d2) + ',' + (y2 - 30) + ' ' + tx + ',' + y2;
+  }
+
+  /** Replay step arithmetic. step -1 means "before the first step". */
+  function moveStep(st, scenario, delta) {
+    if (!scenario) return -1;
+    var n = scenario.steps.length;
+    var next = st.step + delta;
+    if (next < -1) next = -1;
+    if (next > n - 1) next = n - 1;
+    return next;
+  }
+
+  /** What has happened up to a step: seen nodes and edges, the active ones. */
+  function replayMarks(graph, scenario, step) {
+    var seenN = {}, seenE = {}, active = null;
+    if (!scenario || step < 0) return { seenNodes: seenN, seenEdges: seenE, active: null };
+    for (var i = 0; i <= step && i < scenario.steps.length; i++) {
+      var s = scenario.steps[i];
+      seenN[s.from] = true; seenN[s.to] = true; seenE[s.edge] = true;
+      if (i === step) active = s;
+    }
+    return { seenNodes: seenN, seenEdges: seenE, active: active };
+  }
+
+  function stepDelay(speed) {
+    return Math.round(1500 / (speed || 1));
+  }
+
+  function parseHash(hash) {
+    var out = {};
+    (hash || '').replace(/^#/, '').split('&').forEach(function (kv) {
+      if (!kv) return;
+      var i = kv.indexOf('=');
+      var k = decodeURIComponent(i < 0 ? kv : kv.slice(0, i));
+      var v = i < 0 ? '' : decodeURIComponent(kv.slice(i + 1));
+      out[k] = v;
+    });
+    return out;
+  }
+
+  function applyHash(graph, st, h) {
+    var ix = index(graph);
+    if (h.scenario && ix.scenarios[h.scenario]) { st.scenario = h.scenario; st.step = -1; }
+    if (h.step && st.scenario) { var n = parseInt(h.step, 10); if (!isNaN(n)) st.step = Math.max(-1, Math.min(ix.scenarios[st.scenario].steps.length - 1, n - 1)); }
+    if (h.level === 'functions' || h.level === 'modules') st.level = h.level;
+    if (h.rel !== undefined) st.relations = h.rel.split(',').filter(function (r) { return RELATIONS.indexOf(r) >= 0; });
+    if (h.prov !== undefined) st.provenance = h.prov.split(',').filter(function (p) { return PROVENANCES.indexOf(p) >= 0; });
+    if (h.features) st.features = h.features.split(',');
+    if (h.node && ix.nodes[h.node]) st.selected = h.node;
+    if (h.edge && ix.edges[h.edge]) st.selectedEdge = h.edge;
+    if (h.speed) { var sp = parseFloat(h.speed); if (sp > 0 && sp <= 8) st.speed = sp; }
+    if (h.play === '1' && st.scenario) st.playing = true;
+    return st;
+  }
+
+  function toHash(graph, st) {
+    var parts = [];
+    var def = defaultState(graph);
+    if (st.scenario) parts.push('scenario=' + encodeURIComponent(st.scenario));
+    if (st.scenario && st.step >= 0) parts.push('step=' + (st.step + 1));
+    if (st.level !== def.level) parts.push('level=' + st.level);
+    if (st.relations.join(',') !== def.relations.join(',')) parts.push('rel=' + st.relations.join(','));
+    if (st.provenance.join(',') !== def.provenance.join(',')) parts.push('prov=' + st.provenance.join(','));
+    if (st.features) parts.push('features=' + encodeURIComponent(st.features.join(',')));
+    if (st.selected) parts.push('node=' + encodeURIComponent(st.selected));
+    if (st.selectedEdge) parts.push('edge=' + encodeURIComponent(st.selectedEdge));
+    if (st.speed !== 1) parts.push('speed=' + st.speed);
+    return parts.length ? '#' + parts.join('&') : '';
+  }
+
+  function shellQuote(s) {
+    return /^[A-Za-z0-9_./,:=@%+-]+$/.test(s) ? s : "'" + s.replace(/'/g, "'\\''") + "'";
+  }
+
+  /** CLI command that re-scans with a new scope and relation selection. */
+  function rescanCommand(include, relations, exclude) {
+    var cmd = ['flowlens', 'scan'];
+    if (include && include.length) cmd.push('--include', shellQuote(include.join(',')));
+    else cmd.push('--preset', 'whole');
+    if (relations && relations.length) cmd.push('--relations', relations.join(','));
+    if (exclude && exclude.length) cmd.push('--exclude', shellQuote(exclude.join(',')));
+    cmd.push('--save');
+    return cmd.join(' ');
+  }
+
+  function search(graph, q, limit) {
+    q = (q || '').trim().toLowerCase();
+    if (!q) return [];
+    var out = [];
+    for (var i = 0; i < graph.nodes.length && out.length < (limit || 30); i++) {
+      var n = graph.nodes[i];
+      var hay = (n.label + ' ' + (n.path || '') + ' ' + n.kind + ' ' + (n.feature || '')).toLowerCase();
+      if (hay.indexOf(q) >= 0) out.push(n);
+    }
+    return out;
+  }
+
+  root.FlowLensCore = {
+    LANES: LANES, RELATIONS: RELATIONS, PROVENANCES: PROVENANCES, NODE_W: NODE_W, NODE_H: NODE_H,
+    laneOf: laneOf, colorOf: colorOf, defaultState: defaultState, index: index, computeView: computeView, layout: layout,
+    edgePath: edgePath, moveStep: moveStep, replayMarks: replayMarks, stepDelay: stepDelay, parseHash: parseHash,
+    applyHash: applyHash, toHash: toHash, rescanCommand: rescanCommand, search: search, shellQuote: shellQuote
+  };
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+</script>
+<script>/* FlowLens report UI. All repository-derived text is inserted with textContent or
+   setAttribute, never as HTML. No network access: the page is self-contained. */
+(function () {
+  'use strict';
+  var C = window.FlowLensCore;
+  var G = JSON.parse(document.getElementById('flowlens-data').textContent);
+  var CFG = JSON.parse(document.getElementById('flowlens-config').textContent);
+  var IX = C.index(G);
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) document.body.classList.add('reduced');
+
+  var st = C.applyHash(G, C.defaultState(G), C.parseHash(location.hash));
+  st.follow = true;
+  var timer = null;
+  var view = null, lay = null;
+  var vb = null; // current viewBox {x,y,w,h}
+
+  // ---------- tiny DOM helpers
+  function h(tag, attrs) {
+    var el = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (attrs[k] == null || attrs[k] === false) continue;
+      if (k === 'text') el.textContent = attrs[k];
+      else if (k === 'on') for (var ev in attrs.on) el.addEventListener(ev, attrs.on[ev]);
+      else if (k === 'cls') el.className = attrs[k];
+      else el.setAttribute(k, attrs[k] === true ? '' : attrs[k]);
+    }
+    for (var i = 2; i < arguments.length; i++) {
+      var c = arguments[i];
+      if (c == null || c === false) continue;
+      el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    }
+    return el;
+  }
+  function s(tag, attrs) {
+    var el = document.createElementNS(SVGNS, tag);
+    if (attrs) for (var k in attrs) if (attrs[k] != null) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function $(id) { return document.getElementById(id); }
+  function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); return el; }
+  function tag(p) { return h('span', { cls: 'tag ' + p, text: p }); }
+  function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+
+  function srcLink(path, line) {
+    var label = path + (line ? ':' + line : '');
+    var href = null;
+    if (CFG.editorRoot) href = 'vscode://file/' + CFG.editorRoot.replace(/\/$/, '') + '/' + path + (line ? ':' + line : '');
+    else if (CFG.sourceBase != null) href = CFG.sourceBase + path.split('/').map(encodeURIComponent).join('/');
+    var wrap = h('span', null);
+    if (href) wrap.appendChild(h('a', { href: href, text: label, title: 'Open source file' }));
+    else wrap.appendChild(h('span', { cls: 'loc', text: label }));
+    wrap.appendChild(document.createTextNode(' '));
+    wrap.appendChild(h('button', { type: 'button', text: 'copy', 'aria-label': 'Copy location ' + label, on: { click: function (e) { copy(label, e.currentTarget); } } }));
+    return wrap;
+  }
+  function copy(text, btn) {
+    var done = function () { if (btn) { var t = btn.textContent; btn.textContent = 'copied'; setTimeout(function () { btn.textContent = t; }, 1200); } };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
+    else fallback();
+    function fallback() {
+      var ta = h('textarea', { 'aria-hidden': 'true', style: 'position:fixed;left:-9999px' });
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) { /* ignore */ }
+      document.body.removeChild(ta);
+    }
+  }
+
+  // ---------- header, legend
+  function renderHeader() {
+    $('title').textContent = G.project.name + ' flow map';
+    var c = G.coverage;
+    $('lede').textContent = 'Generated by FlowLens from static analysis of ' + plural(c.filesAnalyzed, 'file') + '. Scenarios are simulated replays reconstructed from source: no timing, traffic or execution results are recorded.';
+    var b = clear($('badges'));
+    b.appendChild(h('span', { cls: 'badge sim', text: 'SIMULATED REPLAY' }));
+    b.appendChild(h('span', { cls: 'badge', text: 'scope: ' + (G.scope.include.length ? G.scope.include.join(', ') : 'whole repository') }));
+    b.appendChild(h('span', { cls: 'badge', text: G.nodes.length + ' nodes · ' + G.edges.length + ' edges' }));
+    b.appendChild(h('span', { cls: 'badge', text: 'schema ' + G.version }));
+    b.appendChild(h('span', { cls: 'badge', text: new Date(G.generatedAt).toISOString().slice(0, 16).replace('T', ' ') + ' UTC' }));
+    var lg = clear($('legend'));
+    C.LANES.forEach(function (l) { lg.appendChild(h('span', null, h('i', { style: 'background:' + l.color }), l.title)); });
+    ['observed', 'inferred', 'unresolved'].forEach(function (p) { lg.appendChild(h('span', null, h('i', { cls: 'ln ' + p }), p)); });
+    $('footer').textContent = 'FlowLens ' + G.generator.version + ' · graph JSON is saved next to this file (' + (CFG.graphFile || 'graph.json') + '). Paths are relative to the repository root.';
+  }
+
+  // ---------- scenarios
+  var KIND_TITLES = { 'entry-flow': 'Entry journeys', 'api-flow': 'API calls', 'endpoint-flow': 'Server routes', 'agent-flow': 'Agent handoffs' };
+  function renderScenarios() {
+    var ul = clear($('scenarios'));
+    var q = ($('scnq').value || '').toLowerCase();
+    var groups = {};
+    G.scenarios.forEach(function (sc) {
+      if (q && (sc.title + ' ' + (sc.feature || '')).toLowerCase().indexOf(q) < 0) return;
+      (groups[sc.kind] = groups[sc.kind] || []).push(sc);
+    });
+    ul.appendChild(h('li', null, h('button', { type: 'button', 'aria-pressed': String(!st.scenario), on: { click: function () { selectScenario(null); } } }, 'Overview', h('small', { text: 'whole map, no replay' }))));
+    ['entry-flow', 'api-flow', 'agent-flow', 'endpoint-flow'].forEach(function (k) {
+      if (!groups[k]) return;
+      ul.appendChild(h('li', { cls: 'grp', text: KIND_TITLES[k] + ' (' + groups[k].length + ')' }));
+      groups[k].forEach(function (sc) {
+        var unresolved = sc.steps.filter(function (x) { return x.provenance === 'unresolved'; }).length;
+        ul.appendChild(h('li', null, h('button', { type: 'button', 'data-scenario': sc.id, 'aria-pressed': String(st.scenario === sc.id), on: { click: function () { selectScenario(sc.id); } } },
+          sc.title, h('small', { text: plural(sc.steps.length, 'step') + (unresolved ? ' · ' + unresolved + ' unresolved' : '') + (sc.feature ? ' · ' + sc.feature : '') }))));
+      });
+    });
+    $('scnCount').textContent = String(G.scenarios.length);
+  }
+  function selectScenario(id) {
+    stop();
+    st.scenario = id; st.step = -1; st.selected = null; st.selectedEdge = null;
+    renderAll(true);
+  }
+
+  // ---------- filters
+  var REL_TITLES = { api: 'API calls', data: 'Data flow', deps: 'Module dependencies', agents: 'Agent handoffs', calls: 'Function calls' };
+  function renderFilters() {
+    var box = clear($('filters'));
+    var relCounts = {}, provCounts = {};
+    G.edges.forEach(function (e) { relCounts[e.relation] = (relCounts[e.relation] || 0) + 1; provCounts[e.provenance] = (provCounts[e.provenance] || 0) + 1; });
+    var fs = h('fieldset', null, h('legend', { cls: 'fl', text: 'Relationships' }));
+    var checks = h('div', { cls: 'checks' });
+    var missing = [];
+    C.RELATIONS.forEach(function (r) {
+      var analyzed = r === 'calls' || G.scope.relations.indexOf(r) >= 0;
+      if (!analyzed) missing.push(r);
+      var cb = h('input', { type: 'checkbox', disabled: !analyzed, on: { change: function (e) { toggle(st.relations, r, e.target.checked); renderAll(false); } } });
+      cb.checked = analyzed && st.relations.indexOf(r) >= 0;
+      checks.appendChild(h('label', { cls: analyzed ? '' : 'off', title: analyzed ? '' : 'Not analyzed in this scan' }, cb, h('i', { cls: 'swatch', style: 'background:var(--r-' + r + ')' }), REL_TITLES[r], h('span', { cls: 'n', text: analyzed ? String(relCounts[r] || 0) : 'not scanned' })));
+    });
+    fs.appendChild(checks);
+    if (missing.length) fs.appendChild(h('p', { cls: 'note warn', text: 'Not analyzed: ' + missing.join(', ') + '. Turning them on needs a new scan (see Re-scan below).' }));
+    box.appendChild(fs);
+
+    var fp = h('fieldset', null, h('legend', { cls: 'fl', text: 'How it was established' }));
+    var pc = h('div', { cls: 'checks' });
+    C.PROVENANCES.forEach(function (p) {
+      var cb = h('input', { type: 'checkbox', on: { change: function (e) { toggle(st.provenance, p, e.target.checked); renderAll(false); } } });
+      cb.checked = st.provenance.indexOf(p) >= 0;
+      pc.appendChild(h('label', null, cb, tag(p), h('span', { cls: 'n', text: String(provCounts[p] || 0) })));
+    });
+    fp.appendChild(pc);
+    box.appendChild(fp);
+
+    var ff = h('fieldset', null, h('legend', { cls: 'fl', text: 'Features (scanned)' }));
+    var feats = Object.keys(IX.features).sort();
+    var row = h('div', { cls: 'bar', style: 'gap:6px;margin-bottom:6px' },
+      h('button', { type: 'button', text: 'All', on: { click: function () { st.features = null; renderAll(false); } } }),
+      h('button', { type: 'button', text: 'None', on: { click: function () { st.features = []; renderAll(false); } } }));
+    ff.appendChild(row);
+    var fc = h('div', { cls: 'checks scroll', style: 'max-height:220px' });
+    feats.forEach(function (f) {
+      var cb = h('input', { type: 'checkbox', on: { change: function (e) {
+        if (!st.features) st.features = feats.slice();
+        toggle(st.features, f, e.target.checked);
+        if (st.features.length === feats.length) st.features = null;
+        renderAll(false);
+      } } });
+      cb.checked = !st.features || st.features.indexOf(f) >= 0;
+      fc.appendChild(h('label', null, cb, h('span', { cls: 'mono', text: f }), h('span', { cls: 'n', text: plural(IX.features[f], 'module') })));
+    });
+    G.scope.topLevel.filter(function (t) { return !t.scanned; }).forEach(function (t) {
+      fc.appendChild(h('label', { cls: 'off', title: 'Outside the scanned scope: needs a new scan' }, h('input', { type: 'checkbox', disabled: true }), h('span', { cls: 'mono', text: t.path + '/' }), h('span', { cls: 'n', text: 'not scanned' })));
+    });
+    ff.appendChild(fc);
+    box.appendChild(ff);
+    var lab = h('label', { style: 'display:flex;gap:7px;align-items:center;font-size:13px;margin-top:4px' });
+    var iso = h('input', { type: 'checkbox', on: { change: function (e) { st.isolated = e.target.checked; renderAll(false); } } });
+    iso.checked = st.isolated;
+    lab.appendChild(iso); lab.appendChild(document.createTextNode('Show items without visible edges'));
+    box.appendChild(lab);
+    var active = [];
+    if (st.relations.length !== C.RELATIONS.length - missing.length) active.push('relations');
+    if (st.provenance.length !== 3) active.push('provenance');
+    if (st.features) active.push(st.features.length + ' features');
+    $('filterSummary').textContent = active.length ? 'active: ' + active.join(', ') : 'none active';
+  }
+  function toggle(list, v, on) { var i = list.indexOf(v); if (on && i < 0) list.push(v); if (!on && i >= 0) list.splice(i, 1); }
+
+  // ---------- scope and coverage
+  function renderScope() {
+    var box = clear($('scope'));
+    var sc = G.scope;
+    box.appendChild(h('dl', { cls: 'kv' },
+      h('dt', { text: 'Preset' }), h('dd', { cls: 'mono', text: sc.preset }),
+      h('dt', { text: 'Included' }), h('dd', { cls: 'mono', text: sc.include.length ? sc.include.join(', ') : '(whole repository)' }),
+      h('dt', { text: 'Excluded' }), h('dd', { cls: 'mono', text: sc.exclude.length ? sc.exclude.join(', ') : '(defaults and ignore files)' }),
+      h('dt', { text: 'Analyzed' }), h('dd', { cls: 'mono', text: sc.relations.join(', ') + ', calls' })));
+    var out = sc.topLevel.filter(function (t) { return !t.scanned; });
+    if (out.length) box.appendChild(h('p', { cls: 'note warn', text: 'Not scanned: ' + out.map(function (t) { return t.path + '/'; }).join(', ') + '. Selecting these needs a new scan.' }));
+    $('scopeSummary').textContent = sc.include.length ? plural(sc.include.length, 'path') : 'whole repo';
+  }
+  function renderCoverage() {
+    var c = G.coverage;
+    var box = clear($('coverage'));
+    var t = h('table', { cls: 'cov' });
+    t.appendChild(h('thead', null, h('tr', null, h('th', { text: 'Item' }), h('th', { text: 'Value' }))));
+    var tb = h('tbody');
+    var row = function (k, v, cls) { tb.appendChild(h('tr', null, h('td', { text: k }), h('td', { cls: cls || '', text: v }))); };
+    row('Files analyzed', c.filesAnalyzed + ' of ' + c.filesConsidered + ' considered');
+    c.adapters.forEach(function (a) { row('Adapter ' + a.id, a.status + (a.files ? ' · ' + plural(a.files, 'file') : '') + (a.detail ? ' · ' + a.detail : ''), 'st-' + a.status); });
+    Object.keys(c.languages).sort().forEach(function (l) { var x = c.languages[l]; row('Language ' + l, plural(x.files, 'file') + (x.supported ? '' : ' · no analyzer'), x.supported ? '' : 'warn'); });
+    Object.keys(c.skipped).sort().forEach(function (k) { row('Skipped: ' + k.replace(/-/g, ' '), String(c.skipped[k])); });
+    row('Inferred edges', String(c.inferredEdges));
+    row('Unresolved edges', String(c.unresolvedEdges));
+    row('Parse problems', String(c.parseErrors));
+    if (c.unsupportedFrameworks.length) row('Unsupported frameworks', c.unsupportedFrameworks.join(', '), 'warn');
+    t.appendChild(tb);
+    box.appendChild(t);
+    var d = clear($('diags'));
+    var dt = h('table', { cls: 'cov' });
+    dt.appendChild(h('thead', null, h('tr', null, h('th', { text: 'Level' }), h('th', { text: 'Message' }))));
+    var dtb = h('tbody');
+    G.diagnostics.forEach(function (x) {
+      var td = h('td', null, x.message);
+      if (x.path) { td.appendChild(h('br')); td.appendChild(srcLink(x.path, x.line)); }
+      dtb.appendChild(h('tr', null, h('td', { cls: x.level === 'warning' ? 'warn' : 'muted', text: x.level }), td));
+    });
+    if (!G.diagnostics.length) dtb.appendChild(h('tr', null, h('td', { text: '—' }), h('td', { text: 'No diagnostics.' })));
+    dt.appendChild(dtb);
+    d.appendChild(dt);
+    $('diagCount').textContent = String(G.diagnostics.length);
+  }
+  function renderRescan() {
+    var box = clear($('rescan'));
+    box.appendChild(h('p', { cls: 'note', text: 'Filters above only switch between what was already analyzed. To scan other folders or relationship types, run a new scan. Pick folders and relationships to build the command:' }));
+    var sel = G.scope.include.length ? G.scope.include.slice() : [];
+    var rels = G.scope.relations.slice();
+    var folders = h('div', { cls: 'checks' });
+    G.scope.topLevel.forEach(function (t) {
+      var cb = h('input', { type: 'checkbox', on: { change: function (e) { toggle(sel, t.path, e.target.checked); upd(); } } });
+      cb.checked = sel.indexOf(t.path) >= 0 || (!G.scope.include.length && false);
+      folders.appendChild(h('label', null, cb, h('span', { cls: 'mono', text: t.path + '/' }), h('span', { cls: 'n', text: t.scanned ? 'scanned' : 'not scanned' })));
+    });
+    box.appendChild(h('fieldset', null, h('legend', { cls: 'fl', text: 'Folders (none = whole repository)' }), folders));
+    var rc = h('div', { cls: 'checks' });
+    ['api', 'data', 'deps', 'agents'].forEach(function (r) {
+      var cb = h('input', { type: 'checkbox', on: { change: function (e) { toggle(rels, r, e.target.checked); upd(); } } });
+      cb.checked = rels.indexOf(r) >= 0;
+      rc.appendChild(h('label', null, cb, REL_TITLES[r]));
+    });
+    box.appendChild(h('fieldset', null, h('legend', { cls: 'fl', text: 'Relationships' }), rc));
+    var code = h('code', { id: 'rescanCmd' });
+    var btn = h('button', { type: 'button', text: 'copy', on: { click: function (e) { copy(code.textContent, e.currentTarget); } } });
+    box.appendChild(h('div', { cls: 'cmd' }, code, btn));
+    box.appendChild(h('p', { cls: 'note', text: 'Run it from the repository root, or use the regenerate action in your agent (/flowlens:map in Claude Code, $flowlens in Codex). "flowlens regenerate" repeats the saved settings.' }));
+    function upd() { code.textContent = C.rescanCommand(sel, rels, G.scope.exclude); }
+    upd();
+  }
+
+  // ---------- map
+  function renderMap(refit) {
+    view = C.computeView(G, st);
+    lay = C.layout(view, CFG.maxNodes || 700);
+    var svg = clear($('svg'));
+    var defs = s('defs');
+    var f = s('filter', { id: 'glow', x: '-30%', y: '-30%', width: '160%', height: '160%' });
+    f.appendChild(s('feGaussianBlur', { stdDeviation: '3', result: 'b' }));
+    var m = s('feMerge'); m.appendChild(s('feMergeNode', { in: 'b' })); m.appendChild(s('feMergeNode', { in: 'SourceGraphic' }));
+    f.appendChild(m); defs.appendChild(f);
+    C.RELATIONS.forEach(function (r) {
+      var mk = s('marker', { id: 'arrow-' + r, viewBox: '0 0 10 10', refX: '9', refY: '5', markerWidth: '7', markerHeight: '7', orient: 'auto-start-reverse' });
+      mk.appendChild(s('path', { d: 'M0,0 L10,5 L0,10 z', fill: 'var(--r-' + r + ')' }));
+      defs.appendChild(mk);
+    });
+    svg.appendChild(defs);
+    var g = s('g', { id: 'world' });
+    lay.lanes.forEach(function (l) {
+      g.appendChild(s('rect', { class: 'lane-bg', x: l.x - 14, y: 16, width: C.NODE_W + 28, height: lay.height - 10, rx: 14 }));
+      var t = s('text', { class: 'lane-h', x: l.x, y: 40, fill: l.color }); t.textContent = l.title + ' · ' + l.count; g.appendChild(t);
+    });
+    var marks = C.replayMarks(G, st.scenario ? IX.scenarios[st.scenario] : null, st.step);
+    var eg = s('g', { id: 'edges' });
+    view.edges.forEach(function (e) {
+      var a = lay.pos[e.from], b = lay.pos[e.to];
+      if (!a || !b) return;
+      var d = C.edgePath(a, b);
+      var cls = 'edge ' + e.provenance;
+      var isActive = marks.active && e.members.indexOf(marks.active.edge) >= 0;
+      var isSeen = e.members.some(function (id) { return marks.seenEdges[id]; });
+      if (isActive) cls += ' active'; else if (isSeen) cls += ' seen';
+      if (st.selectedEdge && e.members.indexOf(st.selectedEdge) >= 0) cls += ' sel';
+      if (st.scenario && st.step >= 0 && !isSeen) cls += ' dim';
+      var p = s('path', { class: cls, d: d, stroke: 'var(--r-' + e.relation + ')', 'marker-end': 'url(#arrow-' + e.relation + ')', 'data-edge': e.members[0] });
+      eg.appendChild(p);
+      var hit = s('path', { class: 'edge-hit', d: d });
+      var tt = s('title'); tt.textContent = edgeSummary(e); hit.appendChild(tt);
+      hit.addEventListener('click', function (ev) { ev.stopPropagation(); selectEdge(e.members[0], e); });
+      eg.appendChild(hit);
+      if (e.count > 1) {
+        var mx = (a.x + a.w + b.x) / 2, my = (a.y + b.y) / 2 + a.h / 2 - 4;
+        var ct = s('text', { class: 'ecount', x: mx, y: my, 'text-anchor': 'middle' }); ct.textContent = '×' + e.count; eg.appendChild(ct);
+      }
+      if (isActive && !reduced) {
+        var dot = s('circle', { class: 'pulse', r: '5' });
+        var am = s('animateMotion', { dur: (C.stepDelay(st.speed) / 1000 * 0.8) + 's', repeatCount: 'indefinite', path: d });
+        dot.appendChild(am); eg.appendChild(dot);
+      }
+    });
+    g.appendChild(eg);
+    var matches = {};
+    if (st.query) C.search(G, st.query, 500).forEach(function (n) { matches[n.id] = true; });
+    var ng = s('g', { id: 'nodes' });
+    view.nodes.forEach(function (n) {
+      var p = lay.pos[n.id];
+      if (!p) return;
+      var cls = 'node';
+      if (marks.active && (marks.active.to === n.id)) cls += ' active';
+      else if (marks.seenNodes[n.id]) cls += ' seen';
+      if (st.scenario && st.step >= 0 && !marks.seenNodes[n.id]) cls += ' dim';
+      if (st.selected === n.id) cls += ' sel';
+      if (st.query && matches[n.id]) cls += ' match';
+      else if (st.query) cls += ' dim';
+      var grp = s('g', { class: cls, transform: 'translate(' + p.x + ',' + p.y + ')', tabindex: '0', role: 'button', 'data-node': n.id, 'aria-label': n.kind + ' ' + n.label + (n.path ? ' in ' + n.path : ''), style: '--kc:' + C.colorOf(n) });
+      grp.appendChild(s('rect', { class: 'box', width: p.w, height: p.h, rx: 9 }));
+      grp.appendChild(s('rect', { class: 'bar', width: 4, height: p.h - 12, x: 6, y: 6, rx: 2 }));
+      grp.appendChild(s('rect', { class: 'frame', x: -4, y: -4, width: p.w + 8, height: p.h + 8, rx: 12 }));
+      var lbl = s('text', { class: 'lbl', x: 18, y: 20 }); lbl.textContent = fit(n.label, 23); grp.appendChild(lbl);
+      var sub = s('text', { class: 'sub', x: 18, y: 36 }); sub.textContent = fit(subText(n), 27); grp.appendChild(sub);
+      var tt = s('title'); tt.textContent = n.kind + ': ' + n.label + (n.path ? '\n' + n.path + (n.line ? ':' + n.line : '') : ''); grp.appendChild(tt);
+      grp.addEventListener('click', function (ev) { ev.stopPropagation(); selectNode(n.id); });
+      grp.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); selectNode(n.id); } });
+      ng.appendChild(grp);
+    });
+    g.appendChild(ng);
+    svg.appendChild(g);
+    var empty = $('empty');
+    if (!view.nodes.length) { empty.hidden = false; empty.textContent = 'Nothing matches the current filters. Turn relationships or features back on.'; }
+    else empty.hidden = true;
+    $('mapnote').textContent = (lay.truncated ? 'Showing ' + lay.shown + ' of ' + lay.total + ' nodes (most connected). Narrow the features filter to see the rest. · ' : '') +
+      (st.scenario ? 'Scenario view' : st.level === 'modules' ? 'Overview · modules' : 'Overview · functions') + ' · drag to pan, scroll or +/− to zoom, 0 to fit';
+    if (refit || !vb) fitView(); else applyViewBox();
+    if (marks.active) { if (st.follow) followStep(marks.active); else ensureVisible(marks.active.to); }
+  }
+  function fit(t, n) { return t.length > n ? t.slice(0, n - 1) + '…' : t; }
+  function subText(n) {
+    if (n.kind === 'function' || n.kind === 'request') return (n.sub || '') + (n.line ? ':' + n.line : '');
+    if (n.kind === 'module') return n.sub || '(root)';
+    return n.sub || n.kind;
+  }
+  function edgeSummary(e) {
+    var a = IX.nodes[e.from], b = IX.nodes[e.to];
+    return (a ? a.label : e.from) + ' → ' + (b ? b.label : e.to) + ' · ' + e.relation + ' · ' + e.provenance + (e.count > 1 ? ' · ' + e.count + ' edges' : '');
+  }
+
+  // ---------- pan and zoom (viewBox)
+  function fitView(whole) {
+    if (!lay) return;
+    var svg = $('svg');
+    var cw = svg.clientWidth || 1000, ch = svg.clientHeight || 600;
+    var lw = Math.max(lay.width, 300), lh = Math.max(lay.height, 200);
+    var scale = Math.min(cw / lw, ch / lh);
+    // Keep labels readable: when the whole map would be tiny, fit the width and let the user pan down.
+    if (!whole && scale < 0.75) scale = Math.min(cw / lw, 1);
+    scale = Math.max(whole ? 0.2 : 0.62, Math.min(scale, 1.35));
+    var w = cw / scale, hgt = ch / scale;
+    vb = { x: Math.min(0, (lw - w) / 2), y: 0, w: w, h: hgt };
+    if (lh < hgt) vb.y = Math.min(0, (lh - hgt) / 2);
+    applyViewBox();
+  }
+  function applyViewBox() { $('svg').setAttribute('viewBox', [vb.x, vb.y, vb.w, vb.h].join(' ')); }
+  function zoom(factor, cx, cy) {
+    var nw = Math.min(Math.max(vb.w * factor, 200), 20000), nh = vb.h * (nw / vb.w);
+    if (cx == null) { cx = vb.x + vb.w / 2; cy = vb.y + vb.h / 2; }
+    vb.x = cx - (cx - vb.x) * (nw / vb.w); vb.y = cy - (cy - vb.y) * (nh / vb.h); vb.w = nw; vb.h = nh;
+    applyViewBox();
+  }
+  /** Camera that keeps the active step readable: both ends in view when they fit, else the target. */
+  function followStep(step) {
+    var a = lay.pos[step.from], b = lay.pos[step.to];
+    if (!b || !vb) return;
+    var svg = $('svg');
+    var cw = svg.clientWidth || 1000, ch = svg.clientHeight || 600;
+    var scale = Math.max(cw / vb.w, 0.9);
+    var w = cw / scale, hgt = ch / scale;
+    var x0 = a ? Math.min(a.x, b.x) : b.x, x1 = a ? Math.max(a.x + a.w, b.x + b.w) : b.x + b.w;
+    var y0 = a ? Math.min(a.y, b.y) : b.y, y1 = a ? Math.max(a.y + a.h, b.y + b.h) : b.y + b.h;
+    if (x1 - x0 > w - 60) { x0 = b.x; x1 = b.x + b.w; }
+    if (y1 - y0 > hgt - 60) { y0 = b.y; y1 = b.y + b.h; }
+    vb = { x: (x0 + x1) / 2 - w / 2, y: Math.max(-20, (y0 + y1) / 2 - hgt / 2), w: w, h: hgt };
+    applyViewBox();
+  }
+  function ensureVisible(id) {
+    var p = lay && lay.pos[id];
+    if (!p || !vb) return;
+    var margin = 40;
+    if (p.x >= vb.x + margin && p.x + p.w <= vb.x + vb.w - margin && p.y >= vb.y + margin && p.y + p.h <= vb.y + vb.h - margin) return;
+    vb.x = p.x + p.w / 2 - vb.w / 2; vb.y = p.y + p.h / 2 - vb.h / 2;
+    applyViewBox();
+  }
+  function bindPanZoom() {
+    var svg = $('svg');
+    var drag = null;
+    svg.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var r = svg.getBoundingClientRect();
+      var cx = vb.x + (e.clientX - r.left) / r.width * vb.w, cy = vb.y + (e.clientY - r.top) / r.height * vb.h;
+      zoom(e.deltaY > 0 ? 1.12 : 1 / 1.12, cx, cy);
+    }, { passive: false });
+    svg.addEventListener('pointerdown', function (e) {
+      if (e.target.closest && (e.target.closest('.node') || e.target.classList.contains('edge-hit'))) return;
+      drag = { x: e.clientX, y: e.clientY, vx: vb.x, vy: vb.y, moved: false };
+      svg.setPointerCapture(e.pointerId); svg.classList.add('dragging');
+    });
+    svg.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var r = svg.getBoundingClientRect();
+      var dx = (e.clientX - drag.x) / r.width * vb.w, dy = (e.clientY - drag.y) / r.height * vb.h;
+      if (Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y) > 3) drag.moved = true;
+      vb.x = drag.vx - dx; vb.y = drag.vy - dy; applyViewBox();
+    });
+    var end = function () { if (drag && !drag.moved) { st.selected = null; st.selectedEdge = null; renderDetails(); renderMap(false); syncHash(); } drag = null; svg.classList.remove('dragging'); };
+    svg.addEventListener('pointerup', end);
+    svg.addEventListener('pointercancel', function () { drag = null; svg.classList.remove('dragging'); });
+  }
+
+  // ---------- replay controls
+  function renderControls() {
+    var sc = st.scenario ? IX.scenarios[st.scenario] : null;
+    var n = sc ? sc.steps.length : 0;
+    ['btnRestart', 'btnBack', 'btnPlay', 'btnNext'].forEach(function (id) { $(id).disabled = !sc; });
+    $('btnExit').hidden = !sc;
+    $('btnFollow').hidden = !sc;
+    $('btnFollow').setAttribute('aria-pressed', String(!!st.follow));
+    if (sc) { $('btnBack').disabled = st.step < 0; $('btnNext').disabled = st.step >= n - 1; }
+    var play = $('btnPlay');
+    play.textContent = st.playing ? 'Pause' : (sc && st.step >= n - 1 ? 'Replay' : 'Play');
+    play.setAttribute('aria-pressed', String(st.playing));
+    $('counter').textContent = sc ? 'step ' + Math.max(0, st.step + 1) + ' / ' + n : 'no scenario';
+    $('prog').style.width = sc && n ? ((st.step + 1) / n * 100) + '%' : '0';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-speed]'), function (b) { b.setAttribute('aria-pressed', String(parseFloat(b.getAttribute('data-speed')) === st.speed)); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-level]'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-level') === st.level)); b.disabled = !!sc; });
+    document.body.setAttribute('data-step', String(st.step + 1));
+    document.body.setAttribute('data-scenario', st.scenario || '');
+    document.body.setAttribute('data-playing', String(st.playing));
+  }
+  function go(delta) {
+    var sc = st.scenario ? IX.scenarios[st.scenario] : null;
+    if (!sc) return;
+    st.step = C.moveStep(st, sc, delta);
+    var a = sc.steps[st.step];
+    st.selectedEdge = a ? a.edge : null;
+    st.selected = null;
+    renderStep();
+  }
+  function jump(i) { stop(); st.step = i; var sc = IX.scenarios[st.scenario]; st.selectedEdge = sc.steps[i] ? sc.steps[i].edge : null; st.selected = null; renderStep(); }
+  function play() {
+    var sc = st.scenario ? IX.scenarios[st.scenario] : null;
+    if (!sc) return;
+    if (st.step >= sc.steps.length - 1) st.step = -1;
+    st.playing = true;
+    tick();
+  }
+  function tick() {
+    clearTimeout(timer);
+    var sc = st.scenario ? IX.scenarios[st.scenario] : null;
+    if (!st.playing || !sc) return;
+    go(1);
+    if (st.step >= sc.steps.length - 1) { st.playing = false; renderControls(); syncHash(); return; }
+    timer = setTimeout(tick, C.stepDelay(st.speed));
+  }
+  function stop() { st.playing = false; clearTimeout(timer); }
+  function renderStep() { renderMap(false); renderNow(); renderLog(); renderDetails(); renderControls(); syncHash(); }
+
+  function renderNow() {
+    var box = clear($('now'));
+    var sc = st.scenario ? IX.scenarios[st.scenario] : null;
+    if (!sc) {
+      box.appendChild(h('p', { cls: 'muted', text: 'Pick a scenario on the left to replay it step by step. The overview shows every analyzed relationship; filters switch views without re-running analysis.' }));
+      $('nowMeta').textContent = '';
+      return;
+    }
+    $('nowMeta').textContent = sc.kind;
+    if (st.step < 0) {
+      box.appendChild(h('div', { cls: 'ev', text: sc.title }));
+      box.appendChild(h('p', { text: sc.summary }));
+      box.appendChild(h('p', { cls: 'note', text: 'Simulated replay: the order follows the source code, not a recorded run. Press Play or → to step.' }));
+      return;
+    }
+    var step = sc.steps[st.step];
+    var e = IX.edges[step.edge];
+    box.appendChild(h('div', { cls: 'ev', role: 'status', text: step.title }));
+    var meta = h('div', { cls: 'bar', style: 'gap:6px' }, tag(e.provenance), h('span', { cls: 'tag kind', text: e.kind.replace('_', ' ') }), h('span', { cls: 'tag kind', text: e.relation }));
+    if (step.branch) meta.appendChild(h('span', { cls: 'tag kind', text: 'alternative ' + step.branch.option + ' of ' + step.branch.of + (step.branch.condition ? ' · ' + step.branch.condition : '') }));
+    box.appendChild(meta);
+    box.appendChild(provenanceNote(e));
+    if (e.data) box.appendChild(h('p', null, h('span', { cls: 'muted', text: 'Passes: ' }), h('span', { cls: 'mono', text: e.data })));
+    box.appendChild(evidenceList(e));
+  }
+  function provenanceNote(e) {
+    var text = e.provenance === 'observed' ? 'Observed: written directly in source at the location below.' :
+      e.provenance === 'inferred' ? 'Inferred: ' + (e.reason || 'joined by a rule.') : 'Unresolved: ' + (e.reason || 'the target is decided at runtime.');
+    return h('p', { cls: 'why ' + e.provenance, text: text });
+  }
+  function evidenceList(e) {
+    var ul = h('ul', { cls: 'evid', 'aria-label': 'Evidence' });
+    e.evidence.forEach(function (ev) { ul.appendChild(h('li', null, srcLink(ev.path, ev.line), h('span', { cls: 'muted', text: ev.note }))); });
+    return ul;
+  }
+
+  function renderLog() {
+    var ol = clear($('log'));
+    var sc = st.scenario ? IX.scenarios[st.scenario] : null;
+    if (!sc) { ol.appendChild(h('li', { cls: 'sep', text: 'No scenario selected' })); return; }
+    ol.appendChild(h('li', { cls: 'sep', text: 'Simulated · ' + sc.title }));
+    sc.steps.forEach(function (stp, i) {
+      var li = h('li', { cls: i === st.step ? 'cur' : i < st.step ? 'seen' : '', tabindex: '0', 'data-step': String(i + 1), on: {
+        click: function () { jump(i); },
+        keydown: function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); jump(i); } }
+      } });
+      li.appendChild(h('span', { cls: 'i', text: '#' + (i + 1 < 10 ? '0' : '') + (i + 1) }));
+      li.appendChild(h('span', null, tag(stp.provenance)));
+      var t = h('span', { cls: 't', style: 'padding-left:' + Math.min(stp.depth, 8) * 8 + 'px' }, stp.title);
+      if (stp.branch) t.appendChild(h('span', { cls: 'alt', text: '↳ alternative ' + stp.branch.option + '/' + stp.branch.of + (stp.branch.condition ? ' · ' + stp.branch.condition : '') }));
+      li.appendChild(t);
+      ol.appendChild(li);
+      if (i === st.step) setTimeout(function () { if (li.scrollIntoView) li.scrollIntoView({ block: 'nearest' }); }, 0);
+    });
+  }
+
+  // ---------- details
+  function selectNode(id) { st.selected = id; st.selectedEdge = null; renderDetails(); renderMap(false); syncHash(); }
+  function selectEdge(id, agg) { st.selectedEdge = id; st.selected = null; renderDetails(agg); renderMap(false); syncHash(); }
+  function renderDetails(agg) {
+    var box = clear($('details'));
+    if (st.selectedEdge) {
+      var group = agg && agg.members && agg.members.length > 1 ? agg.members : [st.selectedEdge];
+      if (group.length > 1) box.appendChild(h('p', { cls: 'note', text: group.length + ' source relationships are combined in this line. Each is listed with its own evidence.' }));
+      group.forEach(function (eid) { var e = IX.edges[eid]; if (e) box.appendChild(edgeDetails(e)); });
+      return;
+    }
+    if (!st.selected) { box.appendChild(h('p', { cls: 'muted', text: 'Select a node or an edge (click, or Tab then Enter) to see where it comes from.' })); return; }
+    var n = IX.nodes[st.selected];
+    if (!n) return;
+    box.appendChild(h('div', { cls: 'ev mono', style: 'font-weight:700;overflow-wrap:anywhere', text: n.label }));
+    var dl = h('dl', { cls: 'kv' });
+    var add = function (k, v) { if (v == null || v === '') return; dl.appendChild(h('dt', { text: k })); dl.appendChild(typeof v === 'string' ? h('dd', { text: v }) : h('dd', null, v)); };
+    add('Kind', n.kind); add('Layer', n.layer); add('Feature', n.feature);
+    if (n.path) add('Source', srcLink(n.path, n.line));
+    if (n.module && IX.nodes[n.module]) add('Module', IX.nodes[n.module].path);
+    add('Language', n.language); add('Adapter', n.adapter);
+    if (n.attrs) Object.keys(n.attrs).forEach(function (k) { add(k, String(n.attrs[k])); });
+    box.appendChild(dl);
+    var outs = G.edges.filter(function (e) { return e.from === n.id; }), ins = G.edges.filter(function (e) { return e.to === n.id; });
+    if (n.kind === 'module') {
+      G.nodes.forEach(function (c) { if (c.module === n.id) { G.edges.forEach(function (e) { if (e.from === c.id) outs.push(e); if (e.to === c.id) ins.push(e); }); } });
+    }
+    box.appendChild(edgeButtons('Outgoing', outs, 'to'));
+    box.appendChild(edgeButtons('Incoming', ins, 'from'));
+    var inScn = G.scenarios.filter(function (sc) { return sc.steps.some(function (x) { return x.from === n.id || x.to === n.id; }); });
+    if (inScn.length) {
+      box.appendChild(h('h3', { cls: 'sub', text: 'In scenarios' }));
+      var ul = h('ul', { cls: 'elist' });
+      inScn.slice(0, 12).forEach(function (sc) { ul.appendChild(h('li', null, h('button', { type: 'button', on: { click: function () { selectScenario(sc.id); } } }, h('span', { cls: 't', text: sc.title })))); });
+      box.appendChild(ul);
+    }
+  }
+  function edgeButtons(title, list, end) {
+    var frag = h('div');
+    frag.appendChild(h('h3', { cls: 'sub', text: title + ' (' + list.length + ')' }));
+    var ul = h('ul', { cls: 'elist' });
+    list.slice(0, 40).forEach(function (e) {
+      var other = IX.nodes[e[end]];
+      ul.appendChild(h('li', null, h('button', { type: 'button', on: { click: function () { selectEdge(e.id); } } }, tag(e.provenance), h('span', { cls: 't', text: e.kind.replace('_', ' ') + ' ' + (other ? other.label : e[end]) }))));
+    });
+    if (list.length > 40) ul.appendChild(h('li', { cls: 'note', text: '… ' + (list.length - 40) + ' more' }));
+    frag.appendChild(ul);
+    return frag;
+  }
+  function edgeDetails(e) {
+    var a = IX.nodes[e.from], b = IX.nodes[e.to];
+    var wrap = h('div', { style: 'margin-bottom:12px' });
+    wrap.appendChild(h('div', { cls: 'ev mono', style: 'font-weight:700;overflow-wrap:anywhere', text: (a ? a.label : e.from) + ' → ' + (b ? b.label : e.to) }));
+    wrap.appendChild(h('div', { cls: 'bar', style: 'gap:6px;margin:6px 0' }, tag(e.provenance), h('span', { cls: 'tag kind', text: e.kind.replace('_', ' ') }), h('span', { cls: 'tag kind', text: e.relation }), e.condition ? h('span', { cls: 'tag kind', text: 'if ' + e.condition }) : null));
+    wrap.appendChild(provenanceNote(e));
+    if (e.data) wrap.appendChild(h('p', null, h('span', { cls: 'muted', text: 'Passes: ' }), h('span', { cls: 'mono', text: e.data })));
+    if (e.branchGroup) {
+      var alts = G.edges.filter(function (x) { return x.branchGroup === e.branchGroup && x.id !== e.id; });
+      if (alts.length) wrap.appendChild(h('p', { cls: 'note', text: 'Alternative branches at this point: ' + alts.map(function (x) { var t = IX.nodes[x.to]; return (t ? t.label : x.to) + (x.condition ? ' (' + x.condition + ')' : ''); }).join(', ') + '. Only one runs at a time.' }));
+    }
+    wrap.appendChild(h('h3', { cls: 'sub', text: 'Evidence' }));
+    wrap.appendChild(evidenceList(e));
+    var nav = h('div', { cls: 'bar', style: 'gap:6px;margin-top:6px' });
+    if (a) nav.appendChild(h('button', { type: 'button', text: 'Go to source node', on: { click: function () { selectNode(a.id); } } }));
+    if (b) nav.appendChild(h('button', { type: 'button', text: 'Go to target node', on: { click: function () { selectNode(b.id); } } }));
+    wrap.appendChild(nav);
+    return wrap;
+  }
+
+  // ---------- search
+  function bindSearch() {
+    var q = $('q'), res = $('results');
+    q.addEventListener('input', function () {
+      st.query = q.value;
+      var found = C.search(G, q.value, 20);
+      clear(res);
+      res.hidden = !q.value;
+      if (q.value && !found.length) res.appendChild(h('li', { cls: 'note', style: 'padding:6px 8px', text: 'No matches in the analyzed graph.' }));
+      found.forEach(function (n) {
+        res.appendChild(h('li', null, h('button', { type: 'button', on: { click: function () { pick(n); } } }, n.label, h('small', { text: n.kind + (n.path ? ' · ' + n.path + (n.line ? ':' + n.line : '') : '') }))));
+      });
+      renderMap(false);
+    });
+    q.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { var f = C.search(G, q.value, 1)[0]; if (f) pick(f); }
+      if (e.key === 'Escape') { q.value = ''; st.query = ''; res.hidden = true; renderMap(false); }
+      if (e.key === 'ArrowDown') { var b = res.querySelector('button'); if (b) { e.preventDefault(); b.focus(); } }
+    });
+    function pick(n) {
+      res.hidden = true;
+      if (st.scenario) { var sc = IX.scenarios[st.scenario]; if (!sc.steps.some(function (x) { return x.from === n.id || x.to === n.id; })) { stop(); st.scenario = null; st.step = -1; renderScenarios(); renderNow(); renderLog(); } }
+      if (st.level === 'modules' && (n.kind === 'function' || n.kind === 'request')) st.level = 'functions';
+      if (st.features && n.feature && st.features.indexOf(n.feature) < 0) st.features.push(n.feature);
+      st.selected = n.id; st.selectedEdge = null;
+      renderMap(false); renderFilters(); renderDetails(); renderControls(); ensureVisible(n.id); syncHash();
+      var el = document.querySelector('[data-node="' + cssEscape(n.id) + '"]');
+      if (el) el.focus();
+    }
+  }
+  function cssEscape(v) { return window.CSS && CSS.escape ? CSS.escape(v) : v.replace(/["\\]/g, '\\$&'); }
+
+  // ---------- keyboard and wiring
+  function bindKeys() {
+    document.addEventListener('keydown', function (e) {
+      var tagName = (e.target && e.target.tagName) || '';
+      if (/INPUT|TEXTAREA|SELECT/.test(tagName)) return;
+      if (e.key === '/') { e.preventDefault(); $('q').focus(); return; }
+      if (e.key === 'ArrowRight') { e.preventDefault(); stop(); go(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); stop(); go(-1); }
+      else if (e.key === ' ' && !/BUTTON|A/.test(tagName) && !(e.target.getAttribute && e.target.getAttribute('role') === 'button')) { e.preventDefault(); toggleplay(); }
+      else if (e.key === 'Home') { e.preventDefault(); stop(); st.step = -1; renderStep(); }
+      else if (e.key === '+' || e.key === '=') zoom(1 / 1.2);
+      else if (e.key === '-') zoom(1.2);
+      else if (e.key === '0') fitView(true);
+      else if (e.key === 'Escape') { st.selected = null; st.selectedEdge = null; renderDetails(); renderMap(false); syncHash(); }
+    });
+  }
+  function toggleplay() { if (st.playing) { stop(); renderControls(); syncHash(); } else { play(); renderControls(); } }
+  function bindControls() {
+    $('btnPlay').addEventListener('click', toggleplay);
+    $('btnNext').addEventListener('click', function () { stop(); go(1); });
+    $('btnBack').addEventListener('click', function () { stop(); go(-1); });
+    $('btnRestart').addEventListener('click', function () { stop(); st.step = -1; st.selectedEdge = null; renderStep(); });
+    $('btnExit').addEventListener('click', function () { selectScenario(null); });
+    $('btnZoomIn').addEventListener('click', function () { zoom(1 / 1.2); });
+    $('btnZoomOut').addEventListener('click', function () { zoom(1.2); });
+    $('btnFit').addEventListener('click', function () { st.follow = false; renderControls(); fitView(true); });
+    $('btnFollow').addEventListener('click', function () { st.follow = !st.follow; renderControls(); if (st.follow) renderMap(false); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-speed]'), function (b) {
+      b.addEventListener('click', function () { st.speed = parseFloat(b.getAttribute('data-speed')); renderControls(); syncHash(); if (st.playing) { clearTimeout(timer); timer = setTimeout(tick, C.stepDelay(st.speed)); } renderMap(false); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-level]'), function (b) {
+      b.addEventListener('click', function () { st.level = b.getAttribute('data-level'); renderAll(true); });
+    });
+    $('scnq').addEventListener('input', renderScenarios);
+    window.addEventListener('hashchange', function () {
+      var cur = C.toHash(G, st);
+      if (location.hash === cur) return;
+      stop();
+      st = C.applyHash(G, C.defaultState(G), C.parseHash(location.hash));
+      st.follow = true;
+      renderAll(true);
+    });
+  }
+  var hashTimer = null;
+  function syncHash() {
+    clearTimeout(hashTimer);
+    hashTimer = setTimeout(function () {
+      var hsh = C.toHash(G, st);
+      if (location.hash !== hsh) { try { history.replaceState(null, '', hsh || location.pathname + location.search); } catch (e) { /* file:// may refuse */ } }
+    }, 120);
+  }
+  function renderAll(refit) {
+    renderScenarios(); renderFilters(); renderMap(refit); renderNow(); renderLog(); renderDetails(); renderControls(); syncHash();
+  }
+
+  renderHeader(); renderScope(); renderCoverage(); renderRescan();
+  bindControls(); bindPanZoom(); bindSearch(); bindKeys();
+  renderAll(true);
+  if (st.playing) { st.playing = false; play(); renderControls(); }
+  window.__flowlens = { state: function () { return JSON.parse(JSON.stringify(st)); }, view: function () { return { nodes: view.nodes.length, edges: view.edges.length }; } };
+  document.body.setAttribute('data-ready', 'true');
+})();
+</script>
+</body>
+</html>

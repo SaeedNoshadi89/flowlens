@@ -1,0 +1,2274 @@
+{
+  "schema": "flowlens.graph",
+  "version": "1.0.0",
+  "generator": {
+    "name": "flowlens",
+    "version": "0.1.0"
+  },
+  "project": {
+    "name": "shop-app"
+  },
+  "generatedAt": "2026-11-07T12:00:00.000Z",
+  "scope": {
+    "preset": "whole",
+    "include": [],
+    "exclude": [],
+    "relations": [
+      "api",
+      "data",
+      "deps",
+      "agents"
+    ],
+    "topLevel": [
+      {
+        "path": "api",
+        "scanned": true
+      },
+      {
+        "path": "config",
+        "scanned": true
+      },
+      {
+        "path": "docs",
+        "scanned": true
+      },
+      {
+        "path": "web",
+        "scanned": true
+      }
+    ]
+  },
+  "coverage": {
+    "filesConsidered": 21,
+    "filesAnalyzed": 14,
+    "skipped": {
+      "secret-like-file": 2
+    },
+    "languages": {
+      "python": {
+        "files": 11,
+        "supported": true
+      },
+      "typescript": {
+        "files": 3,
+        "supported": true
+      }
+    },
+    "adapters": [
+      {
+        "id": "python.ast",
+        "language": "python",
+        "status": "active",
+        "files": 11
+      },
+      {
+        "id": "js.babel",
+        "language": "javascript",
+        "status": "active",
+        "files": 3
+      }
+    ],
+    "parseErrors": 0,
+    "unresolvedEdges": 2,
+    "inferredEdges": 4,
+    "unsupportedFrameworks": []
+  },
+  "nodes": [
+    {
+      "id": "ep:GET_/api/inventory/{sku}~1500b01bfa",
+      "kind": "endpoint",
+      "label": "GET /api/inventory/{sku}",
+      "sub": "fastapi",
+      "layer": "backend",
+      "path": "api/app/routes/inventory.py",
+      "line": 8,
+      "feature": "api/app",
+      "module": "mod:api/app/routes/inventory.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "method": "GET",
+        "route": "/api/inventory/{sku}"
+      }
+    },
+    {
+      "id": "ep:GET_/api/orders/{order_id}~56eae040a4",
+      "kind": "endpoint",
+      "label": "GET /api/orders/{order_id}",
+      "sub": "fastapi",
+      "layer": "backend",
+      "path": "api/app/routes/orders.py",
+      "line": 20,
+      "feature": "api/app",
+      "module": "mod:api/app/routes/orders.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "method": "GET",
+        "route": "/api/orders/{order_id}"
+      }
+    },
+    {
+      "id": "ep:GET_/api/orders~93ddc8e4b8",
+      "kind": "endpoint",
+      "label": "GET /api/orders",
+      "sub": "fastapi",
+      "layer": "backend",
+      "path": "api/app/routes/orders.py",
+      "line": 15,
+      "feature": "api/app",
+      "module": "mod:api/app/routes/orders.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "method": "GET",
+        "route": "/api/orders"
+      }
+    },
+    {
+      "id": "ep:GET_/health~ce575b3b5c",
+      "kind": "endpoint",
+      "label": "GET /health",
+      "sub": "fastapi",
+      "layer": "backend",
+      "path": "api/app/main.py",
+      "line": 10,
+      "feature": "api/app",
+      "module": "mod:api/app/main.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "method": "GET",
+        "route": "/health"
+      }
+    },
+    {
+      "id": "ep:POST_/api/orders~6741cd86e9",
+      "kind": "endpoint",
+      "label": "POST /api/orders",
+      "sub": "fastapi",
+      "layer": "backend",
+      "path": "api/app/routes/orders.py",
+      "line": 10,
+      "feature": "api/app",
+      "module": "mod:api/app/routes/orders.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "method": "POST",
+        "route": "/api/orders"
+      }
+    },
+    {
+      "id": "ext:hooks.example.com",
+      "kind": "external",
+      "label": "hooks.example.com",
+      "sub": "external host",
+      "layer": "external"
+    },
+    {
+      "id": "fn:api/app/main.py#health",
+      "kind": "function",
+      "label": "health",
+      "sub": "main.py",
+      "layer": "backend",
+      "path": "api/app/main.py",
+      "line": 11,
+      "feature": "api/app",
+      "module": "mod:api/app/main.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/routes/inventory.py#stock_level",
+      "kind": "function",
+      "label": "stock_level",
+      "sub": "inventory.py",
+      "layer": "backend",
+      "path": "api/app/routes/inventory.py",
+      "line": 9,
+      "feature": "api/app",
+      "module": "mod:api/app/routes/inventory.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/routes/orders.py#create_order",
+      "kind": "function",
+      "label": "create_order",
+      "sub": "orders.py",
+      "layer": "backend",
+      "path": "api/app/routes/orders.py",
+      "line": 11,
+      "feature": "api/app",
+      "module": "mod:api/app/routes/orders.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/routes/orders.py#get_order",
+      "kind": "function",
+      "label": "get_order",
+      "sub": "orders.py",
+      "layer": "backend",
+      "path": "api/app/routes/orders.py",
+      "line": 21,
+      "feature": "api/app",
+      "module": "mod:api/app/routes/orders.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/routes/orders.py#list_orders",
+      "kind": "function",
+      "label": "list_orders",
+      "sub": "orders.py",
+      "layer": "backend",
+      "path": "api/app/routes/orders.py",
+      "line": 16,
+      "feature": "api/app",
+      "module": "mod:api/app/routes/orders.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/services/orders.py#notify_warehouse",
+      "kind": "function",
+      "label": "notify_warehouse",
+      "sub": "orders.py",
+      "layer": "backend",
+      "path": "api/app/services/orders.py",
+      "line": 12,
+      "feature": "api/app",
+      "module": "mod:api/app/services/orders.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/services/orders.py#place_order",
+      "kind": "function",
+      "label": "place_order",
+      "sub": "orders.py",
+      "layer": "backend",
+      "path": "api/app/services/orders.py",
+      "line": 6,
+      "feature": "api/app",
+      "module": "mod:api/app/services/orders.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/store/orders_repo.py#find_order",
+      "kind": "function",
+      "label": "find_order",
+      "sub": "orders_repo.py",
+      "layer": "backend",
+      "path": "api/app/store/orders_repo.py",
+      "line": 17,
+      "feature": "api/app",
+      "module": "mod:api/app/store/orders_repo.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/store/orders_repo.py#find_orders",
+      "kind": "function",
+      "label": "find_orders",
+      "sub": "orders_repo.py",
+      "layer": "backend",
+      "path": "api/app/store/orders_repo.py",
+      "line": 13,
+      "feature": "api/app",
+      "module": "mod:api/app/store/orders_repo.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:api/app/store/orders_repo.py#save_order",
+      "kind": "function",
+      "label": "save_order",
+      "sub": "orders_repo.py",
+      "layer": "backend",
+      "path": "api/app/store/orders_repo.py",
+      "line": 6,
+      "feature": "api/app",
+      "module": "mod:api/app/store/orders_repo.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:docs/snippet.py#doc_helper",
+      "kind": "function",
+      "label": "doc_helper",
+      "sub": "snippet.py",
+      "layer": "backend",
+      "path": "docs/snippet.py",
+      "line": 1,
+      "feature": "docs",
+      "module": "mod:docs/snippet.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:web/src/api/client.ts#createOrder",
+      "kind": "function",
+      "label": "createOrder",
+      "sub": "client.ts",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 11,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/api/client.ts#getOrder",
+      "kind": "function",
+      "label": "getOrder",
+      "sub": "client.ts",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 25,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/api/client.ts#getStock",
+      "kind": "function",
+      "label": "getStock",
+      "sub": "client.ts",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 29,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/api/client.ts#listOrders",
+      "kind": "function",
+      "label": "listOrders",
+      "sub": "client.ts",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 20,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/api/client.ts#sendFeedback",
+      "kind": "function",
+      "label": "sendFeedback",
+      "sub": "client.ts",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 37,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/api/client.ts#trackEvent",
+      "kind": "function",
+      "label": "trackEvent",
+      "sub": "client.ts",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 33,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage",
+      "kind": "function",
+      "label": "CheckoutPage",
+      "sub": "CheckoutPage.tsx",
+      "layer": "frontend",
+      "path": "web/src/pages/CheckoutPage.tsx",
+      "line": 8,
+      "feature": "web/src",
+      "module": "mod:web/src/pages/CheckoutPage.tsx",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+      "kind": "function",
+      "label": "CheckoutPage.submit",
+      "sub": "CheckoutPage.tsx",
+      "layer": "frontend",
+      "path": "web/src/pages/CheckoutPage.tsx",
+      "line": 11,
+      "feature": "web/src",
+      "module": "mod:web/src/pages/CheckoutPage.tsx",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/pages/CheckoutPage.tsx#saveDraft",
+      "kind": "function",
+      "label": "saveDraft",
+      "sub": "CheckoutPage.tsx",
+      "layer": "frontend",
+      "path": "web/src/pages/CheckoutPage.tsx",
+      "line": 4,
+      "feature": "web/src",
+      "module": "mod:web/src/pages/CheckoutPage.tsx",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/pages/OrdersPage.tsx#OrdersPage",
+      "kind": "function",
+      "label": "OrdersPage",
+      "sub": "OrdersPage.tsx",
+      "layer": "frontend",
+      "path": "web/src/pages/OrdersPage.tsx",
+      "line": 4,
+      "feature": "web/src",
+      "module": "mod:web/src/pages/OrdersPage.tsx",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder",
+      "kind": "function",
+      "label": "OrdersPage.openOrder",
+      "sub": "OrdersPage.tsx",
+      "layer": "frontend",
+      "path": "web/src/pages/OrdersPage.tsx",
+      "line": 10,
+      "feature": "web/src",
+      "module": "mod:web/src/pages/OrdersPage.tsx",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "mod:api/app/__init__.py",
+      "kind": "module",
+      "label": "app/__init__.py",
+      "sub": "api/app",
+      "layer": "backend",
+      "path": "api/app/__init__.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/main.py",
+      "kind": "module",
+      "label": "main.py",
+      "sub": "api/app",
+      "layer": "backend",
+      "path": "api/app/main.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/models.py",
+      "kind": "module",
+      "label": "models.py",
+      "sub": "api/app",
+      "layer": "backend",
+      "path": "api/app/models.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/routes/__init__.py",
+      "kind": "module",
+      "label": "routes/__init__.py",
+      "sub": "api/app/routes",
+      "layer": "backend",
+      "path": "api/app/routes/__init__.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/routes/inventory.py",
+      "kind": "module",
+      "label": "inventory.py",
+      "sub": "api/app/routes",
+      "layer": "backend",
+      "path": "api/app/routes/inventory.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/routes/orders.py",
+      "kind": "module",
+      "label": "orders.py",
+      "sub": "api/app/routes",
+      "layer": "backend",
+      "path": "api/app/routes/orders.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/services/__init__.py",
+      "kind": "module",
+      "label": "services/__init__.py",
+      "sub": "api/app/services",
+      "layer": "backend",
+      "path": "api/app/services/__init__.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/services/orders.py",
+      "kind": "module",
+      "label": "orders.py",
+      "sub": "api/app/services",
+      "layer": "backend",
+      "path": "api/app/services/orders.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/store/__init__.py",
+      "kind": "module",
+      "label": "store/__init__.py",
+      "sub": "api/app/store",
+      "layer": "backend",
+      "path": "api/app/store/__init__.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:api/app/store/orders_repo.py",
+      "kind": "module",
+      "label": "orders_repo.py",
+      "sub": "api/app/store",
+      "layer": "backend",
+      "path": "api/app/store/orders_repo.py",
+      "line": 1,
+      "feature": "api/app",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:docs/snippet.py",
+      "kind": "module",
+      "label": "snippet.py",
+      "sub": "docs",
+      "layer": "backend",
+      "path": "docs/snippet.py",
+      "line": 1,
+      "feature": "docs",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:web/src/api/client.ts",
+      "kind": "module",
+      "label": "client.ts",
+      "sub": "web/src/api",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 1,
+      "feature": "web/src",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "mod:web/src/pages/CheckoutPage.tsx",
+      "kind": "module",
+      "label": "CheckoutPage.tsx",
+      "sub": "web/src/pages",
+      "layer": "frontend",
+      "path": "web/src/pages/CheckoutPage.tsx",
+      "line": 1,
+      "feature": "web/src",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "mod:web/src/pages/OrdersPage.tsx",
+      "kind": "module",
+      "label": "OrdersPage.tsx",
+      "sub": "web/src/pages",
+      "layer": "frontend",
+      "path": "web/src/pages/OrdersPage.tsx",
+      "line": 1,
+      "feature": "web/src",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "req:api/app/services/orders.py#L13",
+      "kind": "request",
+      "label": "POST //hooks.example.com/warehouse",
+      "sub": "requests",
+      "layer": "backend",
+      "path": "api/app/services/orders.py",
+      "line": 13,
+      "feature": "api/app",
+      "module": "mod:api/app/services/orders.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "method": "POST",
+        "url": "//hooks.example.com/warehouse",
+        "urlKind": "literal"
+      }
+    },
+    {
+      "id": "req:web/src/api/client.ts#L12",
+      "kind": "request",
+      "label": "POST /api/orders",
+      "sub": "fetch",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 12,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "adapter": "js.babel",
+      "attrs": {
+        "method": "POST",
+        "url": "/api/orders",
+        "urlKind": "literal"
+      }
+    },
+    {
+      "id": "req:web/src/api/client.ts#L21",
+      "kind": "request",
+      "label": "GET /api/orders",
+      "sub": "fetch",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 21,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "adapter": "js.babel",
+      "attrs": {
+        "method": "GET",
+        "url": "/api/orders",
+        "urlKind": "template"
+      }
+    },
+    {
+      "id": "req:web/src/api/client.ts#L26",
+      "kind": "request",
+      "label": "GET /api/orders/{}",
+      "sub": "fetch",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 26,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "adapter": "js.babel",
+      "attrs": {
+        "method": "GET",
+        "url": "/api/orders/{}",
+        "urlKind": "template"
+      }
+    },
+    {
+      "id": "req:web/src/api/client.ts#L30",
+      "kind": "request",
+      "label": "GET {base}/inventory/{}",
+      "sub": "http",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 30,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "adapter": "js.babel",
+      "attrs": {
+        "method": "GET",
+        "url": "{base}/inventory/{}",
+        "urlKind": "partial"
+      }
+    },
+    {
+      "id": "req:web/src/api/client.ts#L34",
+      "kind": "request",
+      "label": "POST (dynamic URL)",
+      "sub": "fetch",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 34,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "adapter": "js.babel",
+      "attrs": {
+        "method": "POST",
+        "url": "(dynamic URL)",
+        "urlKind": "dynamic"
+      }
+    },
+    {
+      "id": "req:web/src/api/client.ts#L38",
+      "kind": "request",
+      "label": "POST /api/feedback",
+      "sub": "fetch",
+      "layer": "frontend",
+      "path": "web/src/api/client.ts",
+      "line": 38,
+      "feature": "web/src",
+      "module": "mod:web/src/api/client.ts",
+      "adapter": "js.babel",
+      "attrs": {
+        "method": "POST",
+        "url": "/api/feedback",
+        "urlKind": "literal"
+      }
+    },
+    {
+      "id": "store:browser-storage:localStorage",
+      "kind": "store",
+      "label": "localStorage",
+      "sub": "browser storage",
+      "layer": "data",
+      "attrs": {
+        "storeKind": "browser-storage"
+      }
+    },
+    {
+      "id": "store:kv:cache",
+      "kind": "store",
+      "label": "cache",
+      "sub": "key-value",
+      "layer": "data",
+      "attrs": {
+        "storeKind": "kv"
+      }
+    },
+    {
+      "id": "store:sql:orders",
+      "kind": "store",
+      "label": "orders",
+      "sub": "SQL table",
+      "layer": "data",
+      "attrs": {
+        "storeKind": "sql"
+      }
+    },
+    {
+      "id": "unknown:dynamic-url",
+      "kind": "unknown",
+      "label": "Dynamic URL",
+      "sub": "target decided at runtime",
+      "layer": "external"
+    },
+    {
+      "id": "unknown:unmatched:POST_/api/feedback~4b69c535c2",
+      "kind": "unknown",
+      "label": "No scanned route: POST /api/feedback",
+      "sub": "outside scope or unsupported",
+      "layer": "external"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e:calls_fn:api/app/routes/orders.py#create_order_fn:api/app/se~25f09ddba6",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:api/app/routes/orders.py#create_order",
+      "to": "fn:api/app/services/orders.py#place_order",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 12,
+          "note": "calls order_service.place_order()"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:calls_fn:api/app/routes/orders.py#get_order_fn:api/app/store~cb3d05c9b1",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:api/app/routes/orders.py#get_order",
+      "to": "fn:api/app/store/orders_repo.py#find_order",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 22,
+          "note": "calls find_order()"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:calls_fn:api/app/routes/orders.py#list_orders_fn:api/app/sto~c5d3f2f3a2",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:api/app/routes/orders.py#list_orders",
+      "to": "fn:api/app/store/orders_repo.py#find_orders",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 17,
+          "note": "calls find_orders()"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~0e2b539a5c",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:api/app/services/orders.py#place_order",
+      "to": "fn:api/app/store/orders_repo.py#save_order",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/services/orders.py",
+          "line": 7,
+          "note": "calls orders_repo.save_order()"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~43e309578d",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:api/app/services/orders.py#place_order",
+      "to": "fn:api/app/services/orders.py#notify_warehouse",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/services/orders.py",
+          "line": 8,
+          "note": "calls notify_warehouse()"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~409990efe8",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+      "to": "fn:web/src/api/client.ts#getStock",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/CheckoutPage.tsx",
+          "line": 13,
+          "note": "calls getStock()"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~4e7a92d57c",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+      "to": "fn:web/src/api/client.ts#trackEvent",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/CheckoutPage.tsx",
+          "line": 15,
+          "note": "calls trackEvent()"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~a84152f7f6",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+      "to": "fn:web/src/pages/CheckoutPage.tsx#saveDraft",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/CheckoutPage.tsx",
+          "line": 12,
+          "note": "calls saveDraft()"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~c3d0de8249",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+      "to": "fn:web/src/api/client.ts#createOrder",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/CheckoutPage.tsx",
+          "line": 14,
+          "note": "calls createOrder()"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage_fn:web/src/~2d1f8fa583",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:web/src/pages/OrdersPage.tsx#OrdersPage",
+      "to": "fn:web/src/api/client.ts#sendFeedback",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/OrdersPage.tsx",
+          "line": 14,
+          "note": "calls sendFeedback()"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage_fn:web/src/~d93b9d647b",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:web/src/pages/OrdersPage.tsx#OrdersPage",
+      "to": "fn:web/src/api/client.ts#listOrders",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/OrdersPage.tsx",
+          "line": 7,
+          "note": "calls listOrders()"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder_f~9a9657737b",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder",
+      "to": "fn:web/src/api/client.ts#getOrder",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/OrdersPage.tsx",
+          "line": 11,
+          "note": "calls getOrder()"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:handles_ep:GET_/api/inventory/{sku}_1500b01bfa_fn:api/app/ro~2135d1184b",
+      "kind": "handles",
+      "relation": "api",
+      "from": "ep:GET_/api/inventory/{sku}~1500b01bfa",
+      "to": "fn:api/app/routes/inventory.py#stock_level",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/main.py",
+          "line": 7,
+          "note": "mounts router inventory.router at /api"
+        },
+        {
+          "path": "api/app/routes/inventory.py",
+          "line": 4,
+          "note": "router prefix /inventory"
+        },
+        {
+          "path": "api/app/routes/inventory.py",
+          "line": 8,
+          "note": "fastapi route GET /{sku} on router"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handles_ep:GET_/api/orders_93ddc8e4b8_fn:api/app/routes/orde~b12582a97c",
+      "kind": "handles",
+      "relation": "api",
+      "from": "ep:GET_/api/orders~93ddc8e4b8",
+      "to": "fn:api/app/routes/orders.py#list_orders",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/main.py",
+          "line": 6,
+          "note": "mounts router orders.router at /api"
+        },
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 7,
+          "note": "router prefix /orders"
+        },
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 15,
+          "note": "fastapi route GET  on router"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handles_ep:GET_/api/orders/{order_id}_56eae040a4_fn:api/app/~713739cc4d",
+      "kind": "handles",
+      "relation": "api",
+      "from": "ep:GET_/api/orders/{order_id}~56eae040a4",
+      "to": "fn:api/app/routes/orders.py#get_order",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/main.py",
+          "line": 6,
+          "note": "mounts router orders.router at /api"
+        },
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 7,
+          "note": "router prefix /orders"
+        },
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 20,
+          "note": "fastapi route GET /{order_id} on router"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handles_ep:GET_/health_ce575b3b5c_fn:api/app/main.py#health_~b952c1935f",
+      "kind": "handles",
+      "relation": "api",
+      "from": "ep:GET_/health~ce575b3b5c",
+      "to": "fn:api/app/main.py#health",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/main.py",
+          "line": 10,
+          "note": "fastapi route GET /health on app"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handles_ep:POST_/api/orders_6741cd86e9_fn:api/app/routes/ord~053e76068b",
+      "kind": "handles",
+      "relation": "api",
+      "from": "ep:POST_/api/orders~6741cd86e9",
+      "to": "fn:api/app/routes/orders.py#create_order",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/main.py",
+          "line": 6,
+          "note": "mounts router orders.router at /api"
+        },
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 7,
+          "note": "router prefix /orders"
+        },
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 10,
+          "note": "fastapi route POST  on router"
+        }
+      ],
+      "data": "payload: OrderIn",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:api/app/main.py_mod:api/app/routes/inventory.py_~bb53f76bbd",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:api/app/main.py",
+      "to": "mod:api/app/routes/inventory.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/main.py",
+          "line": 3,
+          "note": "imports app.routes.inventory"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:api/app/main.py_mod:api/app/routes/orders.py_~df8bb539a6",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:api/app/main.py",
+      "to": "mod:api/app/routes/orders.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/main.py",
+          "line": 3,
+          "note": "imports app.routes.orders"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:api/app/routes/orders.py_mod:api/app/models.py_~38ecc14300",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:api/app/routes/orders.py",
+      "to": "mod:api/app/models.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 3,
+          "note": "imports app.models"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:api/app/routes/orders.py_mod:api/app/services/or~9015900fad",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:api/app/routes/orders.py",
+      "to": "mod:api/app/services/orders.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 4,
+          "note": "imports app.services.orders"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:api/app/routes/orders.py_mod:api/app/store/order~4bf64e0b24",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:api/app/routes/orders.py",
+      "to": "mod:api/app/store/orders_repo.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 5,
+          "note": "imports app.store.orders_repo"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:api/app/services/orders.py_mod:api/app/store/ord~e108be4446",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:api/app/services/orders.py",
+      "to": "mod:api/app/store/orders_repo.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/services/orders.py",
+          "line": 3,
+          "note": "imports app.store.orders_repo"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:web/src/pages/CheckoutPage.tsx_mod:web/src/api/c~1aa0077724",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:web/src/pages/CheckoutPage.tsx",
+      "to": "mod:web/src/api/client.ts",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/CheckoutPage.tsx",
+          "line": 2,
+          "note": "imports ../api/client"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:imports_mod:web/src/pages/OrdersPage.tsx_mod:web/src/api/cli~8521c90c68",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:web/src/pages/OrdersPage.tsx",
+      "to": "mod:web/src/api/client.ts",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/OrdersPage.tsx",
+          "line": 2,
+          "note": "imports ../api/client"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:reads_fn:api/app/routes/inventory.py#stock_level_store:kv:ca~067e645e11",
+      "kind": "reads",
+      "relation": "data",
+      "from": "fn:api/app/routes/inventory.py#stock_level",
+      "to": "store:kv:cache",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/routes/inventory.py",
+          "line": 10,
+          "note": "key-value get"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:reads_fn:api/app/store/orders_repo.py#find_order_store:sql:o~f1124e677e",
+      "kind": "reads",
+      "relation": "data",
+      "from": "fn:api/app/store/orders_repo.py#find_order",
+      "to": "store:sql:orders",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/store/orders_repo.py",
+          "line": 18,
+          "note": "SQL SELECT on table orders"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:reads_fn:api/app/store/orders_repo.py#find_orders_store:sql:~4710cd33f2",
+      "kind": "reads",
+      "relation": "data",
+      "from": "fn:api/app/store/orders_repo.py#find_orders",
+      "to": "store:sql:orders",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/store/orders_repo.py",
+          "line": 14,
+          "note": "SQL SELECT on table orders"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:requests_fn:api/app/services/orders.py#notify_warehouse_req:~baf922871a",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:api/app/services/orders.py#notify_warehouse",
+      "to": "req:api/app/services/orders.py#L13",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/services/orders.py",
+          "line": 13,
+          "note": "requests POST request with {order_id}"
+        }
+      ],
+      "data": "{order_id}",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:requests_fn:web/src/api/client.ts#createOrder_req:web/src/ap~b6d692afa6",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:web/src/api/client.ts#createOrder",
+      "to": "req:web/src/api/client.ts#L12",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/api/client.ts",
+          "line": 12,
+          "note": "fetch POST request with order"
+        }
+      ],
+      "data": "order",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:requests_fn:web/src/api/client.ts#getOrder_req:web/src/api/c~73fe7713f4",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:web/src/api/client.ts#getOrder",
+      "to": "req:web/src/api/client.ts#L26",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/api/client.ts",
+          "line": 26,
+          "note": "fetch GET request"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:requests_fn:web/src/api/client.ts#getStock_req:web/src/api/c~55b6f8f64c",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:web/src/api/client.ts#getStock",
+      "to": "req:web/src/api/client.ts#L30",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/api/client.ts",
+          "line": 30,
+          "note": "http GET request"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:requests_fn:web/src/api/client.ts#listOrders_req:web/src/api~18dc2ebf1b",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:web/src/api/client.ts#listOrders",
+      "to": "req:web/src/api/client.ts#L21",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/api/client.ts",
+          "line": 21,
+          "note": "fetch GET request"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:requests_fn:web/src/api/client.ts#sendFeedback_req:web/src/a~99e253f7da",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:web/src/api/client.ts#sendFeedback",
+      "to": "req:web/src/api/client.ts#L38",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/api/client.ts",
+          "line": 38,
+          "note": "fetch POST request with {text}"
+        }
+      ],
+      "data": "{text}",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:requests_fn:web/src/api/client.ts#trackEvent_req:web/src/api~8305acf991",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:web/src/api/client.ts#trackEvent",
+      "to": "req:web/src/api/client.ts#L34",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/api/client.ts",
+          "line": 34,
+          "note": "fetch POST request with {name}"
+        }
+      ],
+      "data": "{name}",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:routes_to_req:api/app/services/orders.py#L13_ext:hooks.examp~83d3d1ea8b",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:api/app/services/orders.py#L13",
+      "to": "ext:hooks.example.com",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/services/orders.py",
+          "line": 13,
+          "note": "request to host hooks.example.com"
+        }
+      ]
+    },
+    {
+      "id": "e:routes_to_req:web/src/api/client.ts#L12_ep:POST_/api/orders_~9eb88b0643",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:web/src/api/client.ts#L12",
+      "to": "ep:POST_/api/orders~6741cd86e9",
+      "provenance": "inferred",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 10,
+          "note": "route POST /api/orders"
+        },
+        {
+          "path": "web/src/api/client.ts",
+          "line": 12,
+          "note": "request URL"
+        }
+      ],
+      "reason": "Method POST and path \"/api/orders\" match route POST /api/orders (api/app/routes/orders.py:10). The base URL and proxying are decided at runtime."
+    },
+    {
+      "id": "e:routes_to_req:web/src/api/client.ts#L21_ep:GET_/api/orders_9~895fec7008",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:web/src/api/client.ts#L21",
+      "to": "ep:GET_/api/orders~93ddc8e4b8",
+      "provenance": "inferred",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 15,
+          "note": "route GET /api/orders"
+        },
+        {
+          "path": "web/src/api/client.ts",
+          "line": 21,
+          "note": "request URL"
+        }
+      ],
+      "reason": "Method GET and path \"/api/orders\" match route GET /api/orders (api/app/routes/orders.py:15). The base URL and proxying are decided at runtime."
+    },
+    {
+      "id": "e:routes_to_req:web/src/api/client.ts#L26_ep:GET_/api/orders/{~f4b9b90853",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:web/src/api/client.ts#L26",
+      "to": "ep:GET_/api/orders/{order_id}~56eae040a4",
+      "provenance": "inferred",
+      "evidence": [
+        {
+          "path": "api/app/routes/orders.py",
+          "line": 20,
+          "note": "route GET /api/orders/{order_id}"
+        },
+        {
+          "path": "web/src/api/client.ts",
+          "line": 26,
+          "note": "request URL"
+        }
+      ],
+      "reason": "Method GET and path \"/api/orders/{}\" match route GET /api/orders/{order_id} (api/app/routes/orders.py:20). The base URL and proxying are decided at runtime."
+    },
+    {
+      "id": "e:routes_to_req:web/src/api/client.ts#L30_ep:GET_/api/inventor~0d9bdfb77d",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:web/src/api/client.ts#L30",
+      "to": "ep:GET_/api/inventory/{sku}~1500b01bfa",
+      "provenance": "inferred",
+      "evidence": [
+        {
+          "path": "api/app/routes/inventory.py",
+          "line": 8,
+          "note": "route GET /api/inventory/{sku}"
+        },
+        {
+          "path": "web/src/api/client.ts",
+          "line": 30,
+          "note": "request URL"
+        }
+      ],
+      "reason": "The URL has a runtime prefix; its known part \"/inventory/{}\" and method GET match the end of route GET /api/inventory/{sku} (api/app/routes/inventory.py:8)."
+    },
+    {
+      "id": "e:routes_to_req:web/src/api/client.ts#L34_unknown:dynamic-url_~f97b16c829",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:web/src/api/client.ts#L34",
+      "to": "unknown:dynamic-url",
+      "provenance": "unresolved",
+      "evidence": [
+        {
+          "path": "web/src/api/client.ts",
+          "line": 34,
+          "note": "request URL"
+        }
+      ],
+      "reason": "The URL is computed at runtime (a variable or a call), so the target cannot be determined from source."
+    },
+    {
+      "id": "e:routes_to_req:web/src/api/client.ts#L38_unknown:unmatched:PO~9977594bfc",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:web/src/api/client.ts#L38",
+      "to": "unknown:unmatched:POST_/api/feedback~4b69c535c2",
+      "provenance": "unresolved",
+      "evidence": [
+        {
+          "path": "web/src/api/client.ts",
+          "line": 38,
+          "note": "request URL"
+        }
+      ],
+      "reason": "No route with this method and path was found in the scanned scope. The server may be outside the scan, behind a proxy, or use a framework without an adapter."
+    },
+    {
+      "id": "e:writes_fn:api/app/store/orders_repo.py#save_order_store:sql:~782339ca18",
+      "kind": "writes",
+      "relation": "data",
+      "from": "fn:api/app/store/orders_repo.py#save_order",
+      "to": "store:sql:orders",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "api/app/store/orders_repo.py",
+          "line": 8,
+          "note": "SQL INSERT on table orders"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:writes_fn:web/src/pages/CheckoutPage.tsx#saveDraft_store:bro~d603f059cf",
+      "kind": "writes",
+      "relation": "data",
+      "from": "fn:web/src/pages/CheckoutPage.tsx#saveDraft",
+      "to": "store:browser-storage:localStorage",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "web/src/pages/CheckoutPage.tsx",
+          "line": 5,
+          "note": "localStorage.setItem with draft"
+        }
+      ],
+      "data": "draft",
+      "adapter": "js.babel"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scn:api:req:web/src/api/client.ts#L30:fn:web/src/api/client.ts#getStock",
+      "title": "GET {base}/inventory/{} from getStock",
+      "kind": "api-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/api/client.ts#getStock",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:web/src/api/client.ts#getStock_req:web/src/api/c~55b6f8f64c",
+          "from": "fn:web/src/api/client.ts#getStock",
+          "to": "req:web/src/api/client.ts#L30",
+          "title": "getStock sends GET {base}/inventory/{}",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L30_ep:GET_/api/inventor~0d9bdfb77d",
+          "from": "req:web/src/api/client.ts#L30",
+          "to": "ep:GET_/api/inventory/{sku}~1500b01bfa",
+          "title": "Request reaches GET /api/inventory/{sku}",
+          "provenance": "inferred",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:handles_ep:GET_/api/inventory/{sku}_1500b01bfa_fn:api/app/ro~2135d1184b",
+          "from": "ep:GET_/api/inventory/{sku}~1500b01bfa",
+          "to": "fn:api/app/routes/inventory.py#stock_level",
+          "title": "GET /api/inventory/{sku} is handled by stock_level",
+          "provenance": "observed",
+          "depth": 2
+        },
+        {
+          "index": 3,
+          "edge": "e:reads_fn:api/app/routes/inventory.py#stock_level_store:kv:ca~067e645e11",
+          "from": "fn:api/app/routes/inventory.py#stock_level",
+          "to": "store:kv:cache",
+          "title": "stock_level reads cache",
+          "provenance": "observed",
+          "depth": 3
+        }
+      ],
+      "summary": "Client code sends a request that is matched to GET /api/inventory/{sku}.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:api:req:web/src/api/client.ts#L21:fn:web/src/api/client.ts#listOrders",
+      "title": "GET /api/orders from listOrders",
+      "kind": "api-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/api/client.ts#listOrders",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:web/src/api/client.ts#listOrders_req:web/src/api~18dc2ebf1b",
+          "from": "fn:web/src/api/client.ts#listOrders",
+          "to": "req:web/src/api/client.ts#L21",
+          "title": "listOrders sends GET /api/orders",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L21_ep:GET_/api/orders_9~895fec7008",
+          "from": "req:web/src/api/client.ts#L21",
+          "to": "ep:GET_/api/orders~93ddc8e4b8",
+          "title": "Request reaches GET /api/orders",
+          "provenance": "inferred",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:handles_ep:GET_/api/orders_93ddc8e4b8_fn:api/app/routes/orde~b12582a97c",
+          "from": "ep:GET_/api/orders~93ddc8e4b8",
+          "to": "fn:api/app/routes/orders.py#list_orders",
+          "title": "GET /api/orders is handled by list_orders",
+          "provenance": "observed",
+          "depth": 2
+        },
+        {
+          "index": 3,
+          "edge": "e:calls_fn:api/app/routes/orders.py#list_orders_fn:api/app/sto~c5d3f2f3a2",
+          "from": "fn:api/app/routes/orders.py#list_orders",
+          "to": "fn:api/app/store/orders_repo.py#find_orders",
+          "title": "list_orders calls find_orders",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 4,
+          "edge": "e:reads_fn:api/app/store/orders_repo.py#find_orders_store:sql:~4710cd33f2",
+          "from": "fn:api/app/store/orders_repo.py#find_orders",
+          "to": "store:sql:orders",
+          "title": "find_orders reads orders",
+          "provenance": "observed",
+          "depth": 4
+        }
+      ],
+      "summary": "Client code sends a request that is matched to GET /api/orders.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:api:req:web/src/api/client.ts#L26:fn:web/src/api/client.ts#getOrder",
+      "title": "GET /api/orders/{} from getOrder",
+      "kind": "api-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/api/client.ts#getOrder",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:web/src/api/client.ts#getOrder_req:web/src/api/c~73fe7713f4",
+          "from": "fn:web/src/api/client.ts#getOrder",
+          "to": "req:web/src/api/client.ts#L26",
+          "title": "getOrder sends GET /api/orders/{}",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L26_ep:GET_/api/orders/{~f4b9b90853",
+          "from": "req:web/src/api/client.ts#L26",
+          "to": "ep:GET_/api/orders/{order_id}~56eae040a4",
+          "title": "Request reaches GET /api/orders/{order_id}",
+          "provenance": "inferred",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:handles_ep:GET_/api/orders/{order_id}_56eae040a4_fn:api/app/~713739cc4d",
+          "from": "ep:GET_/api/orders/{order_id}~56eae040a4",
+          "to": "fn:api/app/routes/orders.py#get_order",
+          "title": "GET /api/orders/{order_id} is handled by get_order",
+          "provenance": "observed",
+          "depth": 2
+        },
+        {
+          "index": 3,
+          "edge": "e:calls_fn:api/app/routes/orders.py#get_order_fn:api/app/store~cb3d05c9b1",
+          "from": "fn:api/app/routes/orders.py#get_order",
+          "to": "fn:api/app/store/orders_repo.py#find_order",
+          "title": "get_order calls find_order",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 4,
+          "edge": "e:reads_fn:api/app/store/orders_repo.py#find_order_store:sql:o~f1124e677e",
+          "from": "fn:api/app/store/orders_repo.py#find_order",
+          "to": "store:sql:orders",
+          "title": "find_order reads orders",
+          "provenance": "observed",
+          "depth": 4
+        }
+      ],
+      "summary": "Client code sends a request that is matched to GET /api/orders/{order_id}.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:api:req:web/src/api/client.ts#L34:fn:web/src/api/client.ts#trackEvent",
+      "title": "POST (dynamic URL) from trackEvent",
+      "kind": "api-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/api/client.ts#trackEvent",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:web/src/api/client.ts#trackEvent_req:web/src/api~8305acf991",
+          "from": "fn:web/src/api/client.ts#trackEvent",
+          "to": "req:web/src/api/client.ts#L34",
+          "title": "trackEvent sends POST (dynamic URL)",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L34_unknown:dynamic-url_~f97b16c829",
+          "from": "req:web/src/api/client.ts#L34",
+          "to": "unknown:dynamic-url",
+          "title": "Request goes to Dynamic URL",
+          "provenance": "unresolved",
+          "depth": 1
+        }
+      ],
+      "summary": "Client code sends a request whose server route was not found in the scan.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:api:req:api/app/services/orders.py#L13:fn:api/app/services/o~264d2d8e4f",
+      "title": "POST //hooks.example.com/warehouse from notify_warehouse",
+      "kind": "api-flow",
+      "feature": "api/app",
+      "entry": "fn:api/app/services/orders.py#notify_warehouse",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:api/app/services/orders.py#notify_warehouse_req:~baf922871a",
+          "from": "fn:api/app/services/orders.py#notify_warehouse",
+          "to": "req:api/app/services/orders.py#L13",
+          "title": "notify_warehouse sends POST //hooks.example.com/warehouse",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:api/app/services/orders.py#L13_ext:hooks.examp~83d3d1ea8b",
+          "from": "req:api/app/services/orders.py#L13",
+          "to": "ext:hooks.example.com",
+          "title": "Request goes to hooks.example.com",
+          "provenance": "observed",
+          "depth": 1
+        }
+      ],
+      "summary": "Client code sends a request whose server route was not found in the scan.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:api:req:web/src/api/client.ts#L38:fn:web/src/api/client.ts#sendFeedback",
+      "title": "POST /api/feedback from sendFeedback",
+      "kind": "api-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/api/client.ts#sendFeedback",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:web/src/api/client.ts#sendFeedback_req:web/src/a~99e253f7da",
+          "from": "fn:web/src/api/client.ts#sendFeedback",
+          "to": "req:web/src/api/client.ts#L38",
+          "title": "sendFeedback sends POST /api/feedback",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L38_unknown:unmatched:PO~9977594bfc",
+          "from": "req:web/src/api/client.ts#L38",
+          "to": "unknown:unmatched:POST_/api/feedback~4b69c535c2",
+          "title": "Request goes to No scanned route: POST /api/feedback",
+          "provenance": "unresolved",
+          "depth": 1
+        }
+      ],
+      "summary": "Client code sends a request whose server route was not found in the scan.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:api:req:web/src/api/client.ts#L12:fn:web/src/api/client.ts#createOrder",
+      "title": "POST /api/orders from createOrder",
+      "kind": "api-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/api/client.ts#createOrder",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:web/src/api/client.ts#createOrder_req:web/src/ap~b6d692afa6",
+          "from": "fn:web/src/api/client.ts#createOrder",
+          "to": "req:web/src/api/client.ts#L12",
+          "title": "createOrder sends POST /api/orders",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L12_ep:POST_/api/orders_~9eb88b0643",
+          "from": "req:web/src/api/client.ts#L12",
+          "to": "ep:POST_/api/orders~6741cd86e9",
+          "title": "Request reaches POST /api/orders",
+          "provenance": "inferred",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:handles_ep:POST_/api/orders_6741cd86e9_fn:api/app/routes/ord~053e76068b",
+          "from": "ep:POST_/api/orders~6741cd86e9",
+          "to": "fn:api/app/routes/orders.py#create_order",
+          "title": "POST /api/orders is handled by create_order",
+          "provenance": "observed",
+          "depth": 2
+        },
+        {
+          "index": 3,
+          "edge": "e:calls_fn:api/app/routes/orders.py#create_order_fn:api/app/se~25f09ddba6",
+          "from": "fn:api/app/routes/orders.py#create_order",
+          "to": "fn:api/app/services/orders.py#place_order",
+          "title": "create_order calls place_order",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 4,
+          "edge": "e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~0e2b539a5c",
+          "from": "fn:api/app/services/orders.py#place_order",
+          "to": "fn:api/app/store/orders_repo.py#save_order",
+          "title": "place_order calls save_order",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 5,
+          "edge": "e:writes_fn:api/app/store/orders_repo.py#save_order_store:sql:~782339ca18",
+          "from": "fn:api/app/store/orders_repo.py#save_order",
+          "to": "store:sql:orders",
+          "title": "save_order writes orders",
+          "provenance": "observed",
+          "depth": 5
+        },
+        {
+          "index": 6,
+          "edge": "e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~43e309578d",
+          "from": "fn:api/app/services/orders.py#place_order",
+          "to": "fn:api/app/services/orders.py#notify_warehouse",
+          "title": "place_order calls notify_warehouse",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 7,
+          "edge": "e:requests_fn:api/app/services/orders.py#notify_warehouse_req:~baf922871a",
+          "from": "fn:api/app/services/orders.py#notify_warehouse",
+          "to": "req:api/app/services/orders.py#L13",
+          "title": "notify_warehouse sends POST //hooks.example.com/warehouse",
+          "provenance": "observed",
+          "depth": 5
+        },
+        {
+          "index": 8,
+          "edge": "e:routes_to_req:api/app/services/orders.py#L13_ext:hooks.examp~83d3d1ea8b",
+          "from": "req:api/app/services/orders.py#L13",
+          "to": "ext:hooks.example.com",
+          "title": "Request goes to hooks.example.com",
+          "provenance": "observed",
+          "depth": 6
+        }
+      ],
+      "summary": "Client code sends a request that is matched to POST /api/orders.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:ep:ep:GET_/health_ce575b3b5c~85cd62af1f",
+      "title": "GET /health",
+      "kind": "endpoint-flow",
+      "feature": "api/app",
+      "entry": "ep:GET_/health~ce575b3b5c",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:handles_ep:GET_/health_ce575b3b5c_fn:api/app/main.py#health_~b952c1935f",
+          "from": "ep:GET_/health~ce575b3b5c",
+          "to": "fn:api/app/main.py#health",
+          "title": "GET /health is handled by health",
+          "provenance": "observed",
+          "depth": 0
+        }
+      ],
+      "summary": "Server route traced from its handler; no client call for it was found in the scan.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:entry:fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+      "title": "CheckoutPage.submit journey",
+      "kind": "entry-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~a84152f7f6",
+          "from": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+          "to": "fn:web/src/pages/CheckoutPage.tsx#saveDraft",
+          "title": "CheckoutPage.submit calls saveDraft",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:writes_fn:web/src/pages/CheckoutPage.tsx#saveDraft_store:bro~d603f059cf",
+          "from": "fn:web/src/pages/CheckoutPage.tsx#saveDraft",
+          "to": "store:browser-storage:localStorage",
+          "title": "saveDraft writes localStorage",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~409990efe8",
+          "from": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+          "to": "fn:web/src/api/client.ts#getStock",
+          "title": "CheckoutPage.submit calls getStock",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 3,
+          "edge": "e:requests_fn:web/src/api/client.ts#getStock_req:web/src/api/c~55b6f8f64c",
+          "from": "fn:web/src/api/client.ts#getStock",
+          "to": "req:web/src/api/client.ts#L30",
+          "title": "getStock sends GET {base}/inventory/{}",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 4,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L30_ep:GET_/api/inventor~0d9bdfb77d",
+          "from": "req:web/src/api/client.ts#L30",
+          "to": "ep:GET_/api/inventory/{sku}~1500b01bfa",
+          "title": "Request reaches GET /api/inventory/{sku}",
+          "provenance": "inferred",
+          "depth": 2
+        },
+        {
+          "index": 5,
+          "edge": "e:handles_ep:GET_/api/inventory/{sku}_1500b01bfa_fn:api/app/ro~2135d1184b",
+          "from": "ep:GET_/api/inventory/{sku}~1500b01bfa",
+          "to": "fn:api/app/routes/inventory.py#stock_level",
+          "title": "GET /api/inventory/{sku} is handled by stock_level",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 6,
+          "edge": "e:reads_fn:api/app/routes/inventory.py#stock_level_store:kv:ca~067e645e11",
+          "from": "fn:api/app/routes/inventory.py#stock_level",
+          "to": "store:kv:cache",
+          "title": "stock_level reads cache",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 7,
+          "edge": "e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~c3d0de8249",
+          "from": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+          "to": "fn:web/src/api/client.ts#createOrder",
+          "title": "CheckoutPage.submit calls createOrder",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 8,
+          "edge": "e:requests_fn:web/src/api/client.ts#createOrder_req:web/src/ap~b6d692afa6",
+          "from": "fn:web/src/api/client.ts#createOrder",
+          "to": "req:web/src/api/client.ts#L12",
+          "title": "createOrder sends POST /api/orders",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 9,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L12_ep:POST_/api/orders_~9eb88b0643",
+          "from": "req:web/src/api/client.ts#L12",
+          "to": "ep:POST_/api/orders~6741cd86e9",
+          "title": "Request reaches POST /api/orders",
+          "provenance": "inferred",
+          "depth": 2
+        },
+        {
+          "index": 10,
+          "edge": "e:handles_ep:POST_/api/orders_6741cd86e9_fn:api/app/routes/ord~053e76068b",
+          "from": "ep:POST_/api/orders~6741cd86e9",
+          "to": "fn:api/app/routes/orders.py#create_order",
+          "title": "POST /api/orders is handled by create_order",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 11,
+          "edge": "e:calls_fn:api/app/routes/orders.py#create_order_fn:api/app/se~25f09ddba6",
+          "from": "fn:api/app/routes/orders.py#create_order",
+          "to": "fn:api/app/services/orders.py#place_order",
+          "title": "create_order calls place_order",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 12,
+          "edge": "e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~0e2b539a5c",
+          "from": "fn:api/app/services/orders.py#place_order",
+          "to": "fn:api/app/store/orders_repo.py#save_order",
+          "title": "place_order calls save_order",
+          "provenance": "observed",
+          "depth": 5
+        },
+        {
+          "index": 13,
+          "edge": "e:writes_fn:api/app/store/orders_repo.py#save_order_store:sql:~782339ca18",
+          "from": "fn:api/app/store/orders_repo.py#save_order",
+          "to": "store:sql:orders",
+          "title": "save_order writes orders",
+          "provenance": "observed",
+          "depth": 6
+        },
+        {
+          "index": 14,
+          "edge": "e:calls_fn:api/app/services/orders.py#place_order_fn:api/app/s~43e309578d",
+          "from": "fn:api/app/services/orders.py#place_order",
+          "to": "fn:api/app/services/orders.py#notify_warehouse",
+          "title": "place_order calls notify_warehouse",
+          "provenance": "observed",
+          "depth": 5
+        },
+        {
+          "index": 15,
+          "edge": "e:requests_fn:api/app/services/orders.py#notify_warehouse_req:~baf922871a",
+          "from": "fn:api/app/services/orders.py#notify_warehouse",
+          "to": "req:api/app/services/orders.py#L13",
+          "title": "notify_warehouse sends POST //hooks.example.com/warehouse",
+          "provenance": "observed",
+          "depth": 6
+        },
+        {
+          "index": 16,
+          "edge": "e:routes_to_req:api/app/services/orders.py#L13_ext:hooks.examp~83d3d1ea8b",
+          "from": "req:api/app/services/orders.py#L13",
+          "to": "ext:hooks.example.com",
+          "title": "Request goes to hooks.example.com",
+          "provenance": "observed",
+          "depth": 7
+        },
+        {
+          "index": 17,
+          "edge": "e:calls_fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit_~4e7a92d57c",
+          "from": "fn:web/src/pages/CheckoutPage.tsx#CheckoutPage.submit",
+          "to": "fn:web/src/api/client.ts#trackEvent",
+          "title": "CheckoutPage.submit calls trackEvent",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 18,
+          "edge": "e:requests_fn:web/src/api/client.ts#trackEvent_req:web/src/api~8305acf991",
+          "from": "fn:web/src/api/client.ts#trackEvent",
+          "to": "req:web/src/api/client.ts#L34",
+          "title": "trackEvent sends POST (dynamic URL)",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 19,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L34_unknown:dynamic-url_~f97b16c829",
+          "from": "req:web/src/api/client.ts#L34",
+          "to": "unknown:dynamic-url",
+          "title": "Request goes to Dynamic URL",
+          "provenance": "unresolved",
+          "depth": 2
+        }
+      ],
+      "summary": "Everything reachable from CheckoutPage.submit, which nothing in the scanned code calls (an entry point such as a UI handler, job or script).",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:entry:fn:web/src/pages/OrdersPage.tsx#OrdersPage",
+      "title": "OrdersPage journey",
+      "kind": "entry-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/pages/OrdersPage.tsx#OrdersPage",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage_fn:web/src/~d93b9d647b",
+          "from": "fn:web/src/pages/OrdersPage.tsx#OrdersPage",
+          "to": "fn:web/src/api/client.ts#listOrders",
+          "title": "OrdersPage calls listOrders",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:requests_fn:web/src/api/client.ts#listOrders_req:web/src/api~18dc2ebf1b",
+          "from": "fn:web/src/api/client.ts#listOrders",
+          "to": "req:web/src/api/client.ts#L21",
+          "title": "listOrders sends GET /api/orders",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L21_ep:GET_/api/orders_9~895fec7008",
+          "from": "req:web/src/api/client.ts#L21",
+          "to": "ep:GET_/api/orders~93ddc8e4b8",
+          "title": "Request reaches GET /api/orders",
+          "provenance": "inferred",
+          "depth": 2
+        },
+        {
+          "index": 3,
+          "edge": "e:handles_ep:GET_/api/orders_93ddc8e4b8_fn:api/app/routes/orde~b12582a97c",
+          "from": "ep:GET_/api/orders~93ddc8e4b8",
+          "to": "fn:api/app/routes/orders.py#list_orders",
+          "title": "GET /api/orders is handled by list_orders",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 4,
+          "edge": "e:calls_fn:api/app/routes/orders.py#list_orders_fn:api/app/sto~c5d3f2f3a2",
+          "from": "fn:api/app/routes/orders.py#list_orders",
+          "to": "fn:api/app/store/orders_repo.py#find_orders",
+          "title": "list_orders calls find_orders",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 5,
+          "edge": "e:reads_fn:api/app/store/orders_repo.py#find_orders_store:sql:~4710cd33f2",
+          "from": "fn:api/app/store/orders_repo.py#find_orders",
+          "to": "store:sql:orders",
+          "title": "find_orders reads orders",
+          "provenance": "observed",
+          "depth": 5
+        },
+        {
+          "index": 6,
+          "edge": "e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage_fn:web/src/~2d1f8fa583",
+          "from": "fn:web/src/pages/OrdersPage.tsx#OrdersPage",
+          "to": "fn:web/src/api/client.ts#sendFeedback",
+          "title": "OrdersPage calls sendFeedback",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 7,
+          "edge": "e:requests_fn:web/src/api/client.ts#sendFeedback_req:web/src/a~99e253f7da",
+          "from": "fn:web/src/api/client.ts#sendFeedback",
+          "to": "req:web/src/api/client.ts#L38",
+          "title": "sendFeedback sends POST /api/feedback",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 8,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L38_unknown:unmatched:PO~9977594bfc",
+          "from": "req:web/src/api/client.ts#L38",
+          "to": "unknown:unmatched:POST_/api/feedback~4b69c535c2",
+          "title": "Request goes to No scanned route: POST /api/feedback",
+          "provenance": "unresolved",
+          "depth": 2
+        }
+      ],
+      "summary": "Everything reachable from OrdersPage, which nothing in the scanned code calls (an entry point such as a UI handler, job or script).",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:entry:fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder",
+      "title": "OrdersPage.openOrder journey",
+      "kind": "entry-flow",
+      "feature": "web/src",
+      "entry": "fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:calls_fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder_f~9a9657737b",
+          "from": "fn:web/src/pages/OrdersPage.tsx#OrdersPage.openOrder",
+          "to": "fn:web/src/api/client.ts#getOrder",
+          "title": "OrdersPage.openOrder calls getOrder",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:requests_fn:web/src/api/client.ts#getOrder_req:web/src/api/c~73fe7713f4",
+          "from": "fn:web/src/api/client.ts#getOrder",
+          "to": "req:web/src/api/client.ts#L26",
+          "title": "getOrder sends GET /api/orders/{}",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:routes_to_req:web/src/api/client.ts#L26_ep:GET_/api/orders/{~f4b9b90853",
+          "from": "req:web/src/api/client.ts#L26",
+          "to": "ep:GET_/api/orders/{order_id}~56eae040a4",
+          "title": "Request reaches GET /api/orders/{order_id}",
+          "provenance": "inferred",
+          "depth": 2
+        },
+        {
+          "index": 3,
+          "edge": "e:handles_ep:GET_/api/orders/{order_id}_56eae040a4_fn:api/app/~713739cc4d",
+          "from": "ep:GET_/api/orders/{order_id}~56eae040a4",
+          "to": "fn:api/app/routes/orders.py#get_order",
+          "title": "GET /api/orders/{order_id} is handled by get_order",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 4,
+          "edge": "e:calls_fn:api/app/routes/orders.py#get_order_fn:api/app/store~cb3d05c9b1",
+          "from": "fn:api/app/routes/orders.py#get_order",
+          "to": "fn:api/app/store/orders_repo.py#find_order",
+          "title": "get_order calls find_order",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 5,
+          "edge": "e:reads_fn:api/app/store/orders_repo.py#find_order_store:sql:o~f1124e677e",
+          "from": "fn:api/app/store/orders_repo.py#find_order",
+          "to": "store:sql:orders",
+          "title": "find_order reads orders",
+          "provenance": "observed",
+          "depth": 5
+        }
+      ],
+      "summary": "Everything reachable from OrdersPage.openOrder, which nothing in the scanned code calls (an entry point such as a UI handler, job or script).",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    }
+  ],
+  "diagnostics": [],
+  "traces": []
+}

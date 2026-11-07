@@ -1,0 +1,8 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "flowlens",
+  "version": "0.1.0",
+  "description": "Analyze the current repository and generate an interactive, offline HTML flow map: API calls, data flow, module dependencies and agent handoffs, with source evidence and simulated replays.",
+  "license": "MIT",
+  "skills": "./skills/"
+}

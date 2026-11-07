@@ -1,0 +1,37 @@
+{
+  "name": "flowlens",
+  "version": "0.1.0",
+  "description": "Generate an interactive, offline HTML flow map of a repository from static analysis.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "flowlens": "dist/flowlens.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node src/cli/main.ts",
+    "build": "node scripts/build.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --test-reporter=spec \"test/**/*.test.ts\"",
+    "test:dist": "FLOWLENS_CLI=dist node --test --test-reporter=spec test/cli.test.ts",
+    "verify:packages": "node scripts/verify-packages.ts",
+    "demo": "node scripts/demo.ts",
+    "check": "npm run typecheck && npm run build && npm test && npm run test:dist && npm run verify:packages"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.28.0",
+    "ignore": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.9.0"
+  }
+}

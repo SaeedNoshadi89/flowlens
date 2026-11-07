@@ -1,0 +1,4 @@
+#!/bin/sh
+# FlowLens CLI wrapper for the Claude Code plugin. Claude Code puts this bin/ folder on the Bash tool's PATH.
+DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+exec node "$DIR/../engine/flowlens.mjs" "$@"

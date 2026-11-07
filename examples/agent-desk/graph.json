@@ -1,0 +1,1712 @@
+{
+  "schema": "flowlens.graph",
+  "version": "1.0.0",
+  "generator": {
+    "name": "flowlens",
+    "version": "0.1.0"
+  },
+  "project": {
+    "name": "agent-desk"
+  },
+  "generatedAt": "2026-11-07T12:00:00.000Z",
+  "scope": {
+    "preset": "whole",
+    "include": [],
+    "exclude": [],
+    "relations": [
+      "api",
+      "data",
+      "deps",
+      "agents"
+    ],
+    "topLevel": [
+      {
+        "path": "desk",
+        "scanned": true
+      },
+      {
+        "path": "experiments",
+        "scanned": true
+      },
+      {
+        "path": "scripts",
+        "scanned": true
+      },
+      {
+        "path": "secrets",
+        "scanned": true
+      }
+    ]
+  },
+  "coverage": {
+    "filesConsidered": 16,
+    "filesAnalyzed": 12,
+    "skipped": {
+      "ignored-by-ignore-file": 1,
+      "secret-like-file": 1
+    },
+    "languages": {
+      "python": {
+        "files": 11,
+        "supported": true
+      },
+      "typescript": {
+        "files": 1,
+        "supported": true
+      }
+    },
+    "adapters": [
+      {
+        "id": "python.ast",
+        "language": "python",
+        "status": "active",
+        "files": 11
+      },
+      {
+        "id": "js.babel",
+        "language": "javascript",
+        "status": "active",
+        "files": 1
+      }
+    ],
+    "parseErrors": 0,
+    "unresolvedEdges": 3,
+    "inferredEdges": 2,
+    "unsupportedFrameworks": [
+      "crewai"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "agent:desk/graph.py#workflow:__end__",
+      "kind": "agent",
+      "label": "END",
+      "sub": "workflow graph",
+      "layer": "agents",
+      "path": "desk/graph.py",
+      "line": 12,
+      "feature": "desk",
+      "module": "mod:desk/graph.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "graph": "workflow",
+        "terminal": true
+      }
+    },
+    {
+      "id": "agent:desk/graph.py#workflow:__start__",
+      "kind": "agent",
+      "label": "START",
+      "sub": "workflow graph",
+      "layer": "agents",
+      "path": "desk/graph.py",
+      "line": 6,
+      "feature": "desk",
+      "module": "mod:desk/graph.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "graph": "workflow",
+        "terminal": true
+      }
+    },
+    {
+      "id": "agent:desk/graph.py#workflow:billing",
+      "kind": "agent",
+      "label": "billing",
+      "sub": "workflow graph",
+      "layer": "agents",
+      "path": "desk/graph.py",
+      "line": 8,
+      "feature": "desk",
+      "module": "mod:desk/graph.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "graph": "workflow"
+      }
+    },
+    {
+      "id": "agent:desk/graph.py#workflow:escalate",
+      "kind": "agent",
+      "label": "escalate",
+      "sub": "workflow graph",
+      "layer": "agents",
+      "path": "desk/graph.py",
+      "line": 10,
+      "feature": "desk",
+      "module": "mod:desk/graph.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "graph": "workflow"
+      }
+    },
+    {
+      "id": "agent:desk/graph.py#workflow:intake",
+      "kind": "agent",
+      "label": "intake",
+      "sub": "workflow graph",
+      "layer": "agents",
+      "path": "desk/graph.py",
+      "line": 7,
+      "feature": "desk",
+      "module": "mod:desk/graph.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "graph": "workflow"
+      }
+    },
+    {
+      "id": "agent:desk/graph.py#workflow:tech",
+      "kind": "agent",
+      "label": "tech",
+      "sub": "workflow graph",
+      "layer": "agents",
+      "path": "desk/graph.py",
+      "line": 9,
+      "feature": "desk",
+      "module": "mod:desk/graph.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "graph": "workflow"
+      }
+    },
+    {
+      "id": "agent:desk/sdk_agents.py#billing_agent",
+      "kind": "agent",
+      "label": "Billing",
+      "sub": "agent",
+      "layer": "agents",
+      "path": "desk/sdk_agents.py",
+      "line": 11,
+      "feature": "desk",
+      "module": "mod:desk/sdk_agents.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "sdk": true
+      }
+    },
+    {
+      "id": "agent:desk/sdk_agents.py#support_agent",
+      "kind": "agent",
+      "label": "Support",
+      "sub": "agent",
+      "layer": "agents",
+      "path": "desk/sdk_agents.py",
+      "line": 12,
+      "feature": "desk",
+      "module": "mod:desk/sdk_agents.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "sdk": true
+      }
+    },
+    {
+      "id": "agent:desk/sdk_agents.py#triage_agent",
+      "kind": "agent",
+      "label": "Triage",
+      "sub": "agent",
+      "layer": "agents",
+      "path": "desk/sdk_agents.py",
+      "line": 14,
+      "feature": "desk",
+      "module": "mod:desk/sdk_agents.py",
+      "adapter": "python.ast",
+      "attrs": {
+        "sdk": true
+      }
+    },
+    {
+      "id": "ext:status.example.org",
+      "kind": "external",
+      "label": "status.example.org",
+      "sub": "external host",
+      "layer": "external"
+    },
+    {
+      "id": "fn:desk/nodes/billing.py#handle",
+      "kind": "function",
+      "label": "handle",
+      "sub": "billing.py",
+      "layer": "backend",
+      "path": "desk/nodes/billing.py",
+      "line": 6,
+      "feature": "desk/nodes",
+      "module": "mod:desk/nodes/billing.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/nodes/intake.py#classify",
+      "kind": "function",
+      "label": "classify",
+      "sub": "intake.py",
+      "layer": "backend",
+      "path": "desk/nodes/intake.py",
+      "line": 1,
+      "feature": "desk/nodes",
+      "module": "mod:desk/nodes/intake.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/nodes/intake.py#route_ticket",
+      "kind": "function",
+      "label": "route_ticket",
+      "sub": "intake.py",
+      "layer": "backend",
+      "path": "desk/nodes/intake.py",
+      "line": 6,
+      "feature": "desk/nodes",
+      "module": "mod:desk/nodes/intake.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/nodes/tech.py#decide_next",
+      "kind": "function",
+      "label": "decide_next",
+      "sub": "tech.py",
+      "layer": "agents",
+      "path": "desk/nodes/tech.py",
+      "line": 9,
+      "feature": "desk/nodes",
+      "module": "mod:desk/nodes/tech.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/nodes/tech.py#escalate",
+      "kind": "function",
+      "label": "escalate",
+      "sub": "tech.py",
+      "layer": "agents",
+      "path": "desk/nodes/tech.py",
+      "line": 15,
+      "feature": "desk/nodes",
+      "module": "mod:desk/nodes/tech.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/nodes/tech.py#handle",
+      "kind": "function",
+      "label": "handle",
+      "sub": "tech.py",
+      "layer": "agents",
+      "path": "desk/nodes/tech.py",
+      "line": 4,
+      "feature": "desk/nodes",
+      "module": "mod:desk/nodes/tech.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/nodes/tech.py#pick_queue",
+      "kind": "function",
+      "label": "pick_queue",
+      "sub": "tech.py",
+      "layer": "agents",
+      "path": "desk/nodes/tech.py",
+      "line": 20,
+      "feature": "desk/nodes",
+      "module": "mod:desk/nodes/tech.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/runner.py#chat",
+      "kind": "function",
+      "label": "chat",
+      "sub": "runner.py",
+      "layer": "agents",
+      "path": "desk/runner.py",
+      "line": 11,
+      "feature": "desk",
+      "module": "mod:desk/runner.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/runner.py#run_ticket",
+      "kind": "function",
+      "label": "run_ticket",
+      "sub": "runner.py",
+      "layer": "agents",
+      "path": "desk/runner.py",
+      "line": 7,
+      "feature": "desk",
+      "module": "mod:desk/runner.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/sdk_agents.py#lookup_account",
+      "kind": "function",
+      "label": "lookup_account",
+      "sub": "sdk_agents.py",
+      "layer": "agents",
+      "path": "desk/sdk_agents.py",
+      "line": 7,
+      "feature": "desk",
+      "module": "mod:desk/sdk_agents.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:desk/specialists.py#make_specialist",
+      "kind": "function",
+      "label": "make_specialist",
+      "sub": "specialists.py",
+      "layer": "agents",
+      "path": "desk/specialists.py",
+      "line": 4,
+      "feature": "desk",
+      "module": "mod:desk/specialists.py",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "fn:scripts/notify.ts#notifyOnCall",
+      "kind": "function",
+      "label": "notifyOnCall",
+      "sub": "notify.ts",
+      "layer": "frontend",
+      "path": "scripts/notify.ts",
+      "line": 1,
+      "feature": "scripts",
+      "module": "mod:scripts/notify.ts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "fn:scripts/notify.ts#statusPage",
+      "kind": "function",
+      "label": "statusPage",
+      "sub": "notify.ts",
+      "layer": "frontend",
+      "path": "scripts/notify.ts",
+      "line": 6,
+      "feature": "scripts",
+      "module": "mod:scripts/notify.ts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "mod:desk/__init__.py",
+      "kind": "module",
+      "label": "desk/__init__.py",
+      "sub": "desk",
+      "layer": "backend",
+      "path": "desk/__init__.py",
+      "line": 1,
+      "feature": "desk",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/db.py",
+      "kind": "module",
+      "label": "db.py",
+      "sub": "desk",
+      "layer": "backend",
+      "path": "desk/db.py",
+      "line": 1,
+      "feature": "desk",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/graph.py",
+      "kind": "module",
+      "label": "graph.py",
+      "sub": "desk",
+      "layer": "agents",
+      "path": "desk/graph.py",
+      "line": 1,
+      "feature": "desk",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/nodes/__init__.py",
+      "kind": "module",
+      "label": "nodes/__init__.py",
+      "sub": "desk/nodes",
+      "layer": "backend",
+      "path": "desk/nodes/__init__.py",
+      "line": 1,
+      "feature": "desk/nodes",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/nodes/billing.py",
+      "kind": "module",
+      "label": "billing.py",
+      "sub": "desk/nodes",
+      "layer": "backend",
+      "path": "desk/nodes/billing.py",
+      "line": 1,
+      "feature": "desk/nodes",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/nodes/intake.py",
+      "kind": "module",
+      "label": "intake.py",
+      "sub": "desk/nodes",
+      "layer": "backend",
+      "path": "desk/nodes/intake.py",
+      "line": 1,
+      "feature": "desk/nodes",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/nodes/tech.py",
+      "kind": "module",
+      "label": "tech.py",
+      "sub": "desk/nodes",
+      "layer": "agents",
+      "path": "desk/nodes/tech.py",
+      "line": 1,
+      "feature": "desk/nodes",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/runner.py",
+      "kind": "module",
+      "label": "runner.py",
+      "sub": "desk",
+      "layer": "agents",
+      "path": "desk/runner.py",
+      "line": 1,
+      "feature": "desk",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/sdk_agents.py",
+      "kind": "module",
+      "label": "sdk_agents.py",
+      "sub": "desk",
+      "layer": "agents",
+      "path": "desk/sdk_agents.py",
+      "line": 1,
+      "feature": "desk",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/specialists.py",
+      "kind": "module",
+      "label": "specialists.py",
+      "sub": "desk",
+      "layer": "agents",
+      "path": "desk/specialists.py",
+      "line": 1,
+      "feature": "desk",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:desk/state.py",
+      "kind": "module",
+      "label": "state.py",
+      "sub": "desk",
+      "layer": "backend",
+      "path": "desk/state.py",
+      "line": 1,
+      "feature": "desk",
+      "language": "python",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "mod:scripts/notify.ts",
+      "kind": "module",
+      "label": "notify.ts",
+      "sub": "scripts",
+      "layer": "frontend",
+      "path": "scripts/notify.ts",
+      "line": 1,
+      "feature": "scripts",
+      "language": "typescript",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "req:scripts/notify.ts#L3",
+      "kind": "request",
+      "label": "POST (dynamic URL)",
+      "sub": "fetch",
+      "layer": "frontend",
+      "path": "scripts/notify.ts",
+      "line": 3,
+      "feature": "scripts",
+      "module": "mod:scripts/notify.ts",
+      "adapter": "js.babel",
+      "attrs": {
+        "method": "POST",
+        "url": "(dynamic URL)",
+        "urlKind": "dynamic"
+      }
+    },
+    {
+      "id": "req:scripts/notify.ts#L7",
+      "kind": "request",
+      "label": "GET //status.example.org/api/v2/status.json",
+      "sub": "fetch",
+      "layer": "frontend",
+      "path": "scripts/notify.ts",
+      "line": 7,
+      "feature": "scripts",
+      "module": "mod:scripts/notify.ts",
+      "adapter": "js.babel",
+      "attrs": {
+        "method": "GET",
+        "url": "//status.example.org/api/v2/status.json",
+        "urlKind": "literal"
+      }
+    },
+    {
+      "id": "store:orm:Refund",
+      "kind": "store",
+      "label": "Refund",
+      "sub": "ORM model",
+      "layer": "data",
+      "attrs": {
+        "storeKind": "orm"
+      }
+    },
+    {
+      "id": "tool:desk/sdk_agents.py#lookup_account",
+      "kind": "tool",
+      "label": "lookup_account",
+      "sub": "tool",
+      "layer": "agents",
+      "path": "desk/sdk_agents.py",
+      "line": 7,
+      "feature": "desk",
+      "module": "mod:desk/sdk_agents.py",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "unknown:dynamic-url",
+      "kind": "unknown",
+      "label": "Dynamic URL",
+      "sub": "target decided at runtime",
+      "layer": "external"
+    },
+    {
+      "id": "unknown:goto:desk/nodes/tech.py:17",
+      "kind": "unknown",
+      "label": "Runtime goto target",
+      "sub": "computed at runtime",
+      "layer": "external"
+    },
+    {
+      "id": "unknown:handoff:desk/sdk_agents.py:17",
+      "kind": "unknown",
+      "label": "Unresolved agent make_specialist()",
+      "sub": "not found in scanned files",
+      "layer": "external"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e:calls_fn:desk/nodes/tech.py#escalate_fn:desk/nodes/tech.py#p~d5d62c5dca",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:desk/nodes/tech.py#escalate",
+      "to": "fn:desk/nodes/tech.py#pick_queue",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/nodes/tech.py",
+          "line": 16,
+          "note": "calls pick_queue()"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:calls_fn:desk/runner.py#chat_agent:desk/sdk_agents.py#triage~cf92cadfc1",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:desk/runner.py#chat",
+      "to": "agent:desk/sdk_agents.py#triage_agent",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/runner.py",
+          "line": 12,
+          "note": "Runner.run on triage_agent"
+        }
+      ]
+    },
+    {
+      "id": "e:calls_fn:desk/runner.py#run_ticket_agent:desk/graph.py#workf~dca5d489af",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "fn:desk/runner.py#run_ticket",
+      "to": "agent:desk/graph.py#workflow:__start__",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/runner.py",
+          "line": 8,
+          "note": "invoke on app"
+        }
+      ]
+    },
+    {
+      "id": "e:calls_mod:desk/sdk_agents.py_fn:desk/specialists.py#make_spe~e4aee4fa17",
+      "kind": "calls",
+      "relation": "calls",
+      "from": "mod:desk/sdk_agents.py",
+      "to": "fn:desk/specialists.py#make_specialist",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/sdk_agents.py",
+          "line": 17,
+          "note": "calls make_specialist()"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handoff_agent:desk/graph.py#workflow:__start___agent:desk/gr~069b4f70a9",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:__start__",
+      "to": "agent:desk/graph.py#workflow:intake",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 11,
+          "note": "entry point"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handoff_agent:desk/graph.py#workflow:billing_agent:desk/grap~17ffdc4876",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:billing",
+      "to": "agent:desk/graph.py#workflow:__end__",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 14,
+          "note": "edge billing → __end__"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handoff_agent:desk/graph.py#workflow:escalate_unknown:goto:d~5e2dbbecc0",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:escalate",
+      "to": "unknown:goto:desk/nodes/tech.py:17",
+      "provenance": "unresolved",
+      "evidence": [
+        {
+          "path": "desk/nodes/tech.py",
+          "line": 17,
+          "note": "goto/handoff call"
+        }
+      ],
+      "reason": "The handoff target is a runtime value, so it cannot be resolved statically.",
+      "branchGroup": "desk/nodes/tech.py:escalate:goto"
+    },
+    {
+      "id": "e:handoff_agent:desk/graph.py#workflow:intake_agent:desk/graph~00b8a4091b",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:intake",
+      "to": "agent:desk/graph.py#workflow:billing",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 12,
+          "column": 75,
+          "note": "conditional edge: router intake.route_ticket result \"billing\" → billing"
+        }
+      ],
+      "condition": "billing",
+      "branchGroup": "desk/graph.py:12",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handoff_agent:desk/graph.py#workflow:intake_agent:desk/graph~f228686fcf",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:intake",
+      "to": "agent:desk/graph.py#workflow:tech",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 12,
+          "column": 99,
+          "note": "conditional edge: router intake.route_ticket result \"technical\" → tech"
+        }
+      ],
+      "condition": "technical",
+      "branchGroup": "desk/graph.py:12",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handoff_agent:desk/graph.py#workflow:tech_agent:desk/graph.p~6a6325e00f",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:tech",
+      "to": "agent:desk/graph.py#workflow:escalate",
+      "provenance": "inferred",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 13,
+          "note": "conditional edge via router tech.decide_next"
+        },
+        {
+          "path": "desk/nodes/tech.py",
+          "line": 11,
+          "note": "router returns \"escalate\""
+        }
+      ],
+      "reason": "router tech.decide_next returns the literal \"escalate\" (desk/nodes/tech.py:11), which is a registered node name. Which branch runs depends on runtime state.",
+      "condition": "escalate",
+      "branchGroup": "desk/graph.py:13"
+    },
+    {
+      "id": "e:handoff_agent:desk/graph.py#workflow:tech_agent:desk/graph.p~ec140f6902",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:tech",
+      "to": "agent:desk/graph.py#workflow:__end__",
+      "provenance": "inferred",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 13,
+          "note": "conditional edge via router tech.decide_next"
+        },
+        {
+          "path": "desk/nodes/tech.py",
+          "line": 12,
+          "note": "router returns \"__end__\""
+        }
+      ],
+      "reason": "router tech.decide_next returns the literal \"__end__\" (desk/nodes/tech.py:12), which is a registered node name. Which branch runs depends on runtime state.",
+      "condition": "END",
+      "branchGroup": "desk/graph.py:13"
+    },
+    {
+      "id": "e:handoff_agent:desk/sdk_agents.py#triage_agent_agent:desk/sdk~4ba0eff19e",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/sdk_agents.py#triage_agent",
+      "to": "agent:desk/sdk_agents.py#support_agent",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/sdk_agents.py",
+          "line": 17,
+          "note": "Triage lists support_agent in handoffs"
+        }
+      ],
+      "condition": "agent decides",
+      "branchGroup": "desk/sdk_agents.py:14:handoffs",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handoff_agent:desk/sdk_agents.py#triage_agent_agent:desk/sdk~90a4d6ad21",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/sdk_agents.py#triage_agent",
+      "to": "agent:desk/sdk_agents.py#billing_agent",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/sdk_agents.py",
+          "line": 17,
+          "note": "Triage lists billing_agent in handoffs"
+        }
+      ],
+      "condition": "agent decides",
+      "branchGroup": "desk/sdk_agents.py:14:handoffs",
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:handoff_agent:desk/sdk_agents.py#triage_agent_unknown:handof~bb1cf1d097",
+      "kind": "handoff",
+      "relation": "agents",
+      "from": "agent:desk/sdk_agents.py#triage_agent",
+      "to": "unknown:handoff:desk/sdk_agents.py:17",
+      "provenance": "unresolved",
+      "evidence": [
+        {
+          "path": "desk/sdk_agents.py",
+          "line": 17,
+          "note": "handoff entry"
+        }
+      ],
+      "reason": "\"make_specialist()\" is not an agent defined in the scanned files (it may be built by a factory or live outside the scope).",
+      "branchGroup": "desk/sdk_agents.py:14:handoffs"
+    },
+    {
+      "id": "e:implemented_by_agent:desk/graph.py#workflow:billing_fn:desk/~6e48fec4a7",
+      "kind": "implemented_by",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:billing",
+      "to": "fn:desk/nodes/billing.py#handle",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 8,
+          "note": "node \"billing\" runs billing.handle"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:implemented_by_agent:desk/graph.py#workflow:escalate_fn:desk~250cbb439c",
+      "kind": "implemented_by",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:escalate",
+      "to": "fn:desk/nodes/tech.py#escalate",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 10,
+          "note": "node \"escalate\" runs tech.escalate"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:implemented_by_agent:desk/graph.py#workflow:intake_fn:desk/n~de97f2efd5",
+      "kind": "implemented_by",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:intake",
+      "to": "fn:desk/nodes/intake.py#classify",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 7,
+          "note": "node \"intake\" runs intake.classify"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:implemented_by_agent:desk/graph.py#workflow:tech_fn:desk/nod~941394d35b",
+      "kind": "implemented_by",
+      "relation": "agents",
+      "from": "agent:desk/graph.py#workflow:tech",
+      "to": "fn:desk/nodes/tech.py#handle",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 9,
+          "note": "node \"tech\" runs tech.handle"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:implemented_by_tool:desk/sdk_agents.py#lookup_account_fn:des~cd73583123",
+      "kind": "implemented_by",
+      "relation": "agents",
+      "from": "tool:desk/sdk_agents.py#lookup_account",
+      "to": "fn:desk/sdk_agents.py#lookup_account",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/sdk_agents.py",
+          "line": 7,
+          "note": "tool lookup_account is lookup_account"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:desk/graph.py_mod:desk/nodes/billing.py_~aeb982ee49",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:desk/graph.py",
+      "to": "mod:desk/nodes/billing.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 3,
+          "note": "imports desk.nodes.billing"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:desk/graph.py_mod:desk/nodes/intake.py_~c22d6e4f9d",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:desk/graph.py",
+      "to": "mod:desk/nodes/intake.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 3,
+          "note": "imports desk.nodes.intake"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:desk/graph.py_mod:desk/nodes/tech.py_~02ef7312dc",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:desk/graph.py",
+      "to": "mod:desk/nodes/tech.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 3,
+          "note": "imports desk.nodes.tech"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:desk/graph.py_mod:desk/state.py_~1f2f5882ca",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:desk/graph.py",
+      "to": "mod:desk/state.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/graph.py",
+          "line": 4,
+          "note": "imports desk.state"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:desk/nodes/billing.py_mod:desk/db.py_~73afdab62c",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:desk/nodes/billing.py",
+      "to": "mod:desk/db.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/nodes/billing.py",
+          "line": 3,
+          "note": "imports desk.db"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:desk/runner.py_mod:desk/graph.py_~af4edb76a9",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:desk/runner.py",
+      "to": "mod:desk/graph.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/runner.py",
+          "line": 3,
+          "note": "imports desk.graph"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:desk/runner.py_mod:desk/sdk_agents.py_~7096388d49",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:desk/runner.py",
+      "to": "mod:desk/sdk_agents.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/runner.py",
+          "line": 4,
+          "note": "imports desk.sdk_agents"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:imports_mod:desk/sdk_agents.py_mod:desk/specialists.py_~7313f8796b",
+      "kind": "imports",
+      "relation": "deps",
+      "from": "mod:desk/sdk_agents.py",
+      "to": "mod:desk/specialists.py",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/sdk_agents.py",
+          "line": 3,
+          "note": "imports desk.specialists"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:invokes_tool_agent:desk/sdk_agents.py#triage_agent_tool:desk~7b0c5aa704",
+      "kind": "invokes_tool",
+      "relation": "agents",
+      "from": "agent:desk/sdk_agents.py#triage_agent",
+      "to": "tool:desk/sdk_agents.py#lookup_account",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/sdk_agents.py",
+          "line": 18,
+          "note": "Triage lists tool lookup_account"
+        }
+      ],
+      "adapter": "python.ast"
+    },
+    {
+      "id": "e:requests_fn:scripts/notify.ts#notifyOnCall_req:scripts/notif~09a03c2e67",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:scripts/notify.ts#notifyOnCall",
+      "to": "req:scripts/notify.ts#L3",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "scripts/notify.ts",
+          "line": 3,
+          "note": "fetch POST request with {summary}"
+        }
+      ],
+      "data": "{summary}",
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:requests_fn:scripts/notify.ts#statusPage_req:scripts/notify.~ff0eddfc83",
+      "kind": "requests",
+      "relation": "api",
+      "from": "fn:scripts/notify.ts#statusPage",
+      "to": "req:scripts/notify.ts#L7",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "scripts/notify.ts",
+          "line": 7,
+          "note": "fetch GET request"
+        }
+      ],
+      "adapter": "js.babel"
+    },
+    {
+      "id": "e:routes_to_req:scripts/notify.ts#L3_unknown:dynamic-url_~d31ba64a08",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:scripts/notify.ts#L3",
+      "to": "unknown:dynamic-url",
+      "provenance": "unresolved",
+      "evidence": [
+        {
+          "path": "scripts/notify.ts",
+          "line": 3,
+          "note": "request URL"
+        }
+      ],
+      "reason": "The URL is computed at runtime (a variable or a call), so the target cannot be determined from source."
+    },
+    {
+      "id": "e:routes_to_req:scripts/notify.ts#L7_ext:status.example.org_~1089340ac2",
+      "kind": "routes_to",
+      "relation": "api",
+      "from": "req:scripts/notify.ts#L7",
+      "to": "ext:status.example.org",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "scripts/notify.ts",
+          "line": 7,
+          "note": "request to host status.example.org"
+        }
+      ]
+    },
+    {
+      "id": "e:writes_fn:desk/nodes/billing.py#handle_store:orm:Refund_~05a568f78f",
+      "kind": "writes",
+      "relation": "data",
+      "from": "fn:desk/nodes/billing.py#handle",
+      "to": "store:orm:Refund",
+      "provenance": "observed",
+      "evidence": [
+        {
+          "path": "desk/nodes/billing.py",
+          "line": 8,
+          "note": "ORM session.add with Refund()"
+        }
+      ],
+      "data": "Refund()",
+      "adapter": "python.ast"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scn:agent:agent:desk/graph.py#workflow:__start__",
+      "title": "Agent graph workflow",
+      "kind": "agent-flow",
+      "feature": "desk",
+      "entry": "agent:desk/graph.py#workflow:__start__",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:__start___agent:desk/gr~069b4f70a9",
+          "from": "agent:desk/graph.py#workflow:__start__",
+          "to": "agent:desk/graph.py#workflow:intake",
+          "title": "START hands off to intake",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:implemented_by_agent:desk/graph.py#workflow:intake_fn:desk/n~de97f2efd5",
+          "from": "agent:desk/graph.py#workflow:intake",
+          "to": "fn:desk/nodes/intake.py#classify",
+          "title": "intake runs classify",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:intake_agent:desk/graph~00b8a4091b",
+          "from": "agent:desk/graph.py#workflow:intake",
+          "to": "agent:desk/graph.py#workflow:billing",
+          "title": "intake hands off to billing (billing)",
+          "provenance": "observed",
+          "depth": 1,
+          "branch": {
+            "group": "desk/graph.py:12",
+            "option": 1,
+            "of": 2,
+            "condition": "billing"
+          }
+        },
+        {
+          "index": 3,
+          "edge": "e:implemented_by_agent:desk/graph.py#workflow:billing_fn:desk/~6e48fec4a7",
+          "from": "agent:desk/graph.py#workflow:billing",
+          "to": "fn:desk/nodes/billing.py#handle",
+          "title": "billing runs handle",
+          "provenance": "observed",
+          "depth": 2
+        },
+        {
+          "index": 4,
+          "edge": "e:writes_fn:desk/nodes/billing.py#handle_store:orm:Refund_~05a568f78f",
+          "from": "fn:desk/nodes/billing.py#handle",
+          "to": "store:orm:Refund",
+          "title": "handle writes Refund",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 5,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:billing_agent:desk/grap~17ffdc4876",
+          "from": "agent:desk/graph.py#workflow:billing",
+          "to": "agent:desk/graph.py#workflow:__end__",
+          "title": "billing hands off to END",
+          "provenance": "observed",
+          "depth": 2
+        },
+        {
+          "index": 6,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:intake_agent:desk/graph~f228686fcf",
+          "from": "agent:desk/graph.py#workflow:intake",
+          "to": "agent:desk/graph.py#workflow:tech",
+          "title": "intake hands off to tech (technical)",
+          "provenance": "observed",
+          "depth": 1,
+          "branch": {
+            "group": "desk/graph.py:12",
+            "option": 2,
+            "of": 2,
+            "condition": "technical"
+          }
+        },
+        {
+          "index": 7,
+          "edge": "e:implemented_by_agent:desk/graph.py#workflow:tech_fn:desk/nod~941394d35b",
+          "from": "agent:desk/graph.py#workflow:tech",
+          "to": "fn:desk/nodes/tech.py#handle",
+          "title": "tech runs handle",
+          "provenance": "observed",
+          "depth": 2
+        },
+        {
+          "index": 8,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:tech_agent:desk/graph.p~6a6325e00f",
+          "from": "agent:desk/graph.py#workflow:tech",
+          "to": "agent:desk/graph.py#workflow:escalate",
+          "title": "tech hands off to escalate (escalate)",
+          "provenance": "inferred",
+          "depth": 2,
+          "branch": {
+            "group": "desk/graph.py:13",
+            "option": 1,
+            "of": 2,
+            "condition": "escalate"
+          }
+        },
+        {
+          "index": 9,
+          "edge": "e:implemented_by_agent:desk/graph.py#workflow:escalate_fn:desk~250cbb439c",
+          "from": "agent:desk/graph.py#workflow:escalate",
+          "to": "fn:desk/nodes/tech.py#escalate",
+          "title": "escalate runs escalate",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 10,
+          "edge": "e:calls_fn:desk/nodes/tech.py#escalate_fn:desk/nodes/tech.py#p~d5d62c5dca",
+          "from": "fn:desk/nodes/tech.py#escalate",
+          "to": "fn:desk/nodes/tech.py#pick_queue",
+          "title": "escalate calls pick_queue",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 11,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:escalate_unknown:goto:d~5e2dbbecc0",
+          "from": "agent:desk/graph.py#workflow:escalate",
+          "to": "unknown:goto:desk/nodes/tech.py:17",
+          "title": "escalate hands off to Runtime goto target",
+          "provenance": "unresolved",
+          "depth": 3
+        },
+        {
+          "index": 12,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:tech_agent:desk/graph.p~ec140f6902",
+          "from": "agent:desk/graph.py#workflow:tech",
+          "to": "agent:desk/graph.py#workflow:__end__",
+          "title": "tech hands off to END (END)",
+          "provenance": "inferred",
+          "depth": 2,
+          "branch": {
+            "group": "desk/graph.py:13",
+            "option": 2,
+            "of": 2,
+            "condition": "END"
+          }
+        }
+      ],
+      "summary": "Agent handoffs reconstructed from orchestration code. Conditional branches are listed as alternatives; only one runs at a time.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:agent:agent:desk/sdk_agents.py#triage_agent",
+      "title": "Agent Triage handoffs",
+      "kind": "agent-flow",
+      "feature": "desk",
+      "entry": "agent:desk/sdk_agents.py#triage_agent",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:handoff_agent:desk/sdk_agents.py#triage_agent_agent:desk/sdk~4ba0eff19e",
+          "from": "agent:desk/sdk_agents.py#triage_agent",
+          "to": "agent:desk/sdk_agents.py#support_agent",
+          "title": "Triage hands off to Support (agent decides)",
+          "provenance": "observed",
+          "depth": 0,
+          "branch": {
+            "group": "desk/sdk_agents.py:14:handoffs",
+            "option": 1,
+            "of": 3,
+            "condition": "agent decides"
+          }
+        },
+        {
+          "index": 1,
+          "edge": "e:handoff_agent:desk/sdk_agents.py#triage_agent_agent:desk/sdk~90a4d6ad21",
+          "from": "agent:desk/sdk_agents.py#triage_agent",
+          "to": "agent:desk/sdk_agents.py#billing_agent",
+          "title": "Triage hands off to Billing (agent decides)",
+          "provenance": "observed",
+          "depth": 0,
+          "branch": {
+            "group": "desk/sdk_agents.py:14:handoffs",
+            "option": 2,
+            "of": 3,
+            "condition": "agent decides"
+          }
+        },
+        {
+          "index": 2,
+          "edge": "e:handoff_agent:desk/sdk_agents.py#triage_agent_unknown:handof~bb1cf1d097",
+          "from": "agent:desk/sdk_agents.py#triage_agent",
+          "to": "unknown:handoff:desk/sdk_agents.py:17",
+          "title": "Triage hands off to Unresolved agent make_specialist()",
+          "provenance": "unresolved",
+          "depth": 0,
+          "branch": {
+            "group": "desk/sdk_agents.py:14:handoffs",
+            "option": 3,
+            "of": 3
+          }
+        },
+        {
+          "index": 3,
+          "edge": "e:invokes_tool_agent:desk/sdk_agents.py#triage_agent_tool:desk~7b0c5aa704",
+          "from": "agent:desk/sdk_agents.py#triage_agent",
+          "to": "tool:desk/sdk_agents.py#lookup_account",
+          "title": "Triage can use tool lookup_account",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 4,
+          "edge": "e:implemented_by_tool:desk/sdk_agents.py#lookup_account_fn:des~cd73583123",
+          "from": "tool:desk/sdk_agents.py#lookup_account",
+          "to": "fn:desk/sdk_agents.py#lookup_account",
+          "title": "lookup_account runs lookup_account",
+          "provenance": "observed",
+          "depth": 1
+        }
+      ],
+      "summary": "Agent handoffs reconstructed from orchestration code. Conditional branches are listed as alternatives; only one runs at a time.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:api:req:scripts/notify.ts#L7:fn:scripts/notify.ts#statusPage",
+      "title": "GET //status.example.org/api/v2/status.json from statusPage",
+      "kind": "api-flow",
+      "feature": "scripts",
+      "entry": "fn:scripts/notify.ts#statusPage",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:scripts/notify.ts#statusPage_req:scripts/notify.~ff0eddfc83",
+          "from": "fn:scripts/notify.ts#statusPage",
+          "to": "req:scripts/notify.ts#L7",
+          "title": "statusPage sends GET //status.example.org/api/v2/status.json",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:scripts/notify.ts#L7_ext:status.example.org_~1089340ac2",
+          "from": "req:scripts/notify.ts#L7",
+          "to": "ext:status.example.org",
+          "title": "Request goes to status.example.org",
+          "provenance": "observed",
+          "depth": 1
+        }
+      ],
+      "summary": "Client code sends a request whose server route was not found in the scan.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:api:req:scripts/notify.ts#L3:fn:scripts/notify.ts#notifyOnCall",
+      "title": "POST (dynamic URL) from notifyOnCall",
+      "kind": "api-flow",
+      "feature": "scripts",
+      "entry": "fn:scripts/notify.ts#notifyOnCall",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:requests_fn:scripts/notify.ts#notifyOnCall_req:scripts/notif~09a03c2e67",
+          "from": "fn:scripts/notify.ts#notifyOnCall",
+          "to": "req:scripts/notify.ts#L3",
+          "title": "notifyOnCall sends POST (dynamic URL)",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:routes_to_req:scripts/notify.ts#L3_unknown:dynamic-url_~d31ba64a08",
+          "from": "req:scripts/notify.ts#L3",
+          "to": "unknown:dynamic-url",
+          "title": "Request goes to Dynamic URL",
+          "provenance": "unresolved",
+          "depth": 1
+        }
+      ],
+      "summary": "Client code sends a request whose server route was not found in the scan.",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:entry:fn:desk/runner.py#chat",
+      "title": "chat journey",
+      "kind": "entry-flow",
+      "feature": "desk",
+      "entry": "fn:desk/runner.py#chat",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:calls_fn:desk/runner.py#chat_agent:desk/sdk_agents.py#triage~cf92cadfc1",
+          "from": "fn:desk/runner.py#chat",
+          "to": "agent:desk/sdk_agents.py#triage_agent",
+          "title": "chat calls Triage",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:handoff_agent:desk/sdk_agents.py#triage_agent_agent:desk/sdk~4ba0eff19e",
+          "from": "agent:desk/sdk_agents.py#triage_agent",
+          "to": "agent:desk/sdk_agents.py#support_agent",
+          "title": "Triage hands off to Support (agent decides)",
+          "provenance": "observed",
+          "depth": 1,
+          "branch": {
+            "group": "desk/sdk_agents.py:14:handoffs",
+            "option": 1,
+            "of": 3,
+            "condition": "agent decides"
+          }
+        },
+        {
+          "index": 2,
+          "edge": "e:handoff_agent:desk/sdk_agents.py#triage_agent_agent:desk/sdk~90a4d6ad21",
+          "from": "agent:desk/sdk_agents.py#triage_agent",
+          "to": "agent:desk/sdk_agents.py#billing_agent",
+          "title": "Triage hands off to Billing (agent decides)",
+          "provenance": "observed",
+          "depth": 1,
+          "branch": {
+            "group": "desk/sdk_agents.py:14:handoffs",
+            "option": 2,
+            "of": 3,
+            "condition": "agent decides"
+          }
+        },
+        {
+          "index": 3,
+          "edge": "e:handoff_agent:desk/sdk_agents.py#triage_agent_unknown:handof~bb1cf1d097",
+          "from": "agent:desk/sdk_agents.py#triage_agent",
+          "to": "unknown:handoff:desk/sdk_agents.py:17",
+          "title": "Triage hands off to Unresolved agent make_specialist()",
+          "provenance": "unresolved",
+          "depth": 1,
+          "branch": {
+            "group": "desk/sdk_agents.py:14:handoffs",
+            "option": 3,
+            "of": 3
+          }
+        },
+        {
+          "index": 4,
+          "edge": "e:invokes_tool_agent:desk/sdk_agents.py#triage_agent_tool:desk~7b0c5aa704",
+          "from": "agent:desk/sdk_agents.py#triage_agent",
+          "to": "tool:desk/sdk_agents.py#lookup_account",
+          "title": "Triage can use tool lookup_account",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 5,
+          "edge": "e:implemented_by_tool:desk/sdk_agents.py#lookup_account_fn:des~cd73583123",
+          "from": "tool:desk/sdk_agents.py#lookup_account",
+          "to": "fn:desk/sdk_agents.py#lookup_account",
+          "title": "lookup_account runs lookup_account",
+          "provenance": "observed",
+          "depth": 2
+        }
+      ],
+      "summary": "Everything reachable from chat, which nothing in the scanned code calls (an entry point such as a UI handler, job or script).",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    },
+    {
+      "id": "scn:entry:fn:desk/runner.py#run_ticket",
+      "title": "run_ticket journey",
+      "kind": "entry-flow",
+      "feature": "desk",
+      "entry": "fn:desk/runner.py#run_ticket",
+      "steps": [
+        {
+          "index": 0,
+          "edge": "e:calls_fn:desk/runner.py#run_ticket_agent:desk/graph.py#workf~dca5d489af",
+          "from": "fn:desk/runner.py#run_ticket",
+          "to": "agent:desk/graph.py#workflow:__start__",
+          "title": "run_ticket calls START",
+          "provenance": "observed",
+          "depth": 0
+        },
+        {
+          "index": 1,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:__start___agent:desk/gr~069b4f70a9",
+          "from": "agent:desk/graph.py#workflow:__start__",
+          "to": "agent:desk/graph.py#workflow:intake",
+          "title": "START hands off to intake",
+          "provenance": "observed",
+          "depth": 1
+        },
+        {
+          "index": 2,
+          "edge": "e:implemented_by_agent:desk/graph.py#workflow:intake_fn:desk/n~de97f2efd5",
+          "from": "agent:desk/graph.py#workflow:intake",
+          "to": "fn:desk/nodes/intake.py#classify",
+          "title": "intake runs classify",
+          "provenance": "observed",
+          "depth": 2
+        },
+        {
+          "index": 3,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:intake_agent:desk/graph~00b8a4091b",
+          "from": "agent:desk/graph.py#workflow:intake",
+          "to": "agent:desk/graph.py#workflow:billing",
+          "title": "intake hands off to billing (billing)",
+          "provenance": "observed",
+          "depth": 2,
+          "branch": {
+            "group": "desk/graph.py:12",
+            "option": 1,
+            "of": 2,
+            "condition": "billing"
+          }
+        },
+        {
+          "index": 4,
+          "edge": "e:implemented_by_agent:desk/graph.py#workflow:billing_fn:desk/~6e48fec4a7",
+          "from": "agent:desk/graph.py#workflow:billing",
+          "to": "fn:desk/nodes/billing.py#handle",
+          "title": "billing runs handle",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 5,
+          "edge": "e:writes_fn:desk/nodes/billing.py#handle_store:orm:Refund_~05a568f78f",
+          "from": "fn:desk/nodes/billing.py#handle",
+          "to": "store:orm:Refund",
+          "title": "handle writes Refund",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 6,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:billing_agent:desk/grap~17ffdc4876",
+          "from": "agent:desk/graph.py#workflow:billing",
+          "to": "agent:desk/graph.py#workflow:__end__",
+          "title": "billing hands off to END",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 7,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:intake_agent:desk/graph~f228686fcf",
+          "from": "agent:desk/graph.py#workflow:intake",
+          "to": "agent:desk/graph.py#workflow:tech",
+          "title": "intake hands off to tech (technical)",
+          "provenance": "observed",
+          "depth": 2,
+          "branch": {
+            "group": "desk/graph.py:12",
+            "option": 2,
+            "of": 2,
+            "condition": "technical"
+          }
+        },
+        {
+          "index": 8,
+          "edge": "e:implemented_by_agent:desk/graph.py#workflow:tech_fn:desk/nod~941394d35b",
+          "from": "agent:desk/graph.py#workflow:tech",
+          "to": "fn:desk/nodes/tech.py#handle",
+          "title": "tech runs handle",
+          "provenance": "observed",
+          "depth": 3
+        },
+        {
+          "index": 9,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:tech_agent:desk/graph.p~6a6325e00f",
+          "from": "agent:desk/graph.py#workflow:tech",
+          "to": "agent:desk/graph.py#workflow:escalate",
+          "title": "tech hands off to escalate (escalate)",
+          "provenance": "inferred",
+          "depth": 3,
+          "branch": {
+            "group": "desk/graph.py:13",
+            "option": 1,
+            "of": 2,
+            "condition": "escalate"
+          }
+        },
+        {
+          "index": 10,
+          "edge": "e:implemented_by_agent:desk/graph.py#workflow:escalate_fn:desk~250cbb439c",
+          "from": "agent:desk/graph.py#workflow:escalate",
+          "to": "fn:desk/nodes/tech.py#escalate",
+          "title": "escalate runs escalate",
+          "provenance": "observed",
+          "depth": 4
+        },
+        {
+          "index": 11,
+          "edge": "e:calls_fn:desk/nodes/tech.py#escalate_fn:desk/nodes/tech.py#p~d5d62c5dca",
+          "from": "fn:desk/nodes/tech.py#escalate",
+          "to": "fn:desk/nodes/tech.py#pick_queue",
+          "title": "escalate calls pick_queue",
+          "provenance": "observed",
+          "depth": 5
+        },
+        {
+          "index": 12,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:escalate_unknown:goto:d~5e2dbbecc0",
+          "from": "agent:desk/graph.py#workflow:escalate",
+          "to": "unknown:goto:desk/nodes/tech.py:17",
+          "title": "escalate hands off to Runtime goto target",
+          "provenance": "unresolved",
+          "depth": 4
+        },
+        {
+          "index": 13,
+          "edge": "e:handoff_agent:desk/graph.py#workflow:tech_agent:desk/graph.p~ec140f6902",
+          "from": "agent:desk/graph.py#workflow:tech",
+          "to": "agent:desk/graph.py#workflow:__end__",
+          "title": "tech hands off to END (END)",
+          "provenance": "inferred",
+          "depth": 3,
+          "branch": {
+            "group": "desk/graph.py:13",
+            "option": 2,
+            "of": 2,
+            "condition": "END"
+          }
+        }
+      ],
+      "summary": "Everything reachable from run_ticket, which nothing in the scanned code calls (an entry point such as a UI handler, job or script).",
+      "replay": "simulated",
+      "basis": "static-analysis"
+    }
+  ],
+  "diagnostics": [
+    {
+      "level": "warning",
+      "code": "framework-unsupported",
+      "message": "Framework \"crewai\" is used but has no adapter; its routes or flows are not in the map."
+    }
+  ],
+  "traces": []
+}
