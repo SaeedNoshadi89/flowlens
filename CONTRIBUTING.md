@@ -22,6 +22,7 @@ Node.js 22.18+ runs the TypeScript sources directly (`npm run dev -- scan …`).
 - Add or extend a fixture test for every new pattern. Fixtures are synthetic and must never contain real data or real credentials.
 - After changing `src/`, run `npm run build` and commit the refreshed `plugins/*/flowlens/engine/` folders. CI checks that they match the build: run `npm run build` and then `git diff --exit-code plugins`.
 - Run `npm run demo` when the report or analysis output changes, and commit the regenerated `examples/`.
+- When the report's look or behaviour changes, run `npm run build && npm run demo:gif` to re-record the README walkthrough (`docs/images/flowlens-demo.gif`). It needs Chrome or Chromium (`CHROME_PATH` to override) and Pillow, or `uv`, which fetches Pillow into a throwaway environment. The script is `scripts/demo-gif/record.mjs`.
 - Update the README (supported patterns, limitations) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) (schema) in the same change.
 
 ## Releasing
