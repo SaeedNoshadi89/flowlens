@@ -6,14 +6,12 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [20, 22]
     steps:
       - uses: actions/checkout@v4
+      # Sources and scripts are TypeScript run directly by Node (22.18+).
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 24
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -22,9 +20,18 @@ jobs:
       - run: npm run build
       - name: Committed plugin engines match the build
         run: git diff --exit-code plugins
-      - name: Tests (built bundle; Node 20 cannot run TypeScript sources)
-        if: matrix.node == 20
-        run: npm run verify:packages
-      - name: Tests
-        if: matrix.node == 22
-        run: npm test && npm run test:dist && npm run verify:packages
+      - name: Tests (includes headless Chrome report tests)
+        run: npm test
+      - run: npm run test:dist
+      - run: npm run verify:packages
+      # The bundled engine promises Node 20+: smoke-test it there.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Bundle runs on Node 20
+        run: |
+          node --version
+          node dist/flowlens.mjs --version
+          node dist/flowlens.mjs scan --root fixtures/shop-app --out "$RUNNER_TEMP/shop" --no-saved --json
+          node dist/flowlens.mjs scan --root fixtures/agent-desk --out "$RUNNER_TEMP/agents" --no-saved --json
+          node dist/flowlens.mjs validate "$RUNNER_TEMP/agents/graph.json"
