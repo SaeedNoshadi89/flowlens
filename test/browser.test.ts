@@ -109,6 +109,8 @@ test('report opens offline and its replay, filters and details work', { skip: !C
   assert.equal(await page.eval(`document.body.getAttribute('data-step')`), '0');
   await page.eval(`document.getElementById('btnNext').click(); document.getElementById('btnNext').click(); document.getElementById('btnNext').click()`);
   assert.equal(await page.eval(`document.body.getAttribute('data-step')`), '3');
+  await new Promise((r) => setTimeout(r, 50));
+  assert.equal(await page.eval(`window.scrollY`), 0, 'stepping never scrolls the page');
   assert.equal(await page.eval(`document.querySelectorAll('#svg .node.active').length`), 1);
   assert.equal(await page.eval(`document.querySelectorAll('#log li.cur').length`), 1);
   assert.match(await page.eval<string>(`document.getElementById('now').textContent`), /getStock/);
@@ -166,7 +168,9 @@ test('report opens offline and its replay, filters and details work', { skip: !C
   const sc = await page.eval<string>(`window.__flowlens.state().scenario || ''`);
   const scenarioId = await page.eval<string>(`[...document.querySelectorAll('#scenarios button[data-scenario]')][0].getAttribute('data-scenario')`);
   await open(page, html, `#scenario=${encodeURIComponent(scenarioId)}&step=2`);
-  assert.equal(await page.eval(`document.body.getAttribute('data-step')`), '2');
+  // Same document, new hash: the hashchange handler applies it asynchronously.
+  await page.until(`document.body.getAttribute('data-step') === '2'`);
+  assert.equal(await page.eval(`window.scrollY`), 0, 'stepping never scrolls the page');
   assert.equal(sc, '');
   assert.deepEqual(page.requests.filter((u) => !u.startsWith('file:') && !u.startsWith('data:') && u !== 'about:blank'), []);
   assert.deepEqual(page.consoleErrors, []);

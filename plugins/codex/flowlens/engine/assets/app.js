@@ -514,7 +514,12 @@
       if (stp.branch) t.appendChild(h('span', { cls: 'alt', text: '↳ alternative ' + stp.branch.option + '/' + stp.branch.of + (stp.branch.condition ? ' · ' + stp.branch.condition : '') }));
       li.appendChild(t);
       ol.appendChild(li);
-      if (i === st.step) setTimeout(function () { if (li.scrollIntoView) li.scrollIntoView({ block: 'nearest' }); }, 0);
+      // Scroll only the log list, never the page, so stepping does not move the viewport.
+      if (i === st.step) setTimeout(function () {
+        var top = li.offsetTop - ol.offsetTop, bottom = top + li.offsetHeight;
+        if (top < ol.scrollTop) ol.scrollTop = top;
+        else if (bottom > ol.scrollTop + ol.clientHeight) ol.scrollTop = bottom - ol.clientHeight;
+      }, 0);
     });
   }
 

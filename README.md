@@ -6,7 +6,9 @@ FlowLens runs from a command-line tool (CLI). A Claude Code plugin and a Codex p
 
 > "FlowLens" is a provisional name. The project is MIT licensed.
 
-![Replay of a checkout journey in the shop-app demo](docs/images/shop-app-replay.png)
+![FlowLens replaying a checkout journey (web client → FastAPI route → SQLite) and then an agent graph with conditional and unresolved handoffs](docs/images/flowlens-demo.gif)
+
+*The demo above steps through two simulated replays. First, a checkout click travels from the web client through an inferred request-to-route match into the FastAPI handler and the `orders` table. Then an agent graph branches on a router function and ends at a `goto` target that can only be decided at runtime. The Now panel shows how each step was established and links to the source line.*
 
 Demo reports, generated from the two synthetic fixtures (open them in a browser):
 
